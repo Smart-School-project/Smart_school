@@ -1,12 +1,7 @@
 <template>
   <v-app>
     <v-layout row>
-      <v-flex
-        md8
-        xl8
-        lg8
-        v-if="$vuetify.breakpoint.mdAndUp"
-        class="background-flex1"
+      <v-flex md8 xl8 lg8 v-if="$vuetify.breakpoint.mdAndUp" class="background-flex1"
       >
         <img class="Ellipse" src="../assets/login/Ellipse.png" />
         <img class="user-blue" src="../assets/login/user-blue.png" />
