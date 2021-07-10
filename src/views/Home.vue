@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-app>
     <v-layout row>
       <v-flex
         md8
@@ -14,21 +14,46 @@
       <v-flex xs12 md4 xl4 lg4 class="background-flex2">
         <img class="book" src="../assets/login/1.png" />
         <img class="tab" src="../assets/login/2.png" />
-        <h2 class="tab-text">Welcom back</h2>
+        <h2 class="tab-text">Welcome back</h2>
         <v-layout row>
-          <v-flex xs8 md8 xl8 lg8>
-            <h3 class="text1">Smart School</h3>
+          <v-flex xs12 md12 xl12 lg12>
+            <h2 class="text1">Smart</h2>
+            <h2 class="text2">School</h2>
+          </v-flex>
+        </v-layout>
+        <v-layout row wrap justify-center align-center>
+          <v-flex xs8 md8 xl8 lg8 class="input">
+            <v-text-field
+              label="Username"
+              outlined
+              prepend-inner-icon="mdi-account-circle"
+            ></v-text-field>
+            <v-text-field
+              label="Password"
+              outlined
+              prepend-inner-icon="mdi-lock"
+            ></v-text-field>
+          </v-flex>
+        </v-layout>
+        <v-layout row>
+          <v-flex xs8 md8 xl8 lg8 class="login">
+            <v-btn color="cyan darken-3" class="white--text" @click="fnLogin"> Login </v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
-  </div>
+  </v-app>
 </template>
 
 <script>
 export default {
   name: "Home",
   components: {},
+  methods: {
+    fnLogin() {
+      this.$router.push("/index")
+    }
+  }
 };
 </script>
 
@@ -39,18 +64,16 @@ export default {
   height: 100vh;
 }
 .Ellipse {
-  position: absolute;
   width: 530px;
   height: 530px;
-  left: 150px;
-  top: 100px;
+  margin-top: 100px;
+  margin-left: -17px;
 }
 .user-blue {
-  position: absolute;
   width: 520px;
   height: 450px;
-  left: 140px;
-  top: 220px;
+  margin-top: -400px;
+  margin-left: -17px;
 }
 .background-flex2 {
   background-color: #ffffff;
@@ -80,8 +103,22 @@ export default {
 }
 .text1 {
   color: #f5a82a;
-  font-size: 2rem;
-  margin-top: 10%;
-  margin-left: 1rem;
+  font-size: 3rem;
+  margin-top: 250px;
+  margin-left: -500px;
+}
+.text2 {
+  color: #030303;
+  font-size: 3rem;
+  margin-top: -72px;
+  margin-left: -180px;
+}
+.input {
+  margin-left: 5px;
+  margin-top: 30px;
+}
+.login {
+  margin-left: 80px;
+  
 }
 </style>
