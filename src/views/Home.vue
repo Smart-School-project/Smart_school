@@ -4,15 +4,24 @@
       <v-flex md8 xl8 lg8 v-if="$vuetify.breakpoint.mdAndUp" class="background-flex1"
       >
         <img class="Ellipse" src="../assets/login/Ellipse.png" />
-        <img class="user-blue" src="../assets/login/user-blue.png" />
       </v-flex>
       <v-flex xs12 md4 xl4 lg4 class="background-flex2">
-        <img class="book" src="../assets/login/1.png" />
-        <img class="tab" src="../assets/login/2.png" />
-        <h2 class="tab-text">Welcome back</h2>
-        <v-layout row>
+        <v-layout row wrap>
           <v-flex xs12 md12 xl12 lg12>
-            <h2 class="text1">Smart</h2>
+            <img class="tab" src="../assets/login/2.png" />
+            <h2 class="tab-text">Welcome back</h2>
+          </v-flex>
+        </v-layout>
+        <v-layout
+          row
+          wrap
+          justify-center
+          align-center
+        >
+          <v-flex xs6 md6 xl6 lg6 style="text-align:right;">
+            <h2 class="text1 ">Smart</h2>
+          </v-flex>
+          <v-flex xs6 md6 xl6 lg6>
             <h2 class="text2">School</h2>
           </v-flex>
         </v-layout>
@@ -30,9 +39,11 @@
             ></v-text-field>
           </v-flex>
         </v-layout>
-        <v-layout row>
-          <v-flex xs8 md8 xl8 lg8 class="login">
-            <v-btn color="cyan darken-3" class="white--text" @click="fnLogin"> Login </v-btn>
+        <v-layout row justify-center align-center>
+          <v-flex xs12 md12 xl12 lg12 class="login">
+            <v-btn color="cyan darken-3" class="white--text" @click="fnLogin">
+              Login
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -46,9 +57,9 @@ export default {
   components: {},
   methods: {
     fnLogin() {
-      this.$router.push("/index")
-    }
-  }
+      this.$router.push("/index");
+    },
+  },
 };
 </script>
 
@@ -57,35 +68,30 @@ export default {
   background-color: #0390a4;
   width: 100vw;
   height: 100vh;
+  position: relative;
 }
 .Ellipse {
-  width: 530px;
-  height: 530px;
-  margin-top: 100px;
-  margin-left: -17px;
+  /* position: absolute; */
+  width: 30rem;
+  height: 30rem;
+  margin-top: 10rem;
+  /* z-index: 2; */
+  /* margin-left: -17px; */
 }
-.user-blue {
-  width: 520px;
-  height: 450px;
-  margin-top: -400px;
-  margin-left: -17px;
-}
+
 .background-flex2 {
   background-color: #ffffff;
   width: 100vw;
   height: 100vh;
+  border-left: 1rem solid #C4C4C4;;
 }
-.book {
-  width: 1rem;
-  height: 100%;
-  float: left;
-}
+
 .tab {
   width: 349px;
   height: 74px;
   float: left;
   margin-top: 2rem;
-  margin-left: -17px;
+  margin-left: -6px;
   z-index: 1;
 }
 .tab-text {
@@ -99,21 +105,19 @@ export default {
 .text1 {
   color: #f5a82a;
   font-size: 3rem;
-  margin-top: 250px;
-  margin-left: -500px;
+  margin-top: 200px;
+   margin-right: 10px;
 }
 .text2 {
   color: #030303;
   font-size: 3rem;
-  margin-top: -72px;
-  margin-left: -180px;
+  margin-top: 200px;
 }
 .input {
   margin-left: 5px;
   margin-top: 30px;
 }
 .login {
-  margin-left: 80px;
-  
+  text-align:center;
 }
 </style>
