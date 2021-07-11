@@ -3,7 +3,7 @@
     <Toolbar />
     <v-layout row justify-center align-top>
       <!-- tab ตารางสอน -->
-      <v-flex xs12 md4 lg4 xl4 class="mt-10 mb-10">
+      <v-flex xs12 md4 lg4 xl4 class="mt-10 mb-10" v-if="$vuetify.breakpoint.mdAndUp" >
         <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 'teacher'"> 
         <v-list-item>
           <v-list-item-icon>
@@ -19,7 +19,7 @@
       </v-flex>
 
       <!-- tab ตารางเรียน -->
-      <v-flex xs12 md7 lg7 xl7 class="mt-10 mb-10">
+      <v-flex xs12 md7 lg7 xl7 class="mt-10 mb-10" v-if="$vuetify.breakpoint.mdAndUp">
         <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 'student'"> 
         <v-list-item>
           <v-list-item-icon>
@@ -33,6 +33,22 @@
         </v-list-item>
         </v-card>
       </v-flex>
+
+      <v-flex xs10 class="mt-10 mb-10" v-if="$vuetify.breakpoint.xs">
+        <v-select
+          v-model="selectTab"
+          :items="objectTab"
+          item-text="text"
+          item-value="value"
+          menu-props="auto"
+          label="Select"
+          hide-details
+          outlined
+          prepend-icon="mdi-calendar-month"
+        ></v-select>
+        </v-flex>
+
+
 
       <!-- ตารางสอน -->
       <v-flex xs11 md11 lg11 xl11 v-if="selectTab == 'teacher'">
@@ -58,7 +74,11 @@ export default {
   },
   data() {
     return {
-      selectTab: 'teacher'
+      selectTab: 'teacher',
+      objectTab: [
+         {text: "ตารางสอน", value: "teacher"},
+         {text: "ตารางเรียนห้องที่ปรึกษา", value: "student"}
+        ],
     };
   },
   methods: {

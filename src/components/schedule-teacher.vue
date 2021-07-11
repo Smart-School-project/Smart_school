@@ -36,8 +36,8 @@
               v-if="item.nine.subject != ''"
             >
               <p>
-                {{ item.nine.id }} <br />
-                {{ item.nine.subject }}
+                {{ item.nine.subject }}<br />
+                ม. {{ item.nine.class }}
               </p>
             </v-chip>
           </template>
@@ -52,8 +52,8 @@
               v-if="item.ten.subject != ''"
             >
               <p>
-                {{ item.ten.id }} <br />
-                {{ item.ten.subject }}
+                {{ item.ten.subject }}<br />
+                ม. {{ item.ten.class }}
               </p>
             </v-chip>
           </template>
@@ -68,8 +68,8 @@
               v-if="item.eleven.subject != ''"
             >
               <p>
-                {{ item.eleven.id }} <br />
-                {{ item.eleven.subject }}
+                {{ item.eleven.subject }}<br />
+                ม. {{ item.eleven.class }}
               </p>
             </v-chip>
           </template>
@@ -84,8 +84,8 @@
               v-if="item.twelve.subject != ''"
             >
               <p>
-                {{ item.twelve.id }} <br />
-                {{ item.twelve.subject }}
+                {{ item.twelve.subject }}<br />
+                ม. {{ item.twelve.class }}
               </p>
             </v-chip>
           </template>
@@ -100,8 +100,8 @@
               v-if="item.thirteen.subject != ''"
             >
               <p>
-                {{ item.thirteen.id }} <br />
-                {{ item.thirteen.subject }}
+                {{ item.thirteen.subject }}<br />
+                ม. {{ item.thirteen.class }}
               </p>
             </v-chip>
           </template>
@@ -116,8 +116,8 @@
               v-if="item.fourteen.subject != ''"
             >
               <p>
-                {{ item.fourteen.id }} <br />
-                {{ item.fourteen.subject }}
+                {{ item.fourteen.subject }}<br />
+                ม. {{ item.fourteen.class }}
               </p>
             </v-chip>
           </template>
@@ -132,8 +132,8 @@
               v-if="item.fifteen.subject != ''"
             >
               <p>
-                {{ item.fifteen.id }} <br />
-                {{ item.fifteen.subject }}
+                {{ item.fifteen.subject }}<br />
+                ม. {{ item.fifteen.class }}
               </p>
             </v-chip>
           </template>
@@ -148,8 +148,8 @@
               v-if="item.sixteen.subject != ''"
             >
               <p>
-                {{ item.sixteen.id }} <br />
-                {{ item.sixteen.subject }}
+                {{ item.sixteen.subject }}<br />
+                ม. {{ item.sixteen.class }}
               </p>
             </v-chip>
           </template>
@@ -182,135 +182,140 @@ export default {
       data: [
         {
           day: "จันทร์",
-          eight: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-2", class: '3/1' },
-          nine: { subject: "ฟิสิกส์", id: "ว31201", color: "lime lighten-2", class: '3/1'},
+          eight: { subject: "ภาษาไทย", id: "ท31101", color: "red lighten-5", class: '3/1' },
+          nine: { subject: "", id: "", color: "", class: ''},
           ten: { subject: "", id: "", color: "" , class: ''},
           eleven: {
-            subject: "ภาษาอังกฤษ",
-            id: "อ31101",
-            color: "brown lighten-3",
-            class: '3/1'
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "purple lighten-4",
+            class: '3/2'
           },
           twelve: { subject: "", id: "", color: "" },
           thirteen: {
-            subject: "ชีววิทยา",
-            id: "ว31213",
-            color: "green lighten-3",
-            class: '3/1'
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
-          fourteen: { subject: "", id: "", color: "" , class: ''},
+          fourteen: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-4" , class: '3/3'},
           fifteen: {
-            subject: "สังคมศึกษา",
-            id: "ส31101",
-            color: "blue-grey lighten-3",
-            class: '3/1'
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
           sixteen: { subject: "", id: "", color: "", class: '' },
         },
         {
           day: "อังคาร",
           eight: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
-            class: '3/1'
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
-          nine: { subject: "", id: "", color: "", class: '' },
-          ten: { subject: "เคมี", id: "ว31207", color: "orange lighten-1", class: '3/1' },
+          nine: { subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "purple lighten-4",
+            class: '3/2' },
+          ten: { subject: "ภาษาไทย", id: "ท31101", color: "teal lighten-4", class: '3/4' },
           eleven: { subject: "", id: "", color: "", class: '' },
           twelve: { subject: "", id: "", color: "", class: '' },
           thirteen: {
-            subject: "ประวัติศาสตร์",
-            id: "ส31103",
-            color: "blue lighten-5",
-            class: '3/1'
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
           fourteen: {
-            subject: "ดาราศาสตร์",
-            id: "ว31110",
-            color: "red lighten-2",
-            class: '3/1'
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
           fifteen: { subject: "", id: "", color: "", class: '' },
           sixteen: {
-            subject: "สุขศึกษา",
-            id: "พ31101",
-            color: "lime accent-3",
-            class: '3/1'
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
         },
         {
           day: "พุธ",
           eight: { subject: "", id: "", color: "", class: '' },
-          nine: { subject: "ศิลปะ", id: "ศ31101", color: "cyan lighten-4", class: '3/1' },
-          ten: { subject: "ฟิสิกส์", id: "ว31201", color: "lime lighten-2", class: '3/1' },
+          nine: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-4" , class: '3/3' },
+          ten: { subject: "", id: "", color: "", class: '' },
           eleven: { subject: "", id: "", color: "", class: '' },
           twelve: { subject: "", id: "", color: "", class: '' },
           thirteen: {
             subject: "ภาษาไทย",
             id: "ท31101",
-            color: "blue lighten-2",
+            color: "red lighten-5",
             class: '3/1'
           },
           fourteen: { subject: "", id: "", color: "", class: '' },
           fifteen: {
-            subject: "การงาน",
-            id: "ง31101",
-            color: "indigo lighten-3",
-            class: '3/1'
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
-          sixteen: { subject: "เคมี", id: "ว31207", color: "orange lighten-1", class: '' },
+          sixteen: { subject: "", id: "", color: "", class: '' },
         },
         {
           day: "พฤหัสบดี",
           eight: {
-            subject: "พลศึกษา",
-            id: "พ31201",
-            color: "purple lighten-3",
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
-          nine: { subject: "", id: "", color: "" },
-          ten: { subject: "ชีววิทยา", id: "ว31213", color: "green lighten-3" },
-          eleven: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-2" },
-          twelve: { subject: "", id: "", color: "" },
+          nine: { subject: "", id: "", color: "", class: '' },
+          ten: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-4" , class: '3/3' },
+          eleven: { subject: "ภาษไทย", id: "ท31101", color: "red lighten-5", class: '3/1' },
+          twelve: { subject: "", id: "", color: "", class: '' },
           thirteen: {
-            subject: "ฟิสิกส์",
-            id: "ว31201",
-            color: "lime lighten-2",
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
-          fourteen: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
-          },
-          fifteen: { subject: "", id: "", color: "" },
-          sixteen: { subject: "", id: "", color: "" },
+          fourteen: {subject: "ภาษาไทย", id: "ท31101", color: "teal lighten-4", class: '3/4' },
+          fifteen: { subject: "", id: "", color: "", class: '' },
+          sixteen: { subject: "", id: "", color: "", class: '' },
         },
         {
           day: "ศุกร์",
-          eight: { subject: "", id: "", color: "" },
+          eight: { subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "purple lighten-4",
+            class: '3/2' },
           nine: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
-          ten: { subject: "", id: "", color: "" },
-          eleven: { subject: "เคมี", id: "ว31207", color: "orange lighten-1" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: { subject: "", id: "", color: "" },
+          ten: { subject: "", id: "", color: "", class: '' },
+          eleven: { subject: "", id: "", color: "", class: '' },
+          twelve: { subject: "", id: "", color: "", class: '' },
+          thirteen: { subject: "", id: "", color: "", class: '' },
           fourteen: {
-            subject: "ชีววิทยา",
-            id: "ว31213",
-            color: "green lighten-3",
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
           fifteen: {
-            subject: "ภาษาอังกฤษ",
-            id: "อ31101",
-            color: "brown lighten-3",
+            subject: "",
+            id: "",
+            color: "",
+            class: ''
           },
           sixteen: {
-            subject: "สังคมศึกษา",
-            id: "ส31101",
-            color: "blue-grey lighten-3",
+            subject: "ภาษาไทย", id: "ท31101", color: "teal lighten-4", class: '3/4'
           },
         },
       ],

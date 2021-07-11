@@ -14,12 +14,11 @@
       </v-btn>
     </v-app-bar>
     <v-navigation-drawer app v-model="drawer" color="rgba(3, 144, 164, 1)">
-      <!-- <v-card height="auto" width="auto" > -->
-      <v-card class="mx-auto" outlined flat>
+      <v-card class="mx-auto" outlined flat style="text-align: center">
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-uppercase black--text">
-              <span class="orange--text text">Smart </span>
+            <v-list-item-title class="text-uppercase black--text" >
+              <span class="orange--text text" >Smart </span>
               <span class=" text">School</span>
             </v-list-item-title>
           </v-list-item-content>
@@ -38,7 +37,6 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <!-- </v-card> -->
     </v-navigation-drawer>
   </nav>
 </template>
@@ -50,7 +48,7 @@ export default {
       drawer: true,
       items: [
         { title: "หน้าหลัก", icon: "mdi-home", to: "/schedule" },
-        { title: "ข้อมูลส่วนตัว", icon: "mdi-account", to: "" },
+        { title: "ข้อมูลส่วนตัว", icon: "mdi-account", to: "/infomation" },
         { title: "คะแนน", icon: "mdi-clipboard-list-outline", to: "" },
         { title: "เกรด", icon: "mdi-clipboard-text-search-outline", to: "" },
         { title: "ใบลา", icon: "mdi-email-newsletter", to: "" },
