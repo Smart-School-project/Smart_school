@@ -2,328 +2,63 @@
     <div style="background-color: #ECEFF1;height: 100vh;">
     <Toolbar />
     <v-layout row justify-center align-top>
-       <!-- หัวข้อ -->
-      <v-flex xs11 md11 lg11 xl11 class="mt-5 mb-10">
+      <!-- tab ตารางสอน -->
+      <v-flex xs12 md4 lg4 xl4 class="mt-10 mb-10">
+        <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 'teacher'"> 
         <v-list-item>
           <v-list-item-icon>
-            <v-avatar color="primary" size="56">
-              <v-icon dark>mdi-calendar-month-outline</v-icon>
-            </v-avatar>
+              <v-icon color="#3F91A4" size="50">mdi-calendar-month-outline</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title><h2>Schedule</h2></v-list-item-title>
+            <v-list-item-title style="color: #3F91A4"><h3>ตารางสอน</h3></v-list-item-title>
+            <hr style="border-top: 1px solid #3F91A4">
+            <v-list-item-title style="color: #3F91A4"><h4>เทอม 1 ปีการศึกษา 2564</h4></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        </v-card>
       </v-flex>
 
-      <!-- ตาราง -->
-      <v-flex xs11 md11 lg11 xl11>
-        <v-data-table
-          :headers="headers"
-          :items="data"
-          class="elevation-1"
-          hide-default-footer
-        >
-          <!-- 8 โมง -->
-          <template v-slot:item.eight="{ item }"  @click="fnEdit()">
-            <v-chip
-              class="chip"
-              :color="item.eight.color"
-              label
-              large
-              v-if="item.eight.subject != ''"
-              @click="fnEdit()"
-            >
-              <p>
-                {{ item.eight.id }}<br />
-                {{ item.eight.subject }}
-              </p>
-            </v-chip>
-          </template>
+      <!-- tab ตารางเรียน -->
+      <v-flex xs12 md7 lg7 xl7 class="mt-10 mb-10">
+        <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 'student'"> 
+        <v-list-item>
+          <v-list-item-icon>
+              <v-icon color="#3F91A4" size="50">mdi-calendar-month-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title style="color: #3F91A4"><h3>ตารางเรียนห้องที่ปรึกษา</h3></v-list-item-title>
+            <hr style="border-top: 1px solid #3F91A4">
+            <v-list-item-title style="color: #3F91A4"><h4>เทอม 1 ปีการศึกษา 2564</h4></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        </v-card>
+      </v-flex>
 
-          <!-- 9 โมง -->
-          <template v-slot:item.nine="{ item }">
-            <v-chip
-              class="chip"
-              :color="item.nine.color"
-              label
-              large
-              v-if="item.nine.subject != ''"
-            >
-              <p>
-                {{ item.nine.id }} <br />
-                {{ item.nine.subject }}
-              </p>
-            </v-chip>
-          </template>
+      <!-- ตารางสอน -->
+      <v-flex xs11 md11 lg11 xl11 v-if="selectTab == 'teacher'">
+       <SCteacher />
+      </v-flex>
 
-          <!-- 10 โมง -->
-          <template v-slot:item.ten="{ item }">
-            <v-chip
-              class="chip"
-              :color="item.ten.color"
-              label
-              large
-              v-if="item.ten.subject != ''"
-            >
-              <p>
-                {{ item.ten.id }} <br />
-                {{ item.ten.subject }}
-              </p>
-            </v-chip>
-          </template>
-
-          <!-- 11 โมง -->
-          <template v-slot:item.eleven="{ item }">
-            <v-chip
-              class="chip"
-              :color="item.eleven.color"
-              label
-              large
-              v-if="item.eleven.subject != ''"
-            >
-              <p>
-                {{ item.eleven.id }} <br />
-                {{ item.eleven.subject }}
-              </p>
-            </v-chip>
-          </template>
-
-          <!-- 12 โมง -->
-          <template v-slot:item.twelve="{ item }">
-            <v-chip
-              class="chip"
-              :color="item.twelve.color"
-              label
-              large
-              v-if="item.twelve.subject != ''"
-            >
-              <p>
-                {{ item.twelve.id }} <br />
-                {{ item.twelve.subject }}
-              </p>
-            </v-chip>
-          </template>
-
-          <!-- 13 โมง -->
-          <template v-slot:item.thirteen="{ item }">
-            <v-chip
-              class="chip"
-              :color="item.thirteen.color"
-              label
-              large
-              v-if="item.thirteen.subject != ''"
-            >
-              <p>
-                {{ item.thirteen.id }} <br />
-                {{ item.thirteen.subject }}
-              </p>
-            </v-chip>
-          </template>
-
-          <!-- 14 โมง -->
-          <template v-slot:item.fourteen="{ item }">
-            <v-chip
-              class="chip"
-              :color="item.fourteen.color"
-              label
-              large
-              v-if="item.fourteen.subject != ''"
-            >
-              <p>
-                {{ item.fourteen.id }} <br />
-                {{ item.fourteen.subject }}
-              </p>
-            </v-chip>
-          </template>
-
-          <!-- 15 โมง -->
-          <template v-slot:item.fifteen="{ item }">
-            <v-chip
-              class="chip"
-              :color="item.fifteen.color"
-              label
-              large
-              v-if="item.fifteen.subject != ''"
-            >
-              <p>
-                {{ item.fifteen.id }} <br />
-                {{ item.fifteen.subject }}
-              </p>
-            </v-chip>
-          </template>
-
-          <!-- 16 โมง -->
-          <template v-slot:item.sixteen="{ item }">
-            <v-chip
-              class="chip"
-              :color="item.sixteen.color"
-              label
-              large
-              v-if="item.sixteen.subject != ''"
-            >
-              <p>
-                {{ item.sixteen.id }} <br />
-                {{ item.sixteen.subject }}
-              </p>
-            </v-chip>
-          </template>
-        </v-data-table>
+      <!-- ตารางเรียน -->
+      <v-flex xs11 md11 lg11 xl11 v-if="selectTab == 'student'">
+       <SCstudent />
       </v-flex>
     </v-layout>
   </div>
 </template>
 <script>
 import Toolbar from "../layout/index.vue";
+import SCstudent from "../components/schedule-student.vue";
+import SCteacher from "../components/schedule-teacher.vue";
 export default {
   components: {
     Toolbar,
+    SCstudent,
+    SCteacher,
   },
   data() {
     return {
-      headers: [
-        {
-          text: "",
-          align: "start",
-          sortable: false,
-          value: "day",
-        },
-        { text: "08:00", align: "center", sortable: false, value: "eight" },
-        { text: "09:00", align: "center", sortable: false, value: "nine" },
-        { text: "10:00", align: "center", sortable: false, value: "ten" },
-        { text: "11:00", align: "center", sortable: false, value: "eleven" },
-        { text: "12:00", align: "center", sortable: false, value: "twelve" },
-        { text: "13:00", align: "center", sortable: false, value: "thirteen" },
-        { text: "14:00", align: "center", sortable: false, value: "fourteen" },
-        { text: "15:00", align: "center", sortable: false, value: "fifteen" },
-        { text: "16:00", align: "center", sortable: false, value: "sixteen" },
-      ],
-      data: [
-        {
-          day: "จันทร์",
-          eight: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-2" },
-          nine: { subject: "ฟิสิกส์", id: "ว31201", color: "lime lighten-2" },
-          ten: { subject: "", id: "", color: "" },
-          eleven: {
-            subject: "ภาษาอังกฤษ",
-            id: "อ31101",
-            color: "brown lighten-3",
-          },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: {
-            subject: "ชีววิทยา",
-            id: "ว31213",
-            color: "green lighten-3",
-          },
-          fourteen: { subject: "", id: "", color: "" },
-          fifteen: {
-            subject: "สังคมศึกษา",
-            id: "ส31101",
-            color: "blue-grey lighten-3",
-          },
-          sixteen: { subject: "", id: "", color: "" },
-        },
-        {
-          day: "อังคาร",
-          eight: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
-          },
-          nine: { subject: "", id: "", color: "" },
-          ten: { subject: "เคมี", id: "ว31207", color: "orange lighten-1" },
-          eleven: { subject: "", id: "", color: "" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: {
-            subject: "ประวัติศาสตร์",
-            id: "ส31103",
-            color: "blue lighten-5",
-          },
-          fourteen: {
-            subject: "ดาราศาสตร์",
-            id: "ว31110",
-            color: "red lighten-2",
-          },
-          fifteen: { subject: "", id: "", color: "" },
-          sixteen: {
-            subject: "สุขศึกษา",
-            id: "พ31101",
-            color: "lime accent-3",
-          },
-        },
-        {
-          day: "พุธ",
-          eight: { subject: "", id: "", color: "" },
-          nine: { subject: "ศิลปะ", id: "ศ31101", color: "cyan lighten-4" },
-          ten: { subject: "ฟิสิกส์", id: "ว31201", color: "lime lighten-2" },
-          eleven: { subject: "", id: "", color: "" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: {
-            subject: "ภาษาไทย",
-            id: "ท31101",
-            color: "blue lighten-2",
-          },
-          fourteen: { subject: "", id: "", color: "" },
-          fifteen: {
-            subject: "การงาน",
-            id: "ง31101",
-            color: "indigo lighten-3",
-          },
-          sixteen: { subject: "เคมี", id: "ว31207", color: "orange lighten-1" },
-        },
-        {
-          day: "พฤหัสบดี",
-          eight: {
-            subject: "พลศึกษา",
-            id: "พ31201",
-            color: "purple lighten-3",
-          },
-          nine: { subject: "", id: "", color: "" },
-          ten: { subject: "ชีววิทยา", id: "ว31213", color: "green lighten-3" },
-          eleven: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-2" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: {
-            subject: "ฟิสิกส์",
-            id: "ว31201",
-            color: "lime lighten-2",
-          },
-          fourteen: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
-          },
-          fifteen: { subject: "", id: "", color: "" },
-          sixteen: { subject: "", id: "", color: "" },
-        },
-        {
-          day: "ศุกร์",
-          eight: { subject: "", id: "", color: "" },
-          nine: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
-          },
-          ten: { subject: "", id: "", color: "" },
-          eleven: { subject: "เคมี", id: "ว31207", color: "orange lighten-1" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: { subject: "", id: "", color: "" },
-          fourteen: {
-            subject: "ชีววิทยา",
-            id: "ว31213",
-            color: "green lighten-3",
-          },
-          fifteen: {
-            subject: "ภาษาอังกฤษ",
-            id: "อ31101",
-            color: "brown lighten-3",
-          },
-          sixteen: {
-            subject: "สังคมศึกษา",
-            id: "ส31101",
-            color: "blue-grey lighten-3",
-          },
-        },
-      ],
+      selectTab: 'teacher'
     };
   },
   methods: {
@@ -336,11 +71,12 @@ export default {
 
 <style scoped>
 .chip {
-  width: 60px;
+  width: 70px;
   height: 100px;
-  /* text-align: center; */
+  text-align: left !important;
 }
 .chip p {
   font-size: 2px;
 }
+
 </style>
