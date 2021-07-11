@@ -49,7 +49,6 @@ export default {
       items: [
         { title: "หน้าหลัก", icon: "mdi-home", to: "/schedule" },
         { title: "ข้อมูลส่วนตัว", icon: "mdi-account", to: "/infomation" },
-        { title: "ข้อมูลส่วนตัว", icon: "mdi-account", to: "" },
         { title: "คะแนน", icon: "mdi-clipboard-list-outline", to: "" },
         { title: "เกรด", icon: "mdi-clipboard-text-search-outline", to: "" },
         { title: "ใบลา", icon: "mdi-email-newsletter", to: "" },
