@@ -16,7 +16,7 @@
             </v-card>
         </v-flex >
             <v-container id="contain1" class="my-1">
-                <v-layout row wrap>
+                <v-layout row wrap flat>
                     <v-flex>
                         <v-card flat class="text-center ma-1" >
                             <v-responsive class="pt-4">
@@ -29,7 +29,7 @@
                                     <v-container>
                                         <v-row >
                                             <v-col cols="12" sm="6">
-                                                <v-text-field value="ซูลตอน แวกะจิ" label="ชื่อ-สกุล" readonly outlined ></v-text-field>
+                                                <v-text-field value="ซูลตอน แวกะจิ" label="ชื่อ-นามสกุล" readonly outlined ></v-text-field>
                                             </v-col>
                                             <v-col cols="12" sm="6">
                                                 <v-text-field value="6110110107" label="เลขประจำตัวนักเรียน" readonly outlined ></v-text-field>
