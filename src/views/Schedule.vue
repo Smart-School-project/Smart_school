@@ -3,7 +3,7 @@
     <Toolbar />
     <v-layout row justify-center align-top>
       <!-- tab ตารางสอน -->
-      <v-flex xs12 md4 lg4 xl4 class="mt-10 mb-10" v-if="$vuetify.breakpoint.mdAndUp" >
+      <v-flex xs12 sm12 md4 lg4 xl4 class="mt-10 mb-10" v-if="$vuetify.breakpoint.mdAndUp" >
         <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 'teacher'"> 
         <v-list-item>
           <v-list-item-icon>
@@ -19,7 +19,7 @@
       </v-flex>
 
       <!-- tab ตารางเรียน -->
-      <v-flex xs12 md7 lg7 xl7 class="mt-10 mb-10" v-if="$vuetify.breakpoint.mdAndUp">
+      <v-flex xs12 sm12 md7 lg7 xl7 class="mt-10 mb-10" v-if="$vuetify.breakpoint.mdAndUp">
         <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 'student'"> 
         <v-list-item>
           <v-list-item-icon>
@@ -34,7 +34,7 @@
         </v-card>
       </v-flex>
 
-      <v-flex xs10 class="mt-10 mb-10" v-if="$vuetify.breakpoint.xs">
+      <v-flex xs10 class="mt-10 mb-10" v-else>
         <v-select
           v-model="selectTab"
           :items="objectTab"
@@ -51,12 +51,12 @@
 
 
       <!-- ตารางสอน -->
-      <v-flex xs11 md11 lg11 xl11 v-if="selectTab == 'teacher'">
+      <v-flex xs11 sm11 md11 lg11 xl11 v-if="selectTab == 'teacher'">
        <SCteacher />
       </v-flex>
 
       <!-- ตารางเรียน -->
-      <v-flex xs11 md11 lg11 xl11 v-if="selectTab == 'student'">
+      <v-flex xs11 sm11 md11 lg11 xl11 v-if="selectTab == 'student'">
        <SCstudent />
       </v-flex>
     </v-layout>
