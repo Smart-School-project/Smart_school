@@ -1,8 +1,7 @@
-<template>
-  <nav>
+<template >
+  <nav id="d1">
     <link
-      href="https://fonts.googleapis.com/css?family=Material+Icons"
-      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet"
     />
     <v-app-bar color="rgba(3, 144, 164, 1)" @click="drawer = !drawer" thin dark>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -49,10 +48,9 @@ export default {
       items: [
         { title: "หน้าหลัก", icon: "mdi-home", to: "/schedule" },
         { title: "ข้อมูลส่วนตัว", icon: "mdi-account", to: "/infomation" },
-        { title: "ข้อมูลส่วนตัว", icon: "mdi-account", to: "" },
-        { title: "คะแนน", icon: "mdi-clipboard-list-outline", to: "" },
-        { title: "เกรด", icon: "mdi-clipboard-text-search-outline", to: "" },
-        { title: "ใบลา", icon: "mdi-email-newsletter", to: "" },
+        { title: "คะแนนระหว่างเรียน", icon: "mdi-clipboard-list-outline", to: "" },
+        { title: "ตรวจสอบผลการเรียน", icon: "mdi-clipboard-text-search-outline", to: "" },
+        { title: "ใบลา/ลาป่วย", icon: "mdi-email-newsletter", to: "/leave" },
         { title: "ปฏิทินกิจกรรม", icon: "mdi-calendar-month", to: "" },
         { title: "การบ้าน", icon: "mdi-book-open-variant", to: "" },
       ],
@@ -63,6 +61,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Athiti&display=swap');
 .text {
   font-size: 20px;
   font-weight:bold;

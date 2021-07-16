@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import index  from '../layout/index.vue'
 import info from '../views/info.vue'
 import Schedule  from '../views/Schedule.vue'
+import leave from '../views/leave.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
     name: 'Schedule',
     component: Schedule
   },
+  {
+    path: '/leave',
+    name: 'Leave',
+    component: leave
+  }
 
 ]
 
