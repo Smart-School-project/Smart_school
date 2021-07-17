@@ -15,6 +15,7 @@
                 </v-list-item>
             </v-card>
         </v-flex >
+        <!-- เริ่มทำฟอร์มใบลา-->
         <v-row justify="center">
             <v-col
             cols="12"
@@ -24,79 +25,117 @@
             >
             <v-card ref="form">
                 <v-card-text>
-                    <v-text-field
-                        ref="name"
-                        v-model="name"
-                        :rules="[() => !!name || 'This field is required']"
-                        :error-messages="errorMessages"
-                        label="Full Name"
-                        placeholder="John Doe"
-                        required
-                    ></v-text-field>
-                    <v-text-field
-                        ref="address"
-                        v-model="address"
-                        :rules="[
-                        () => !!address || 'This field is required',
-                        () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
-                        addressCheck
-                        ]"
-                        label="Address Line"
-                        placeholder="Snowy Rock Pl"
-                        counter="25"
-                        required
-                    ></v-text-field>
-                    <v-text-field
-                        ref="city"
-                        v-model="city"
-                        :rules="[() => !!city || 'This field is required', addressCheck]"
-                        label="City"
-                        placeholder="El Paso"
-                        required
-                    ></v-text-field>
-                    <v-text-field
-                        ref="state"
-                        v-model="state"
-                        :rules="[() => !!state || 'This field is required']"
-                        label="State/Province/Region"
-                        required
-                        placeholder="TX"
-                    ></v-text-field>
-                    <v-text-field
-                        ref="zip"
-                        v-model="zip"
-                        :rules="[() => !!zip || 'This field is required']"
-                        label="ZIP / Postal Code"
-                        required
-                        placeholder="79938"
-                    ></v-text-field>
-                    <v-autocomplete
-                        ref="country"
-                        v-model="country"
-                        :rules="[() => !!country || 'This field is required']"
-                        :items="countries"
-                        label="Country"
-                        placeholder="Select..."
-                        required
-                    ></v-autocomplete>
-                    <v-form
-                    ref="form"
-                    v-model="valid"
-                    lazy-validation>
+                    <!--ประเภทการลา-->
                     <v-select
                         v-model="select"
                         :items="items"
-                        :rules="[v => !!v || 'Item is required']"
-                        label="Item"
+                        :rules="[v => !!v || 'ต้องระบุข้อมูลในช่องนี้']"
+                        label="ประเภทการลา"
                         required
-                        ></v-select>
-                    </v-form>
+                    ></v-select>
+                    <!--ตัวปฏิทิน-->
+                    <v-col id="d1" cols="12" sm="12" md="12">
+                        <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent width="290px">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                                v-model="date"
+                                label="ปฏิทิน"
+                                prepend-icon="mdi-calendar"
+                                readonly
+                                v-bind="attrs"
+                                v-on="on"
+                            ></v-text-field>
+                        </template>
+                        <v-date-picker
+                        v-model="date"
+                        scrollable
+                        >
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            text
+                            color="primary"
+                            @click="modal = false"
+                        >
+                            Cancel
+                        </v-btn>
+                        <v-btn
+                            text
+                            color="primary"
+                            @click="$refs.dialog.save(date)"
+                        >
+                            OK
+                        </v-btn>
+                        </v-date-picker>
+                        </v-dialog>
+                    </v-col>
+                    <!--ชือ่-นามสกุล-->
+                    <v-text-field
+                        ref="name"
+                        v-model="name"
+                        :rules="[() => !!name || 'ต้องระบุข้อมูลในช่องนี้']"
+                        :error-messages="errorMessages"
+                        label="ชื่อ-นามสกุล"
+                        placeholder="ซูลตอน แวกะจิ"
+                        required
+                    ></v-text-field>
+                    <!--เลขประจำตัว-->
+                    <v-text-field
+                        ref="id_card"
+                        v-model="id_card"
+                        :rules="[() => !!id_card || 'ต้องระบุข้อมูลในช่องนี้']"
+                        :error-messages="errorMessages"
+                        label="เลขประจำตัวนักเรียน"
+                        placeholder="00001"
+                        required
+                    ></v-text-field>
+                    <!--ชั้นเรียน-->
+                    <v-text-field
+                        ref="room"
+                        v-model="room"
+                        :rules="[() => !!room || 'ต้องระบุข้อมูลในช่องนี้']"
+                        label="ชั้นสามัญ"
+                        required
+                    ></v-text-field>
+                    <!--หมวดวิชา-->
+                    <v-select
+                        v-model="select"
+                        :items="subject"
+                        :rules="[v => !!v || 'ต้องระบุข้อมูลในช่องนี้']"
+                        label="หมวดวิชา"
+                        required
+                    ></v-select>
+                    <!--อาจารย์-->
+                    <v-select
+                        v-model="select"
+                        :items="teacher"
+                        :rules="[v => !!v || 'ต้องระบุข้อมูลในช่องนี้']"
+                        label="อาจารย์"
+                        required
+                    ></v-select>
+                    <!--Bio-->
+                    <v-col id="d2" cols="12">
+                        <v-textarea
+                            v-model="bio"
+                            color="teal"
+                        >
+                            <template v-slot:label>
+                                <div>
+                                เหตุผลการลา
+                                </div>
+                            </template>
+                        </v-textarea>
+                    </v-col>
+                    <!--เเนบไฟล์-->
+                    <v-file-input
+                        show-size
+                        label="เเนบเอกสาร"
+                    ></v-file-input>
+                        
+
+
                 </v-card-text>
                 <v-divider class="mt-12"></v-divider>
                 <v-card-actions>
-                <v-btn text color="red">
-                    Cancel
-                </v-btn>
                 <v-spacer></v-spacer>
                 <v-slide-x-reverse-transition>
                         <v-tooltip
@@ -128,7 +167,10 @@
             </v-card>
             </v-col>
         </v-row>
+    <!--test ตัว text box-->
+    
     </div>
+    
 </template>
 
 <script>
@@ -139,12 +181,58 @@ export default {
     components: {
         Toolbar
     },
-    data() {
-    return {
-    };
-  },
-};
+    data: () => ({
+      items: [
+          'ลากิจ',
+          'ลาป่วย'
+          
+      ],
+      subject: [
+          'คนิตศาสตร์',
+          'วิทยาศาสตร์',
+          'ศิลปะ',
+      ],
+      teacher: [
+          'นิรุศดี นิกะจิ',
+          'มุสปานี อาเเอ',
+          'อับดุลมาลิก เสนาลิก',
+          'ฮากีมีน พิสพัน'
+      ],
+      
+
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      menu: false,
+      modal: false,
+      menu2: false,
+    }),
+    computed: {
+      formIsValid () {
+        return (
+          this.form.first &&
+          this.form.last &&
+          this.form.favoriteAnimal &&
+          this.form.terms
+        )
+      },
+    },
+  }
+
+
+
 </script>
 
 <style scoped>
+
+#d1 {
+    padding-top: 0%;
+    padding-bottom: 0%;
+    padding-right: 0%;
+    padding-left: 0%;
+}
+#d2{
+    padding-top: 0%;
+    padding-bottom: 0%;
+    padding-right: 0%;
+    padding-left: 0%;
+}
 </style>
