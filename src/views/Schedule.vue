@@ -1,7 +1,7 @@
 <template>
     <div style="background-color: #ECEFF1;height: 100vh;">
     <Toolbar />
-    <v-layout row justify-center align-top>
+    <v-layout row  align-top>
       <!-- tab ตารางสอน -->
       <v-flex xs12 md4 lg4 xl4 class="my-8 ma-7">
             <v-card width="350" color="blue-grey lighten-4" flat > 
@@ -19,7 +19,7 @@
       </v-flex >
     
       <!-- ตารางสอน -->
-      <v-flex xs11 sm11 md11 lg11 xl11>
+      <v-flex xs11 sm11 md11 lg11 xl11 class="my-1 ma-10">
        <SCstudent />
       </v-flex>
     </v-layout>

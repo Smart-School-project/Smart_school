@@ -63,7 +63,7 @@ export default {
   components: {},
   methods: {
     fnLogin() {
-      this.$router.push("/index");
+      this.$router.push("/schedule");
     },
   },
 };
