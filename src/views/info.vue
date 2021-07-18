@@ -28,28 +28,28 @@
                                 <v-form>
                                     <v-container>
                                         <v-row >
-                                            <v-col cols="12" sm="6">
+                                            <v-col id="col1" cols="12" sm="6">
                                                 <v-text-field value="ซูลตอน แวกะจิ" label="ชื่อ-นามสกุล" readonly outlined ></v-text-field>
                                             </v-col>
-                                            <v-col cols="12" sm="6">
+                                            <v-col id="col1" cols="12" sm="6">
                                                 <v-text-field value="6110110107" label="เลขประจำตัวนักเรียน" readonly outlined ></v-text-field>
                                             </v-col>
-                                            <v-col cols="12" sm="6">
+                                            <v-col id="col1" cols="12" sm="6">
                                                 <v-text-field value="1-8423-4521-45-7" label="เลขบัตรประชาชน" readonly outlined ></v-text-field>
                                             </v-col>
-                                            <v-col cols="12" sm="6">
+                                            <v-col id="col1" cols="12" sm="6">
                                                 <v-text-field value="ม.3/1" label="ชั้นสามัญ" readonly outlined ></v-text-field>
                                             </v-col>
-                                            <v-col cols="12" sm="6">
+                                            <v-col id="col1" cols="12" sm="6">
                                                 <v-text-field value="01/12/2547" label="วัน/เดือน/ปีเกิด" readonly outlined ></v-text-field>
                                             </v-col>
-                                            <v-col cols="12" sm="6">
+                                            <v-col id="col1" cols="12" sm="6">
                                                 <v-text-field value="60 ถ.ท่าเสด็จ ต.ตะลุบัน อ.สายบุรี จ.ปัตตานี 94110" label="ที่อยู่" readonly outlined ></v-text-field>
                                             </v-col>
-                                            <v-col cols="12" sm="6">
+                                            <v-col id="col1" cols="12" sm="6">
                                                 <v-text-field value="นาย มูฮัมหมัด เฮลโล" label="ชื่อ-สกุล ผู้ปกครอง" readonly outlined ></v-text-field>
                                             </v-col>
-                                            <v-col cols="12" sm="6">
+                                            <v-col id="col1" cols="12" sm="6">
                                                 <v-text-field value="084-569-5794" label="เบอร์โทรศัพท์" readonly outlined ></v-text-field>
                                             </v-col>
                                         </v-row>
@@ -91,5 +91,11 @@ export default {
     }
     #avatar1 {
         margin-top: 15px;
+        margin-bottom: 15px;
     }
+    #col1 {
+        padding-top: 0%;
+        padding-bottom: 0%;
+    }
+
 </style>

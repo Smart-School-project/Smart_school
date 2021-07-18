@@ -10,7 +10,7 @@
                         <v-list-item-content>
                             <v-list-item-title style="color: #3F91A4"><h3>ใบลากิจ/ลาป่วย</h3></v-list-item-title>
                                 <hr style="border-top: 1px solid #3F91A4">
-                            <v-list-item-title style="color: #3F91A4"><h4>ใบลากิจ/ลาป่วย สำหรับนักเรียน</h4></v-list-item-title>
+                            <v-list-item-title style="color: #3F91A4"><h4>สำหรับนักเรียน</h4></v-list-item-title>
                         </v-list-item-content>
                 </v-list-item>
             </v-card>
@@ -130,8 +130,6 @@
                         show-size
                         label="เเนบเอกสาร"
                     ></v-file-input>
-                        
-
 
                 </v-card-text>
                 <v-divider class="mt-12"></v-divider>
@@ -198,6 +196,13 @@ export default {
           'อับดุลมาลิก เสนาลิก',
           'ฮากีมีน พิสพัน'
       ],
+      bio : '',
+      select : '',
+      name :'',
+      id_card : '',
+      room : '',
+      submit : '',
+
       
 
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
