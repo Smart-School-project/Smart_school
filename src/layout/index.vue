@@ -7,7 +7,7 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text color="white">
+      <v-btn text color="white" @click="fnLogout">
         <span>Sign out</span>
         <v-icon right>mdi-logout</v-icon>
       </v-btn>
@@ -42,6 +42,11 @@
 
 <script>
 export default {
+  methods: {
+    fnLogout() {
+      this.$router.push("/");
+    },
+  },
   data() {
     return {
       drawer: true,

@@ -5,7 +5,7 @@
             <v-card width="350" color="blue-grey lighten-4" flat > 
                 <v-list-item>
                     <v-list-item-icon>
-                        <v-icon color="#3F91A4" size="50">mdi-calendar-month-outline</v-icon>
+                        <v-icon color="#3F91A4" size="50">mdi-account</v-icon>
                     </v-list-item-icon>
                         <v-list-item-content>
                             <v-list-item-title style="color: #3F91A4"><h3>ข้อมูลส่วนตัว</h3></v-list-item-title>

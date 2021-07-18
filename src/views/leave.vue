@@ -5,7 +5,7 @@
             <v-card width="350" color="blue-grey lighten-4" flat > 
                 <v-list-item>
                     <v-list-item-icon>
-                        <v-icon color="#3F91A4" size="50">mdi-calendar-month-outline</v-icon>
+                        <v-icon color="#3F91A4" size="50">mdi-email-newsletter</v-icon>
                     </v-list-item-icon>
                         <v-list-item-content>
                             <v-list-item-title style="color: #3F91A4"><h3>ใบลากิจ/ลาป่วย</h3></v-list-item-title>
@@ -96,6 +96,7 @@
                         label="ชั้นสามัญ"
                         required
                     ></v-text-field>
+                    
                     <!--หมวดวิชา-->
                     <v-select
                         v-model="select"
@@ -130,8 +131,8 @@
                         show-size
                         label="เเนบเอกสาร"
                     ></v-file-input>
-
                 </v-card-text>
+                
                 <v-divider class="mt-12"></v-divider>
                 <v-card-actions>
                 <v-spacer></v-spacer>
@@ -202,6 +203,9 @@ export default {
       id_card : '',
       room : '',
       submit : '',
+      errorMessages : '',
+      formHasErrors : '',
+
 
       
 
