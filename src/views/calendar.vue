@@ -15,6 +15,7 @@
                 </v-list-item>
             </v-card>
         </v-flex>
+        <div id="calen">
         <v-row class="fill-height">
             <v-col>
             <v-sheet height="64">
@@ -146,6 +147,7 @@
             </v-sheet>
             </v-col>
         </v-row>
+        </div>
     </div>
 </template>
 
@@ -243,5 +245,8 @@ export default {
 </script>
 
 <style scoped>
-    
+#calen {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
 </style>
