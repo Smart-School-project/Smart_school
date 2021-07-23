@@ -56,7 +56,7 @@ export default {
         { title: "คะแนนระหว่างเรียน", icon: "mdi-clipboard-list-outline", to: "" },
         { title: "ตรวจสอบผลการเรียน", icon: "mdi-clipboard-text-search-outline", to: "" },
         { title: "ใบลา/ลาป่วย", icon: "mdi-email-newsletter", to: "/leave" },
-        { title: "ปฏิทินกิจกรรม", icon: "mdi-calendar-month", to: "" },
+        { title: "ปฏิทินกิจกรรม", icon: "mdi-calendar-month", to: "/calendar" },
         { title: "การบ้าน", icon: "mdi-book-open-variant", to: "" },
       ],
       right: null,
