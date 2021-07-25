@@ -4,7 +4,7 @@
     <v-layout row justify-center align-top>
       <!-- tab ตารางสอน -->
       <v-flex xs12 sm12 md4 lg4 xl4 class="mt-10 mb-10" v-if="$vuetify.breakpoint.mdAndUp" >
-        <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 'teacher'"> 
+        <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 0"> 
         <v-list-item>
           <v-list-item-icon>
               <v-icon color="#3F91A4" size="50">mdi-calendar-month-outline</v-icon>
@@ -20,7 +20,7 @@
 
       <!-- tab ตารางเรียน -->
       <v-flex xs12 sm12 md7 lg7 xl7 class="mt-10 mb-10" v-if="$vuetify.breakpoint.mdAndUp">
-        <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 'student'"> 
+        <v-card width="350" color="blue-grey lighten-4" flat @click="selectTab = 1"> 
         <v-list-item>
           <v-list-item-icon>
               <v-icon color="#3F91A4" size="50">mdi-calendar-month-outline</v-icon>
@@ -48,15 +48,13 @@
         ></v-select>
         </v-flex>
 
-
-
       <!-- ตารางสอน -->
-      <v-flex xs11 sm11 md11 lg11 xl11 v-if="selectTab == 'teacher'">
+      <v-flex xs11 sm11 md11 lg11 xl11 v-if="selectTab == 0">
        <SCteacher />
       </v-flex>
 
       <!-- ตารางเรียน -->
-      <v-flex xs11 sm11 md11 lg11 xl11 v-if="selectTab == 'student'">
+      <v-flex xs11 sm11 md11 lg11 xl11 v-if="selectTab == 1">
        <SCstudent />
       </v-flex>
     </v-layout>
@@ -74,17 +72,17 @@ export default {
   },
   data() {
     return {
-      selectTab: 'teacher',
+      selectTab: 0,
       objectTab: [
          {text: "ตารางสอน", value: "teacher"},
          {text: "ตารางเรียนห้องที่ปรึกษา", value: "student"}
         ],
     };
   },
+  mounted() {
+    this.selectTab = localStorage.role
+  },
   methods: {
-    fnEdit() {
-      alert('ddddd')
-    }
   }
 };
 </script>

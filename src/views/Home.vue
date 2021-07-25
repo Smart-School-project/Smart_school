@@ -7,7 +7,7 @@
         lg8
         v-if="$vuetify.breakpoint.mdAndUp"
         class="background-flex1"
-        style="text-align:center;"
+        style="text-align: center"
       >
         <img class="Ellipse" src="../assets/login/Ellipse.png" />
       </v-flex>
@@ -18,14 +18,9 @@
             <h2 class="tab-text">Welcome back</h2>
           </v-flex>
         </v-layout>
-        <v-layout
-          row
-          wrap
-          justify-center
-          align-center
-        >
-          <v-flex xs6 md6 xl6 lg6 style="text-align:right;">
-            <h2 class="text1 ">Smart</h2>
+        <v-layout row wrap justify-center align-center>
+          <v-flex xs6 md6 xl6 lg6 style="text-align: right">
+            <h2 class="text1">Smart</h2>
           </v-flex>
           <v-flex xs6 md6 xl6 lg6>
             <h2 class="text2">School</h2>
@@ -35,11 +30,13 @@
           <v-flex xs8 md8 xl8 lg8 class="input">
             <v-text-field
               label="Username"
+              v-model="username"
               outlined
               prepend-inner-icon="mdi-account-circle"
             ></v-text-field>
             <v-text-field
               label="Password"
+              v-model="password"
               outlined
               prepend-inner-icon="mdi-lock"
             ></v-text-field>
@@ -58,12 +55,33 @@
 </template>
 
 <script>
+// import axios from 'axios'
 export default {
   name: "Home",
+  data () {
+      return {
+        username: "",
+        password: "",
+      }
+    },
   components: {},
   methods: {
     fnLogin() {
-      this.$router.push("/index");
+      var payload  = {
+        username: this.username,
+        password: this.password,
+      }
+      const vm = this
+      this.axios
+        .post("http://0.0.0.0:3000/login", payload)
+        .then(function (response) {
+          if(response.data.status == "OK") {
+            localStorage.setItem("id",response.data.result[0].id)
+            localStorage.setItem("role",response.data.result[0].role_id)
+            vm.$router.push("/schedule");
+          }
+        });
+
     },
   },
 };
@@ -89,7 +107,7 @@ export default {
   background-color: #ffffff;
   width: 100vw;
   height: 100vh;
-  border-left: 1rem solid #C4C4C4;;
+  border-left: 1rem solid #c4c4c4;
 }
 
 .tab {
@@ -112,7 +130,7 @@ export default {
   color: #f5a82a;
   font-size: 3rem;
   margin-top: 200px;
-   margin-right: 10px;
+  margin-right: 10px;
 }
 .text2 {
   color: #030303;
@@ -124,6 +142,6 @@ export default {
   margin-top: 30px;
 }
 .login {
-  text-align:center;
+  text-align: center;
 }
 </style>

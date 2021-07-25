@@ -51,7 +51,7 @@ export default {
         { title: "ข้อมูลส่วนตัว", icon: "mdi-account", to: "/infomation" },
         { title: "คะแนน", icon: "mdi-clipboard-list-outline", to: "" },
         { title: "เกรด", icon: "mdi-clipboard-text-search-outline", to: "" },
-        { title: "ใบลา", icon: "mdi-email-newsletter", to: "" },
+        { title: "ใบลา", icon: "mdi-email-newsletter", to: "/leave" },
         { title: "ปฏิทินกิจกรรม", icon: "mdi-calendar-month", to: "" },
         { title: "การบ้าน", icon: "mdi-book-open-variant", to: "" },
       ],

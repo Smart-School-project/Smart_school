@@ -1,5 +1,19 @@
 <template>
-    <div >
+  <div>
+    <editSC
+    :edit="editSC"
+        @close="editSC = false"
+    />
+    <v-layout row justify-right align-right>
+      <v-flex xs12 md12 lg12 xl12>
+      <v-btn tile color="warning" style="float: right" @click="fnEdit">
+        <v-icon left> mdi-pencil </v-icon>
+        แก้ไข
+      </v-btn>
+      </v-flex>
+    </v-layout>
+<br>
+<br>
     <v-layout row justify-center align-top>
       <!-- ตาราง -->
       <v-flex xs12 md12 lg12 xl12>
@@ -10,14 +24,13 @@
           hide-default-footer
         >
           <!-- 8 โมง -->
-          <template v-slot:item.eight="{ item }"  @click="fnEdit()">
+          <template v-slot:item.eight="{ item }" >
             <v-chip
               class="chip"
               :color="item.eight.color"
               label
               large
               v-if="item.eight.subject != ''"
-              @click="fnEdit()"
             >
               <p>
                 {{ item.eight.id }}<br />
@@ -159,7 +172,11 @@
   </div>
 </template>
 <script>
+import editSC from "../components/dialog-schedule-student"
 export default {
+  components: {
+      editSC,
+  },
   data() {
     return {
       headers: [
@@ -169,7 +186,7 @@ export default {
           sortable: false,
           value: "day",
         },
-        { text: "08:00", align: "center", sortable: false, value: "eight"},
+        { text: "08:00", align: "center", sortable: false, value: "eight" },
         { text: "09:00", align: "center", sortable: false, value: "nine" },
         { text: "10:00", align: "center", sortable: false, value: "ten" },
         { text: "11:00", align: "center", sortable: false, value: "eleven" },
@@ -305,13 +322,14 @@ export default {
           },
         },
       ],
+      editSC : false,
     };
   },
   methods: {
     fnEdit() {
-      alert('ddddd')
-    }
-  }
+      this.editSC = true;
+    },
+  },
 };
 </script>
 
@@ -324,5 +342,4 @@ export default {
 .chip p {
   font-size: 2px;
 }
-
 </style>
