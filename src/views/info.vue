@@ -21,36 +21,47 @@
                         <v-card flat class="text-center ma-1" >
                             <v-responsive class="pt-4">
                                 <v-avatar  id="avatar1" size="190">
-                                    <img id="img1"  src="../assets/profile.jpg" alt="profile">
+                                    <img :src="imageUrl">
                                 </v-avatar>
                             </v-responsive>
+                            <div class="text-center">
+                                <v-btn
+                                rounded
+                                color="primary"
+                                dark
+                                @click="onPickFile"
+                                >
+                                insert image
+                                </v-btn>
+                                <input type="file" style="display : none" ref="fileInput" accept="image/*" @change="onFilePicked">
+                            </div>
                             <v-card-text id="d1">
                                 <v-form>
                                     <v-container>
                                         <v-row >
                                             <v-col id="col1" cols="12" sm="6">
-                                                <v-text-field value="ซูลตอน แวกะจิ" label="ชื่อ-นามสกุล" readonly outlined ></v-text-field>
+                                                <v-text-field v-model="name" label="ชื่อ-นามสกุล" readonly outlined ></v-text-field>
+                                            </v-col>
+                                            <v-col  id="col1" cols="12" sm="6">
+                                                <v-text-field v-model="id" label="เลขประจำตัวนักเรียน" readonly outlined ></v-text-field>
                                             </v-col>
                                             <v-col id="col1" cols="12" sm="6">
-                                                <v-text-field value="6110110107" label="เลขประจำตัวนักเรียน" readonly outlined ></v-text-field>
+                                                <v-text-field v-model="id_card" label="เลขบัตรประชาชน" readonly outlined ></v-text-field>
                                             </v-col>
                                             <v-col id="col1" cols="12" sm="6">
-                                                <v-text-field value="1-8423-4521-45-7" label="เลขบัตรประชาชน" readonly outlined ></v-text-field>
+                                                <v-text-field v-model="room" label="ชั้นสามัญ" readonly outlined ></v-text-field>
                                             </v-col>
                                             <v-col id="col1" cols="12" sm="6">
-                                                <v-text-field value="ม.3/1" label="ชั้นสามัญ" readonly outlined ></v-text-field>
+                                                <v-text-field v-model="birthday" label="วัน/เดือน/ปีเกิด" readonly outlined ></v-text-field>
+                                            </v-col>
+                                            <v-col  id="col1" cols="12" sm="6">
+                                                <v-text-field v-model="address" label="ที่อยู่" readonly outlined ></v-text-field>
                                             </v-col>
                                             <v-col id="col1" cols="12" sm="6">
-                                                <v-text-field value="01/12/2547" label="วัน/เดือน/ปีเกิด" readonly outlined ></v-text-field>
+                                                <v-text-field v-model="email" label="ชื่อ-สกุล ผู้ปกครอง" readonly outlined ></v-text-field>
                                             </v-col>
                                             <v-col id="col1" cols="12" sm="6">
-                                                <v-text-field value="60 ถ.ท่าเสด็จ ต.ตะลุบัน อ.สายบุรี จ.ปัตตานี 94110" label="ที่อยู่" readonly outlined ></v-text-field>
-                                            </v-col>
-                                            <v-col id="col1" cols="12" sm="6">
-                                                <v-text-field value="นาย มูฮัมหมัด เฮลโล" label="ชื่อ-สกุล ผู้ปกครอง" readonly outlined ></v-text-field>
-                                            </v-col>
-                                            <v-col id="col1" cols="12" sm="6">
-                                                <v-text-field value="084-569-5794" label="เบอร์โทรศัพท์" readonly outlined ></v-text-field>
+                                                <v-text-field v-model="phone" label="เบอร์โทรศัพท์" readonly outlined ></v-text-field>
                                             </v-col>
                                         </v-row>
                                     </v-container>
@@ -73,8 +84,49 @@ export default {
     },
     data() {
     return {
+        name: "",
+        id: "",
+        id_card: "",
+        room: "",
+        birthday: "",
+        address: "",
+        email: "",
+        phone: "",
+        // img1: ""
       
     };
+  },
+   mounted() {
+    this.fnProfile();
+  },
+   methods: {
+    fnProfile() {
+      var payload = {
+        account_id: localStorage.id,
+      };
+      const vm = this
+      this.axios
+        .post("http://localhost:3000/profile", payload)
+        .then(function (response) {
+            console.log(response.data)
+            if(response.data.status == "OK") {
+                var dataResult = response.data.result[0]
+                vm.name = dataResult.name
+                vm.id = dataResult.id
+                vm.id_card = dataResult.id_card
+                vm.room = dataResult.class
+                vm.birthday = dataResult.birthday
+                vm.address = dataResult.address
+                vm.email = dataResult.email
+                vm.phone = dataResult.phone
+                // vm.img1 = dataResult.img1
+            }
+        });
+    },
+    onPickFile() {
+        this.$refs.fileInput.click();
+    },
+    
   },
 };
 </script>
