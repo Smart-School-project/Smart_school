@@ -21,20 +21,10 @@
                         <v-card flat class="text-center ma-1" >
                             <v-responsive class="pt-4">
                                 <v-avatar  id="avatar1" size="190">
-                                    <img :src="imageUrl">
+                                    <img :src="'data:image/jpg;base64, '+image" alt="Red dot" />
                                 </v-avatar>
                             </v-responsive>
-                            <div class="text-center">
-                                <v-btn
-                                rounded
-                                color="primary"
-                                dark
-                                @click="onPickFile"
-                                >
-                                insert image
-                                </v-btn>
-                                <input type="file" style="display : none" ref="fileInput" accept="image/*" @change="onFilePicked">
-                            </div>
+                            
                             <v-card-text id="d1">
                                 <v-form>
                                     <v-container>
@@ -92,7 +82,7 @@ export default {
         address: "",
         email: "",
         phone: "",
-        // img1: ""
+        image: ""
       
     };
   },
@@ -119,7 +109,7 @@ export default {
                 vm.address = dataResult.address
                 vm.email = dataResult.email
                 vm.phone = dataResult.phone
-                // vm.img1 = dataResult.img1
+                vm.image = dataResult.image
             }
         });
     },
