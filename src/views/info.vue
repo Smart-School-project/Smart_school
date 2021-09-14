@@ -25,7 +25,7 @@
           <v-card flat class="text-center ma-1">
             <v-responsive class="pt-4">
               <v-avatar id="avatar1" size="190">
-                <img id="img1" src="../assets/profile.jpg" alt="profile" />
+                <img :src="'data:image/jpg;base64, '+image" alt="" />
               </v-avatar>
             </v-responsive>
             <v-card-text id="d1">
@@ -123,7 +123,8 @@ export default {
       birthday: "",
       address: "",
       email: "",
-      phone: ""
+      phone: "",
+      image: ""
 
     };
   },
@@ -149,6 +150,7 @@ export default {
                 vm.address = dataResult.address
                 vm.email = dataResult.email
                 vm.phone = dataResult.phone
+                vm.image = dataResult.image
             }
         });
     },

@@ -76,12 +76,12 @@ export default {
           sortable: false,
           value: "day",
         },
-        { text: "รหัสนักเรียน", value: "id" },
-        { text: "ชื่อ-นามสกุล", value: "name" },
-        { text: "ห้อง", value: "room" },
-        { text: "ประเภทการลา", value: "category" },
-        { text: "สาเหตุ", value: "cause" },
-        { text: "เอกสาร", value: "doc" },
+        { text: "รหัสนักเรียน", align: "center", sortable: false, value: "id" },
+        { text: "ชื่อ-นามสกุล", align: "center", sortable: false, value: "name" },
+        { text: "ห้อง", align: "center", sortable: false, value: "room" },
+        { text: "ประเภทการลา", align: "center", sortable: false, value: "category" },
+        { text: "สาเหตุ", align: "center", sortable: false, value: "cause" },
+        { text: "เอกสาร", align: "center", sortable: false, value: "doc" },
       ],
       data: [
         {

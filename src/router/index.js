@@ -5,6 +5,8 @@ import index  from '../layout/index.vue'
 import info from '../views/info.vue'
 import Schedule  from '../views/Schedule.vue'
 import Leave  from '../views/leave.vue'
+import calendar  from '../views/calendar.vue'
+import homework  from '../views/homework.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,16 @@ const routes = [
     path: '/leave',
     name: 'Leave',
     component: Leave
+  },
+  {
+    path: '/calendar',
+    name: 'calendar',
+    component: calendar
+  },
+  {
+    path: '/homework',
+    name: 'homework',
+    component: homework
   },
 
 ]

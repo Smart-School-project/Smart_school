@@ -5,8 +5,12 @@ import router from './router'
 import 'vuetify/dist/vuetify.min.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VCalendar from "v-calendar";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar);
 Vue.use(VueAxios, axios)
 
 new Vue({

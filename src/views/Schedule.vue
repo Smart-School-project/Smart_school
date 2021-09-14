@@ -74,8 +74,8 @@ export default {
     return {
       selectTab: 0,
       objectTab: [
-         {text: "ตารางสอน", value: "teacher"},
-         {text: "ตารางเรียนห้องที่ปรึกษา", value: "student"}
+         {text: "ตารางสอน", value: 0},
+         {text: "ตารางเรียนห้องที่ปรึกษา", value: 1}
         ],
     };
   },
