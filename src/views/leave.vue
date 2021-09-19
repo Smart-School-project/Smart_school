@@ -29,9 +29,7 @@
                     <v-select
                         v-model="select"
                         :items="items"
-                        :rules="[v => !!v || 'ต้องระบุข้อมูลในช่องนี้']"
                         label="ประเภทการลา"
-                        required
                     ></v-select>
                     <!--ตัวปฏิทิน-->
                     <v-col id="d1" cols="12" sm="12" md="12">
@@ -39,7 +37,7 @@
                         <template v-slot:activator="{ on, attrs }">
                             <v-text-field
                                 v-model="date"
-                                label="ปฏิทิน"
+                                label="วันที่ส่ง"
                                 prepend-icon="mdi-calendar"
                                 readonly
                                 v-bind="attrs"
@@ -72,62 +70,50 @@
                     <v-text-field
                         ref="name"
                         v-model="name"
-                        :rules="[() => !!name || 'ต้องระบุข้อมูลในช่องนี้']"
                         :error-messages="errorMessages"
                         label="ชื่อ-นามสกุล"
                         placeholder="ซูลตอน แวกะจิ"
-                        required
                     ></v-text-field>
                     <!--เลขประจำตัว-->
                     <v-text-field
                         ref="id_card"
                         v-model="id_card"
-                        :rules="[() => !!id_card || 'ต้องระบุข้อมูลในช่องนี้']"
                         :error-messages="errorMessages"
                         label="เลขประจำตัวนักเรียน"
                         placeholder="00001"
-                        required
                     ></v-text-field>
                     <!--ชั้นเรียน-->
                     <v-text-field
                         ref="room"
                         v-model="room"
-                        :rules="[() => !!room || 'ต้องระบุข้อมูลในช่องนี้']"
                         label="ชั้นสามัญ"
-                        required
                     ></v-text-field>
                     
                     <!--หมวดวิชา-->
                     <v-select
-                        v-model="select"
-                        :items="subject"
-                        :rules="[v => !!v || 'ต้องระบุข้อมูลในช่องนี้']"
+                        v-model="subject"
+                        :items="subject1"
                         label="หมวดวิชา"
-                        required
+                        
                     ></v-select>
                     <!--อาจารย์-->
                     <v-select
-                        v-model="select"
-                        :items="teacher"
-                        :rules="[v => !!v || 'ต้องระบุข้อมูลในช่องนี้']"
+                        v-model="teacher"
+                        :items="teacher1"
                         label="อาจารย์"
-                        required
                     ></v-select>
                     <!--Bio-->
                     <v-col id="d2" cols="12">
                         <v-textarea
                             v-model="bio"
                             color="teal"
+                            label="เหตุผลการลา"
                         >
-                            <template v-slot:label>
-                                <div>
-                                เหตุผลการลา
-                                </div>
-                            </template>
                         </v-textarea>
                     </v-col>
                     <!--เเนบไฟล์-->
-                    <v-file-input
+                     <v-file-input
+                        v-model="pdf_file"
                         show-size
                         label="เเนบเอกสาร"
                     ></v-file-input>
@@ -156,9 +142,16 @@
                         </v-tooltip>
                 </v-slide-x-reverse-transition>
                 <v-btn
+                    color="error"
+                    text
+                    @click="reset"
+                    >
+                    Reset Form
+                </v-btn>
+                <v-btn
                     color="green"
                     text
-                    @click="submit"
+                    @click="fn_submit"
                 >
                     Submit
                 </v-btn>
@@ -167,7 +160,6 @@
             </v-col>
         </v-row>
     <!--test ตัว text box-->
-    
     </div>
     
 </template>
@@ -186,12 +178,12 @@ export default {
           'ลาป่วย'
           
       ],
-      subject: [
+      subject1: [
           'คนิตศาสตร์',
           'วิทยาศาสตร์',
           'ศิลปะ',
       ],
-      teacher: [
+      teacher1: [
           'นิรุศดี นิกะจิ',
           'มุสปานี อาเเอ',
           'อับดุลมาลิก เสนาลิก',
@@ -205,14 +197,14 @@ export default {
       submit : '',
       errorMessages : '',
       formHasErrors : '',
-
-
-      
-
+      subject: '',
+      teacher: '',
+      pdf_file: [],
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       menu: false,
       modal: false,
       menu2: false,
+      date1: '',
     }),
     computed: {
       formIsValid () {
@@ -224,10 +216,55 @@ export default {
         )
       },
     },
+    methods: {
+        async fn_submit() {
+            var filebase64 = await this.toBase64()
+
+            var payload = {
+                date: this.date1,
+                name: this.name,
+                students_id: this.id_card,
+                room: this.room,
+                teacher: this.teacher,
+                subject: this.subject,
+                type_leave: this.select,
+                cause: this.bio,
+                pdf: filebase64,
+             };
+             console.log(payload)
+             this.axios
+                .post("http://localhost:3000/leave", payload)
+                .then(function (response) { 
+                    if(response.data.status == "OK") {
+                        alert(response.data.result)
+                    }
+                });
+        },
+        toBase64() {
+            console.log(this.pdf_file)
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(this.pdf_file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        },
+        reset(){
+            this.bio =  '',
+            this.select = '',
+            this.name = '',
+            this.id_card = '',
+            this.room = '',
+            this.submit = '',
+            this.subject = '',
+            this.teacher = '',
+            this.pdf_file = [],
+            this.date = [],
+            this.$refs.observer.reset()
+        },
+
+    }
   }
-
-
-
 </script>
 
 <style scoped>
