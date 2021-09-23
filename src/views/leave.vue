@@ -1,6 +1,7 @@
 <template>
     <div style="background-color: #ECEFF1; height: 100%;">
         <Toolbar/>
+        <!-- กรอบใบลา -->
         <v-flex xs12 md4 lg4 xl4 class="my-8 ma-7">
             <v-card width="350" color="blue-grey lighten-4" flat > 
                 <v-list-item>
@@ -15,8 +16,9 @@
                 </v-list-item>
             </v-card>
         </v-flex >
+
         <!-- เริ่มทำฟอร์มใบลา-->
-        <v-row justify="center">
+        <v-row justify="center" id="d5">
             <v-col
             cols="12"
             sm="10"
@@ -205,6 +207,7 @@ export default {
       modal: false,
       menu2: false,
       date1: '',
+    
     }),
     computed: {
       formIsValid () {
@@ -281,4 +284,6 @@ export default {
     padding-right: 0%;
     padding-left: 0%;
 }
+
+
 </style>

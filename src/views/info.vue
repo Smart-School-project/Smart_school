@@ -104,7 +104,7 @@ export default {
                 vm.name = dataResult.name
                 vm.id = dataResult.id
                 vm.id_card = dataResult.id_card
-                vm.room = dataResult.class
+                vm.room = dataResult.room
                 vm.birthday = dataResult.birthday
                 vm.address = dataResult.address
                 vm.email = dataResult.email

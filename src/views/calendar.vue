@@ -16,138 +16,147 @@
             </v-card>
         </v-flex>
         <!-- ปฏิทิน -->
-        <div id="calen">
-        <v-row class="fill-height">
+        <div>
+          <v-row class="fill-height">
             <v-col>
-            <v-sheet height="64">
+              <v-sheet height="64">
                 <v-toolbar
-                flat
+                  flat
                 >
-                <v-btn
+                  <v-btn
                     outlined
                     class="mr-4"
                     color="grey darken-2"
                     @click="setToday"
-                >
+                  >
                     Today
-                </v-btn>
-                <v-btn
+                  </v-btn>
+                  <!-- ย้อนกลับเดือน -->
+                  <v-btn
                     fab
                     text
                     small
                     color="grey darken-2"
                     @click="prev"
-                >
+                  >
                     <v-icon small>
-                    mdi-chevron-left
+                      mdi-chevron-left
                     </v-icon>
-                </v-btn>
-                <v-btn
+                  </v-btn>
+                  <!-- ไปหน้าเดือน -->
+                  <v-btn
                     fab
                     text
                     small
                     color="grey darken-2"
                     @click="next"
-                >
+                  >
                     <v-icon small>
-                    mdi-chevron-right
+                      mdi-chevron-right
                     </v-icon>
-                </v-btn>
-                <v-toolbar-title v-if="$refs.calendar">
+                  </v-btn>
+                  <!-- ชื่อเดือนที่เเสดง -->
+                  <v-toolbar-title v-if="$refs.calendar">
                     {{ $refs.calendar.title }}
-                </v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-menu
+                  </v-toolbar-title>
+                  <v-spacer></v-spacer>
+                  <!-- เมนูของเดือนต่างๆ day month year -->
+                  <v-menu
                     bottom
                     right
-                >
+                  >
                     <template v-slot:activator="{ on, attrs }">
-                    <v-btn
+                      <v-btn
                         outlined
                         color="grey darken-2"
                         v-bind="attrs"
                         v-on="on"
-                    >
+                      >
                         <span>{{ typeToLabel[type] }}</span>
                         <v-icon right>
-                        mdi-menu-down
+                          mdi-menu-down
                         </v-icon>
-                    </v-btn>
+                      </v-btn>
                     </template>
                     <v-list>
-                    <v-list-item @click="type = 'day'">
+                      <v-list-item @click="type = 'day'">
                         <v-list-item-title>Day</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="type = 'week'">
+                      </v-list-item>
+                      <v-list-item @click="type = 'week'">
                         <v-list-item-title>Week</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="type = 'month'">
+                      </v-list-item>
+                      <v-list-item @click="type = 'month'">
                         <v-list-item-title>Month</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="type = '4day'">
+                      </v-list-item>
+                      <v-list-item @click="type = '4day'">
                         <v-list-item-title>4 days</v-list-item-title>
-                    </v-list-item>
+                      </v-list-item>
                     </v-list>
-                </v-menu>
+                  </v-menu>
                 </v-toolbar>
-            </v-sheet>
-            <v-sheet height="600">
+              </v-sheet>
+              <!-- พวกอีเว้นต่างๆภายในตาราง -->
+              <v-sheet height="600">
                 <v-calendar
-                ref="calendar"
-                v-model="focus"
-                color="primary"
-                :events="events"
-                :event-color="getEventColor"
-                :type="type"
-                @click:event="showEvent"
-                @click:more="viewDay"
-                @click:date="viewDay"
-                @change="updateRange"
+                  ref="calendar"
+                  v-model="focus"
+                  color="primary"
+                  :events="events"
+                  :event-color="getEventColor"
+                  :type="type"
+                  @click:event="showEvent"
+                  @click:more="viewDay"
+                  @click:date="viewDay"
+                  @change="updateRange"
                 ></v-calendar>
+                <!-- เมื่อกดไปที่อีเว้นจะมีป็อปอัพขึ้นมา -->
                 <v-menu
-                v-model="selectedOpen"
-                :close-on-content-click="false"
-                :activator="selectedElement"
-                offset-x
+                  v-model="selectedOpen"
+                  :close-on-content-click="false"
+                  :activator="selectedElement"
+                  offset-x
                 >
-                <v-card
+                  <v-card
                     color="grey lighten-4"
                     min-width="350px"
                     flat
-                >
+                  >
                     <v-toolbar
-                    :color="selectedEvent.color"
-                    dark
+                      :color="selectedEvent.color"
+                      dark
                     >
-                    <v-btn icon>
+                      <v-btn icon>
                         <v-icon>mdi-pencil</v-icon>
-                    </v-btn>
-                    <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-btn icon>
+                      </v-btn>
+                      <!-- ชื่ออีเว้น -->
+                      <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                      <v-spacer></v-spacer>
+                      <v-btn icon>
                         <v-icon>mdi-heart</v-icon>
-                    </v-btn>
-                    <v-btn icon>
+                      </v-btn>
+                      <v-btn icon>
                         <v-icon>mdi-dots-vertical</v-icon>
-                    </v-btn>
+                      </v-btn>
                     </v-toolbar>
+                    <!-- detailภายในอีเว้นเมื่อเราคลิก -->
                     <v-card-text>
-                    <span v-html="selectedEvent.details"></span>
+                      <span v-html="selectedEvent.details"></span>
                     </v-card-text>
+                    <!-- ปุ่ม cancel -->
                     <v-card-actions>
-                    <v-btn
+                      <v-btn
                         text
                         color="secondary"
                         @click="selectedOpen = false"
-                    >
+                      >
                         Cancel
-                    </v-btn>
+                      </v-btn>
                     </v-card-actions>
-                </v-card>
+                  </v-card>
                 </v-menu>
-            </v-sheet>
+              </v-sheet>
             </v-col>
-        </v-row>
+          </v-row>
         </div>
     </div>
 </template>
@@ -160,26 +169,91 @@ export default {
     components: {
         Toolbar
     },
+    // data() {
+    //   return{
+    //   today: new Date().toISOString().substr(0,10),
+    //   focus: new Date().toISOString().substr(0,10),
+    //   type: "month",
+    //   typeToLabel: {
+    //     month: "Month",
+    //     week: "Week",
+    //     day: "Day",
+    //      "4day": "4 Days"
+    //    },
+    //   name: '',
+    //   details: null,
+    //   start: null,
+    //   end: null,
+    //   color: "#1976D2",
+    //   currentlyEditing: null,
+    //   selectedEvent: {},
+    //   selectedElement: null,
+    //   selectedOpen: false,
+    //   event: [],
+    //   dialog: false
+    //   }
+    // },
+
     data: () => ({
-      focus: '',
-      type: 'month',
+      today: new Date().toISOString().substr(0,10),
+      focus: new Date().toISOString().substr(0,10),
+      type: "month",
       typeToLabel: {
-        month: 'Month',
-        week: 'Week',
-        day: 'Day',
-        '4day': '4 Days',
+        month: "Month",
+        week: "Week",
+        day: "Day",
+        "4day": "4 Days"
       },
+      name: "",
+      details: "",
+      start: "",
+      end: "",
+      color: "#1976D2",
+      currentlyEditing: "",
       selectedEvent: {},
-      selectedElement: null,
+      selectedElement: "",
       selectedOpen: false,
       events: [],
-      colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-      names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+      dialog: false
     }),
-    mounted () {
-      this.$refs.calendar.checkChange()
+    async mounted(){
+      this.getEvents();
     },
-    methods: {
+    methods:{
+      async getEvents() {
+      var payload = {
+        name : this.name,
+        start : this.start,
+        end : this.end,
+        details : this.details
+      };
+      const vm = this
+      console.log(payload)
+      this.axios
+        .post("http://localhost:3000/calendar", payload)
+        .then(function (response) {
+            console.log(response.data)
+            if(response.data.status == "OK") {
+                // callback(response.data.calendardata)
+                // let events = [];
+                // let appData = response.data();
+                // appData.id = response.id;
+                // events.push(appData)
+                vm.dataResult = response.data.result[0]
+                // vm.name = dataResult.name
+                // vm.details = dataResult.details
+                // vm.start = dataResult.start
+                // vm.end = dataResult.end
+                // let snapshot =  response.data.result[0]
+                // let events = [];
+                // snapshot.forEach(doc =>{
+                //   let appData = doc.data();
+                //   appData.id = doc.id;
+                //   events.push(appData)
+                // });
+            }
+        });
+      },
       viewDay ({ date }) {
         this.focus = date
         this.type = 'day'
@@ -241,13 +315,10 @@ export default {
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a
       },
-    },
-  }
+    }
+  };
 </script>
 
 <style scoped>
-#calen {
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-}
+
 </style>

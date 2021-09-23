@@ -24,12 +24,7 @@
       
         
         <br />
-        <v-data-table
-          :headers="headers"
-          :items="data"
-          class="elevation-1"
-          hide-default-footer
-        >
+        <v-data-table :headers="headers" :items="data" class="elevation-1" hide-default-footer>
           <template v-slot:item.doc="{ item }">
             <!-- <v-list >
               <v-list-item-group>
@@ -72,55 +67,59 @@ export default {
   },
   data() {
     return {
+      data: [],
+      room: '',
       headers: [
-        {
-          text: "วัน/เดือน/ปี ที่ส่ง",
-          align: "start",
-          sortable: false,
-          value: "day",
-        },
-        { text: "ชื่อวิชา", align: "center", sortable: false, value: "id" },
+        { text: "วัน/เดือน/ปี ที่ส่ง", align: "start" , sortable: false , value: "date"},
+        { text: "ชื่อวิชา", align: "center", sortable: false, value: "cause_name" },
         { text: "ห้อง", align: "center", sortable: false, value: "room" },
-        { text: "รายละเอียด", align: "center", sortable: false, value: "cause" },
-        { text: "เอกสาร", align: "center", sortable: false, value: "doc" },
-      ],
-      data: [
-        {
-          day: "17/08/2564",
-          id: "คนิตศาสตร์",
-          name: "ซูลตอน แวกะจิ",
-          room: "ม.3/1",
-          cause: "มีไข้ ทำให้ไม่สามารถไปโรงเรียนได้",
-          doc: "ใบงาน 2.pdf",
-        },
-        {
-          day: "26/08/2564",
-          id: "วิทยาศาสตร์",
-          name: "มูฮัมหมัด แวเด็ง",
-          room: "ม.3/2",
-          cause: "ต้องไปทำบัตรประชาชน",
-          doc: "ใบงาน 1.pdf",
-        },
-        {
-          day: "09/09/2564",
-          id: "ศิลปะ",
-          name: "อับดุลเลาะ อาลี",
-          room: "ม.3/1",
-          category: "ลาป่วย",
-          cause: "ตัวร้อน ไม่สบาย ต้องพักผ่อนอยู่บ้าน",
-          doc: "ใบงาน 1.pdf",
-        },
-       
-        
+        { text: "รายละเอียด", align: "center", sortable: false, value: "detail" },
+        { text: "เอกสาร", align: "center", sortable: false, value: "file" },
       ],
       showPdf : false,
     };
   },
+  mounted() {
+    // this.fnHomework();
+    this.fnProfile();
+  },
   methods: {
-      fn_showPdf(){
-          this.showPdf = true;
-      }
-  }
+    fnHomework() {
+      var payload = {
+        room : this.room
+      };
+      const vm = this
+      this.axios
+        .post("http://localhost:3000/homework", payload)
+        .then(function (response) {
+            console.log(response.data)
+            if(response.data.status == "OK") {
+                // vm.data = response.data.result[0]
+                vm.data = response.data.result
+            }
+        });
+    },
+    fnProfile() {
+      var payload = {
+        account_id: localStorage.id,
+      };
+      const vm = this
+      this.axios
+        .post("http://localhost:3000/profile", payload)
+        .then(function (response) {
+            console.log(response.data)
+            if(response.data.status == "OK") {
+                var dataResult = response.data.result[0]
+                vm.room = dataResult.room
+                vm.fnHomework()
+            }
+        });
+    },
+    onPickFile() {
+        this.$refs.fileInput.click();
+    },
+    
+  },
 };
 </script>
 
