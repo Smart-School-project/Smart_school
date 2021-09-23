@@ -74,69 +74,42 @@ export default {
           text: "วัน/เดือน/ปี",
           align: "start",
           sortable: false,
-          value: "day",
+          value: "date",
         },
-        { text: "รหัสนักเรียน", align: "center", sortable: false, value: "id" },
+        { text: "รหัสนักเรียน", align: "center", sortable: false, value: "students_id" },
         { text: "ชื่อ-นามสกุล", align: "center", sortable: false, value: "name" },
         { text: "ห้อง", align: "center", sortable: false, value: "room" },
-        { text: "ประเภทการลา", align: "center", sortable: false, value: "category" },
+        { text: "ประเภทการลา", align: "center", sortable: false, value: "type_leave" },
         { text: "สาเหตุ", align: "center", sortable: false, value: "cause" },
-        { text: "เอกสาร", align: "center", sortable: false, value: "doc" },
+        // { text: "เอกสาร", align: "center", sortable: false, value: "pdf" },
       ],
-      data: [
-        {
-          day: "17/08/2564",
-          id: "6110107",
-          name: "ซูลตอน แวกะจิ",
-          room: "ม.3/1",
-          category: "ลาป่วย",
-          cause: "มีไข้ ทำให้ไม่สามารถไปโรงเรียนได้",
-          doc: "ใบรับรองแพทย์.pdf",
-        },
-        {
-          day: "26/08/2564",
-          id: "6110363",
-          name: "มูฮัมหมัด แวเด็ง",
-          room: "ม.3/2",
-          category: "ลากิจ",
-          cause: "ต้องไปทำบัตรประชาชน",
-          doc: "",
-        },
-        {
-          day: "09/09/2564",
-          id: "6110628",
-          name: "อับดุลเลาะ อาลี",
-          room: "ม.3/1",
-          category: "ลาป่วย",
-          cause: "ตัวร้อน ไม่สบาย ต้องพักผ่อนอยู่บ้าน",
-          doc: "ใบรับรองแพทย์.pdf",
-        },
-        {
-          day: "13/09/2564",
-          id: "6110362",
-          name: "มุสปานี อาแด",
-          room: "ม.3/4",
-          category: "ลากิจ",
-          cause: "เนื่องจากต้องไปงานแต่งงานแฟนเก่า",
-          doc: "",
-        },
-        {
-          day: "28/09/2564",
-          id: "6110500",
-          name: "ฮากีมีน พิศพรรณ",
-          room: "ม.3/3",
-          category: "ลากิจ",
-          cause: "แม่ให้กรอกน้ำที่บ้าน",
-          doc: "",
-        },
-      ],
+      data: [ ],
       showPdf : false,
     };
+  },
+  mounted(){
+    this.fnLeave()
   },
   methods: {
       fn_showPdf(){
           this.showPdf = true;
-      }
+      },
+
+      fnLeave() {
+        var payload = {
+          subject: "คณิตศาสตร์",
+          room : "ม.3"
+        };
+        const vm = this
+        this.axios
+          .post("http://0.0.0.0:3000/leave", payload)
+          .then(function (response) {
+              if(response.data.status == "OK") {
+                  vm.data = response.data.result
+                 
+              }
+          });
+    },
   }
 };
 </script>

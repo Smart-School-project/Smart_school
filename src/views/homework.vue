@@ -121,6 +121,13 @@
                         </v-tooltip>
                 </v-slide-x-reverse-transition>
                 <v-btn
+                    color="error"
+                    text
+                    @click="reset"
+                    >
+                    Reset Form
+                </v-btn>
+                <v-btn
                     color="green"
                     text
                     @click="fn_submit"
@@ -191,13 +198,24 @@ export default {
 
         },
         toBase64() {
+            console.log(this.file)
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(this.file);
                 reader.onload = () => resolve(reader.result);
                 reader.onerror = error => reject(error);
             });
-        }
+        },
+        reset() {
+            this.bio =  '',
+            this.detail = '',
+            this.room_select = [],
+            this.submit = '',
+            this.subject = '',
+            this.file = [],
+            this.date = [],
+            this.$refs.observer.reset()
+        },
     }
   }
 
