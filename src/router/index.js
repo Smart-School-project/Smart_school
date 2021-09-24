@@ -7,6 +7,7 @@ import Schedule  from '../views/Schedule.vue'
 import leave from '../views/leave.vue'
 import calendar from '../views/calendar.vue'
 import homework from '../views/homework.vue'
+import submitleave from '../views/submitleave.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/homework',
     name: 'homework',
     component: homework
+  },
+  {
+    path: '/submitleave',
+    name: 'submitleave',
+    component: submitleave
   }
 
 ]

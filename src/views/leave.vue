@@ -13,10 +13,13 @@
                                 <hr style="border-top: 1px solid #3F91A4">
                             <v-list-item-title style="color: #3F91A4"><h4>สำหรับนักเรียน</h4></v-list-item-title>
                         </v-list-item-content>
+                        
                 </v-list-item>
             </v-card>
         </v-flex >
-
+        <v-row align="center" justify="space-around">
+            <v-btn depressed large color="primary" @click="submitleave">ตรวจสอบใบลาที่ส่งเเล้ว</v-btn>
+        </v-row>
         <!-- เริ่มทำฟอร์มใบลา-->
         <v-row justify="center" id="d5">
             <v-col
@@ -206,7 +209,7 @@ export default {
       menu: false,
       modal: false,
       menu2: false,
-      date1: '',
+    //   date1: '',
     
     }),
     computed: {
@@ -224,7 +227,7 @@ export default {
             var filebase64 = await this.toBase64()
 
             var payload = {
-                date: this.date1,
+                date: this.date,
                 name: this.name,
                 students_id: this.id_card,
                 room: this.room,
@@ -265,6 +268,9 @@ export default {
             this.date = [],
             this.$refs.observer.reset()
         },
+        submitleave(){
+            this.$router.push("/submitleave");
+        }
 
     }
   }
@@ -284,6 +290,4 @@ export default {
     padding-right: 0%;
     padding-left: 0%;
 }
-
-
 </style>

@@ -11,7 +11,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title style="color: #3f91a4"
-                ><h3>การบ้าน</h3></v-list-item-title
+                ><h3>ใบลากิจ/ลาป่วย</h3></v-list-item-title
               >
               <hr style="border-top: 1px solid #3f91a4" />
               <v-list-item-title style="color: #3f91a4"
@@ -21,7 +21,8 @@
           </v-list-item>
         </v-card>
 
-
+      
+        
         <br />
         <v-data-table :headers="headers" :items="data" class="elevation-1" hide-default-footer>
           <template v-slot:item.doc="{ item }">
@@ -67,34 +68,35 @@ export default {
   data() {
     return {
       data: [],
-      room: '',
+      name: '',
       headers: [
-        { text: "วัน/เดือน/ปี ที่ส่ง", align: "start" , sortable: false , value: "date"},
-        { text: "ชื่อวิชา", align: "center", sortable: false, value: "cause_name" },
+        { text: "วัน/เดือน/ปี", align: "start" , sortable: false , value: "date"},
+        { text: "ชื่อ นามสกุล", align: "center", sortable: false, value: "name" },
+        { text: "รหัสนักเรียน", align: "center", sortable: false, value: "students_id" },
         { text: "ห้อง", align: "center", sortable: false, value: "room" },
-        { text: "รายละเอียด", align: "center", sortable: false, value: "detail" },
-        { text: "เอกสาร", align: "center", sortable: false, value: "file" },
+        { text: "ชนิดการลา", align: "center", sortable: false, value: "type_leave" },
+        { text: "วิชา", align: "center", sortable: false, value: "subject" },
+        { text: "สาเหตุ", align: "center", sortable: false, value: "cause" },
+        { text: "ไฟล์เเนบ", align: "center", sortable: false, value: "pdf" },
       ],
       showPdf : false,
     };
   },
   mounted() {
-    // this.fnHomework();
-    this.fnProfile();
+      this.fnProfile();
   },
   methods: {
-    fnHomework() {
+    fnsubmitleave() {
       var payload = {
-        room : this.room
+        name : this.name
       };
-      console.log(payload)
       const vm = this
+      console.log(payload)
       this.axios
-        .post("http://localhost:3000/homework", payload)
+        .post("http://localhost:3000/submitleave", payload)
         .then(function (response) {
             console.log(response.data)
             if(response.data.status == "OK") {
-                // vm.data = response.data.result[0]
                 vm.data = response.data.result
             }
         });
@@ -104,24 +106,34 @@ export default {
         account_id: localStorage.id,
       };
       const vm = this
-      
       this.axios
         .post("http://localhost:3000/profile", payload)
         .then(function (response) {
             console.log(response.data)
             if(response.data.status == "OK") {
                 var dataResult = response.data.result[0]
-                vm.room = dataResult.room
-                vm.fnHomework()
+                vm.name = dataResult.name
+                vm.fnsubmitleave()
             }
         });
     },
     onPickFile() {
         this.$refs.fileInput.click();
     },
+    toBase64() {
+            console.log(this.pdf_file)
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(this.pdf_file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        },
     
-  },
-};
+    }
+}
 </script>
 
-<style lang="stylus" scoped></style>
+<style>
+
+</style>
