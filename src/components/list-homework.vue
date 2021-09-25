@@ -11,7 +11,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title style="color: #3f91a4"
-                ><h3>ใบลากิจ / ลาป่วย</h3></v-list-item-title
+                ><h3>การบ้าน</h3></v-list-item-title
               >
               <hr style="border-top: 1px solid #3f91a4" />
               <v-list-item-title style="color: #3f91a4"
@@ -61,7 +61,7 @@
 
 <script>
 import Toolbar from "../layout/index.vue";
-import Pdf from "../components/dialog-leave-pdf.vue"
+import Pdf from "../components/dialog-homework-pdf.vue"
 export default {
   components: {
     Toolbar,
@@ -71,16 +71,14 @@ export default {
     return {
       headers: [
         {
-          text: "วัน/เดือน/ปี",
+          text: "วันที่ส่ง",
           align: "start",
           sortable: false,
           value: "date",
         },
-        { text: "รหัสนักเรียน", align: "center", sortable: false, value: "students_id" },
-        { text: "ชื่อ-นามสกุล", align: "center", sortable: false, value: "name" },
+        { text: "วิชา", align: "center", sortable: false, value: "course_name" },
         { text: "ห้อง", align: "center", sortable: false, value: "room" },
-        { text: "ประเภทการลา", align: "center", sortable: false, value: "type_leave" },
-        { text: "สาเหตุ", align: "center", sortable: false, value: "cause" },
+        { text: "รายละเอียด", align: "center", sortable: false, value: "detail" },
         // { text: "เอกสาร", align: "center", sortable: false, value: "pdf" },
       ],
       data: [ ],
@@ -97,12 +95,11 @@ export default {
 
       fnLeave() {
         var payload = {
-          subject: "ภาษาไทย",
-          room : "ม.3"
+          account_id: localStorage.id,
         };
         const vm = this
         this.axios
-          .post("http://0.0.0.0:3000/leave", payload)
+          .post("http://0.0.0.0:3000/list_homework", payload)
           .then(function (response) {
               if(response.data.status == "OK") {
                   vm.data = response.data.result

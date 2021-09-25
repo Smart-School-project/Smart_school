@@ -15,6 +15,9 @@
                 </v-list-item>
             </v-card>
         </v-flex >
+        <v-row align="center" justify="space-around">
+            <v-btn depressed large color="primary" @click="submitHw">ตรวจสอบการบ้านที่สร้างเเล้ว</v-btn>
+        </v-row>
         <!-- เริ่มทำฟอร์มการบ้าน-->
         <v-row justify="center">
             <v-col
@@ -150,14 +153,14 @@ import Toolbar from "../layout/index.vue";
 
 export default {
     components: {
-        Toolbar
+        Toolbar,
     },
     data: () => ({
       room: [
-          '3/1',
-          '3/2',
-          '3/3',
-          '3/4',
+          'ม.3/1',
+          'ม.3/2',
+          'ม.3/3',
+          'ม.3/4',
       ],
       room_select: '',
       detail : '',
@@ -178,10 +181,14 @@ export default {
       menu2: false,
     }),
     methods: {
+        submitHw() {
+            this.$router.push("/list-homework")
+        },
         async fn_submit() {
             this.fileBase64 = await this.toBase64()
 
             var payload = {
+                    account_id: localStorage.id,
                     course_name: this.subject,
                     room: this.room_select,
                     date: this.date,

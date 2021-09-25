@@ -321,10 +321,29 @@ export default {
       ],
     };
   },
+  mounted(){
+    this.fnTeacher()
+  },
   methods: {
     fnEdit() {
       alert('ddddd')
-    }
+    },
+    fnTeacher() {
+        var payload = {
+          account_id: localStorage.id,
+        };
+        const vm = this
+        console.log(payload)
+        this.axios
+          .post("http://0.0.0.0:3000/schedule_teacher", payload)
+          .then(function (response) {
+              if(response.data.status == "OK") {
+                var dataResult = response.data.result[0]
+                vm.data = dataResult.schedule
+                
+              }
+          });
+    },
   }
 };
 </script>
