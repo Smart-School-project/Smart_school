@@ -7,7 +7,7 @@
     >
       <v-card>
         
-        <iframe src="https://tmc.or.th/pdf/MedCertificate/Medical_Certificate_TH.pdf" width="100%" height="500px">
+        <iframe :src="pdf" width="100%" height="600px">
              </iframe>
 
         <v-divider></v-divider>
@@ -29,7 +29,7 @@
 
 <script>
   export default {
-    props:["show"],
+    props:["show","pdf"],
     data () {
       return {
         dialog: true,

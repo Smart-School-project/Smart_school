@@ -27,41 +27,23 @@
           class="elevation-1"
           hide-default-footer
         >
-          <template v-slot:item.doc="{ item }">
-            <!-- <v-list >
-              <v-list-item-group>
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-file-pdf</v-icon>
-                  </v-list-item-icon>
-                    <v-list-item-title>
-                      {{item.doc}}
-                    </v-list-item-title>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list> -->
-            <!-- <div v-if="item.doc != ''">
-              <v-icon color="red">mdi-file-pdf</v-icon>{{ item.doc }}
-            </div> -->
-            <v-btn tile v-if="item.doc != ''" text @click="fn_showPdf">
-              <v-icon left color="red">mdi-file-pdf</v-icon>
-              {{ item.doc }}
+         <template v-slot:item.pdf="{ item }">
+            <v-btn @click="fn_showPdf(item.pdf)" color="red" small dark v-if="item.type_leave != 'ลากิจ'">
+              ใบรับรองแพทย์.pdf
             </v-btn>
           </template>
         </v-data-table>
       </v-flex>
     </v-layout>
 
-    <pdf 
-        :show="showPdf"
-        @close="showPdf = false"
-    />
+    <Pdf :show="showPdf" :pdf="pdfProp" @close="showPdf = false" />
+
   </div>
 </template>
 
 <script>
 import Toolbar from "../layout/index.vue";
-import Pdf from "../components/dialog-leave-pdf.vue"
+import Pdf from "../components/dialog-leave-pdf.vue";
 export default {
   components: {
     Toolbar,
@@ -76,41 +58,57 @@ export default {
           sortable: false,
           value: "date",
         },
-        { text: "รหัสนักเรียน", align: "center", sortable: false, value: "students_id" },
-        { text: "ชื่อ-นามสกุล", align: "center", sortable: false, value: "name" },
+        {
+          text: "รหัสนักเรียน",
+          align: "center",
+          sortable: false,
+          value: "students_id",
+        },
+        {
+          text: "ชื่อ-นามสกุล",
+          align: "center",
+          sortable: false,
+          value: "name",
+        },
         { text: "ห้อง", align: "center", sortable: false, value: "room" },
-        { text: "ประเภทการลา", align: "center", sortable: false, value: "type_leave" },
+        {
+          text: "ประเภทการลา",
+          align: "center",
+          sortable: false,
+          value: "type_leave",
+        },
         { text: "สาเหตุ", align: "center", sortable: false, value: "cause" },
-        // { text: "เอกสาร", align: "center", sortable: false, value: "pdf" },
+        { text: "เอกสาร", align: "center", sortable: false, value: "pdf" },
       ],
-      data: [ ],
-      showPdf : false,
+      data: [],
+      showPdf: false,
+      pdfProp: "",
     };
   },
-  mounted(){
-    this.fnLeave()
+  mounted() {
+    this.fnLeave();
   },
   methods: {
-      fn_showPdf(){
-          this.showPdf = true;
-      },
-
-      fnLeave() {
-        var payload = {
-          subject: "ภาษาไทย",
-          room : "ม.3"
-        };
-        const vm = this
-        this.axios
-          .post("http://0.0.0.0:3000/leave", payload)
-          .then(function (response) {
-              if(response.data.status == "OK") {
-                  vm.data = response.data.result
-                 
-              }
-          });
+    fn_showPdf(val) {
+      this.pdfProp = val;
+      this.showPdf = true;
     },
-  }
+
+    fnLeave() {
+      var payload = {
+        subject: "ภาษาไทย",
+        room: "ม.3",
+      };
+      const vm = this;
+      this.axios
+        .post("http://0.0.0.0:3000/leave", payload)
+        .then(function (response) {
+          if (response.data.status == "OK") {
+            vm.data = response.data.result;
+          }
+        });
+    },
+  },
 };
 </script>
 

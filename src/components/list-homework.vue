@@ -7,7 +7,7 @@
         <v-card width="350" color="blue-grey lighten-4" flat>
           <v-list-item>
             <v-list-item-icon>
-              <v-icon color="#3F91A4" size="50">mdi-email-newsletter</v-icon>
+              <v-icon color="#3F91A4" size="50">mdi-book-open-variant</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title style="color: #3f91a4"
@@ -27,33 +27,18 @@
           class="elevation-1"
           hide-default-footer
         >
-          <template v-slot:item.doc="{ item }">
-            <!-- <v-list >
-              <v-list-item-group>
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-file-pdf</v-icon>
-                  </v-list-item-icon>
-                    <v-list-item-title>
-                      {{item.doc}}
-                    </v-list-item-title>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list> -->
-            <!-- <div v-if="item.doc != ''">
-              <v-icon color="red">mdi-file-pdf</v-icon>{{ item.doc }}
-            </div> -->
-            <v-btn tile v-if="item.doc != ''" text @click="fn_showPdf">
-              <v-icon left color="red">mdi-file-pdf</v-icon>
-              {{ item.doc }}
+           <template v-slot:item.file="{ item }">
+            <v-btn @click="fn_showPdf(item.file)" color="red" small dark >
+              เอกสาร.pdf
             </v-btn>
           </template>
         </v-data-table>
       </v-flex>
     </v-layout>
 
-    <pdf 
+    <Pdf 
         :show="showPdf"
+        :pdf="pdfProp"
         @close="showPdf = false"
     />
   </div>
@@ -79,17 +64,19 @@ export default {
         { text: "วิชา", align: "center", sortable: false, value: "course_name" },
         { text: "ห้อง", align: "center", sortable: false, value: "room" },
         { text: "รายละเอียด", align: "center", sortable: false, value: "detail" },
-        // { text: "เอกสาร", align: "center", sortable: false, value: "pdf" },
+        { text: "เอกสาร", align: "center", sortable: false, value: "file" },
       ],
       data: [ ],
       showPdf : false,
+      pdfProp:"",
     };
   },
   mounted(){
     this.fnLeave()
   },
   methods: {
-      fn_showPdf(){
+      fn_showPdf(val){
+          this.pdfProp = val;
           this.showPdf = true;
       },
 
@@ -103,6 +90,7 @@ export default {
           .then(function (response) {
               if(response.data.status == "OK") {
                   vm.data = response.data.result
+                  console.log(vm.data)
                  
               }
           });

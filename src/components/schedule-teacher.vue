@@ -1,5 +1,5 @@
 <template>
-    <div >
+  <div>
     <v-layout row justify-center align-top>
       <!-- ตาราง -->
       <v-flex xs12 md12 lg12 xl12>
@@ -10,7 +10,7 @@
           hide-default-footer
         >
           <!-- 8 โมง -->
-          <template v-slot:item.eight="{ item }"  @click="fnEdit()">
+          <template v-slot:item.eight="{ item }" @click="fnEdit()">
             <v-chip
               class="chip"
               :color="item.eight.color"
@@ -164,12 +164,12 @@ export default {
     return {
       headers: [
         {
-          text: '',
+          text: "",
           align: "start",
           sortable: false,
           value: "day",
         },
-        { text: "08:00", align: "center", sortable: false, value: "eight"},
+        { text: "08:00", align: "center", sortable: false, value: "eight" },
         { text: "09:00", align: "center", sortable: false, value: "nine" },
         { text: "10:00", align: "center", sortable: false, value: "ten" },
         { text: "11:00", align: "center", sortable: false, value: "eleven" },
@@ -181,170 +181,211 @@ export default {
       ],
       data: [
         {
-          day: 'จันทร์',
-          eight: { subject: 'ภาษาไทย', id: 'ท31101', color: 'red lighten-5', class: '3/1' },
-          nine: { subject: '', id: '', color: '', class: ''},
-          ten: { subject: '', id: '', color: '' , class: ''},
+          day: "จันทร์",
+          eight: {
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "red lighten-5",
+            class: "3/1",
+          },
+          nine: { subject: "", id: "", color: "", class: "" },
+          ten: { subject: "", id: "", color: "", class: "" },
           eleven: {
-            subject: 'ภาษาไทย',
-            id: 'ท31101',
-            color: 'purple lighten-4',
-            class: '3/2'
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "purple lighten-4",
+            class: "3/2",
           },
-          twelve: { subject: '', id: '', color: '' },
+          twelve: { subject: "", id: "", color: "" },
           thirteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
-          },
-          fourteen: { subject: 'ภาษาไทย', id: 'ท31101', color: 'blue lighten-4' , class: '3/3'},
-          fifteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
-          },
-          sixteen: { subject: '', id: '', color: '', class: '' },
-        },
-        {
-          day: 'อังคาร',
-          eight: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
-          },
-          nine: { subject: 'ภาษาไทย',
-            id: 'ท31101',
-            color: 'purple lighten-4',
-            class: '3/2' },
-          ten: { subject: 'ภาษาไทย', id: 'ท31101', color: 'teal lighten-4', class: '3/4' },
-          eleven: { subject: '', id: '', color: '', class: '' },
-          twelve: { subject: '', id: '', color: '', class: '' },
-          thirteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
           },
           fourteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "blue lighten-4",
+            class: "3/3",
           },
-          fifteen: { subject: '', id: '', color: '', class: '' },
-          sixteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
-          },
-        },
-        {
-          day: 'พุธ',
-          eight: { subject: '', id: '', color: '', class: '' },
-          nine: { subject: 'ภาษาไทย', id: '31101', color: 'blue lighten-4' , class: '3/3' },
-          ten: { subject: '', id: '', color: '', class: '' },
-          eleven: { subject: '', id: '', color: '', class: '' },
-          twelve: { subject: '', id: '', color: '', class: '' },
-          thirteen: {
-            subject: 'ภาษาไทย',
-            id: 'ท31101',
-            color: 'red lighten-5',
-            class: '3/1'
-          },
-          fourteen: { subject: '', id: '', color: '', class: '' },
           fifteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
           },
-          sixteen: { subject: '', id: '', color: '', class: '' },
+          sixteen: { subject: "", id: "", color: "", class: "" },
         },
         {
-          day: 'พฤหัสบดี',
+          day: "อังคาร",
           eight: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
           },
-          nine: { subject: '', id: '', color: '', class: '' },
-          ten: { subject: 'ภาษาไทย', id: 'ท31101', color: 'blue lighten-4' , class: '3/3' },
-          eleven: { subject: 'ภาษไทย', id: 'ท31101', color: 'red lighten-5', class: '3/1' },
-          twelve: { subject: '', id: '', color: '', class: '' },
-          thirteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
-          },
-          fourteen: {subject: 'ภาษาไทย', id: 'ท31101', color: 'teal lighten-4', class: '3/4' },
-          fifteen: { subject: '', id: '', color: '', class: '' },
-          sixteen: { subject: '', id: '', color: '', class: '' },
-        },
-        {
-          day: 'ศุกร์',
-          eight: { subject: 'ภาษาไทย',
-            id: 'ท31101',
-            color: 'purple lighten-4',
-            class: '3/2' },
           nine: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "purple lighten-4",
+            class: "3/2",
           },
-          ten: { subject: '', id: '', color: '', class: '' },
-          eleven: { subject: '', id: '', color: '', class: '' },
-          twelve: { subject: '', id: '', color: '', class: '' },
-          thirteen: { subject: '', id: '', color: '', class: '' },
+          ten: {
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "teal lighten-4",
+            class: "3/4",
+          },
+          eleven: { subject: "", id: "", color: "", class: "" },
+          twelve: { subject: "", id: "", color: "", class: "" },
+          thirteen: {
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
+          },
           fourteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
+          },
+          fifteen: { subject: "", id: "", color: "", class: "" },
+          sixteen: {
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
+          },
+        },
+        {
+          day: "พุธ",
+          eight: { subject: "", id: "", color: "", class: "" },
+          nine: {
+            subject: "ภาษาไทย",
+            id: "31101",
+            color: "blue lighten-4",
+            class: "3/3",
+          },
+          ten: { subject: "", id: "", color: "", class: "" },
+          eleven: { subject: "", id: "", color: "", class: "" },
+          twelve: { subject: "", id: "", color: "", class: "" },
+          thirteen: {
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "red lighten-5",
+            class: "3/1",
+          },
+          fourteen: { subject: "", id: "", color: "", class: "" },
+          fifteen: {
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
+          },
+          sixteen: { subject: "", id: "", color: "", class: "" },
+        },
+        {
+          day: "พฤหัสบดี",
+          eight: {
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
+          },
+          nine: { subject: "", id: "", color: "", class: "" },
+          ten: {
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "blue lighten-4",
+            class: "3/3",
+          },
+          eleven: {
+            subject: "ภาษไทย",
+            id: "ท31101",
+            color: "red lighten-5",
+            class: "3/1",
+          },
+          twelve: { subject: "", id: "", color: "", class: "" },
+          thirteen: {
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
+          },
+          fourteen: {
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "teal lighten-4",
+            class: "3/4",
+          },
+          fifteen: { subject: "", id: "", color: "", class: "" },
+          sixteen: { subject: "", id: "", color: "", class: "" },
+        },
+        {
+          day: "ศุกร์",
+          eight: {
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "purple lighten-4",
+            class: "3/2",
+          },
+          nine: {
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
+          },
+          ten: { subject: "", id: "", color: "", class: "" },
+          eleven: { subject: "", id: "", color: "", class: "" },
+          twelve: { subject: "", id: "", color: "", class: "" },
+          thirteen: { subject: "", id: "", color: "", class: "" },
+          fourteen: {
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
           },
           fifteen: {
-            subject: '',
-            id: '',
-            color: '',
-            class: ''
+            subject: "",
+            id: "",
+            color: "",
+            class: "",
           },
           sixteen: {
-            subject: 'ภาษาไทย', id: 'ท31101', color: 'teal lighten-4', class: '3/4'
+            subject: "ภาษาไทย",
+            id: "ท31101",
+            color: "teal lighten-4",
+            class: "3/4",
           },
         },
       ],
     };
   },
-  mounted(){
-    this.fnTeacher()
+  mounted() {
+    this.fnTeacher();
   },
   methods: {
     fnEdit() {
-      alert('ddddd')
+      alert("ddddd");
     },
     fnTeacher() {
-        var payload = {
-          account_id: localStorage.id,
-        };
-        const vm = this
-        console.log(payload)
-        this.axios
-          .post("http://0.0.0.0:3000/schedule_teacher", payload)
-          .then(function (response) {
-              if(response.data.status == "OK") {
-                var dataResult = response.data.result[0]
-                vm.data = dataResult.schedule
-                
-              }
-          });
+      var payload = {
+        account_id: localStorage.id,
+      };
+      const vm = this;
+      console.log(payload);
+      this.axios
+        .post("http://0.0.0.0:3000/schedule_teacher", payload)
+        .then(function (response) {
+          if (response.data.status == "OK") {
+            var dataResult = response.data.result[0];
+            vm.data = dataResult.schedule;
+          }
+        });
     },
-  }
+  },
 };
 </script>
 
@@ -357,5 +398,4 @@ export default {
 .chip p {
   font-size: 2px;
 }
-
 </style>
