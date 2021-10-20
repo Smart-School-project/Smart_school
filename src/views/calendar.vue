@@ -124,10 +124,8 @@ export default {
       this.$refs.calendar.next();
     },
     updateRange(val) {
-      // console.log(start.date,end.date);
       const events = [];
-      // const allDay = this.rnd(0, 3) === 0;
-      // console.log(allDay);
+      
       for(var i of val){
       events.push(
         {

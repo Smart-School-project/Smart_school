@@ -5,7 +5,7 @@
       <v-flex xs12 md12 lg12 xl12>
         <v-data-table
           :headers="headers"
-          :items="data"
+          :items="room_id"
           class="elevation-1"
           hide-default-footer
         >
@@ -179,7 +179,7 @@ export default {
         { text: "15:00", align: "center", sortable: false, value: "fifteen" },
         { text: "16:00", align: "center", sortable: false, value: "sixteen" },
       ],
-      data: [
+      room_id: [
         {
           day: "จันทร์",
           eight: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-2" },
@@ -307,10 +307,27 @@ export default {
       ],
     };
   },
+  mounted(){
+    this.fnSchedule();
+  },
   methods: {
-    fnEdit() {
-      alert('ddddd')
-    }
+    fnSchedule(){
+      var payload = {
+        room_id : this.room_id
+      };
+      console.log(payload);
+      const vm = this
+      this.axios
+        .post("http://localhost:3000/schedule_student", payload)
+        .then(function (response){
+          console.log(response.data);
+          if(response.data.status == "OK"){
+              vm.data = response.data.result
+              // var dataResult = response.data.result[0]
+              // vm.room_id = dataResult.room_id
+          }
+        })
+    } 
   }
 };
 </script>

@@ -25,25 +25,9 @@
         
         <br />
         <v-data-table :headers="headers" :items="data" class="elevation-1" hide-default-footer>
-          <template v-slot:item.doc="{ item }">
-            <!-- <v-list >
-              <v-list-item-group>
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-file-pdf</v-icon>
-                  </v-list-item-icon>
-                    <v-list-item-title>
-                      {{item.doc}}
-                    </v-list-item-title>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list> -->
-            <!-- <div v-if="item.doc != ''">
-              <v-icon color="red">mdi-file-pdf</v-icon>{{ item.doc }}
-            </div> -->
-            <v-btn tile v-if="item.doc != ''" text @click="fn_showPdf">
-              <v-icon left color="red">mdi-file-pdf</v-icon>
-              {{ item.doc }}
+          <template v-slot:item.pdf="{ item }">
+            <v-btn @click="fn_showPdf(item.pdf)" color="red" small dark v-if="item.type_leave != 'ลากิจ'">
+              เอกสาร.pdf
             </v-btn>
           </template>
         </v-data-table>
@@ -52,6 +36,7 @@
 
     <pdf 
         :show="showPdf"
+        :pdf="pdfProp"
         @close="showPdf = false"
     />
   </div>
@@ -88,7 +73,7 @@ export default {
   methods: {
     fnsubmitleave() {
       var payload = {
-        name : this.name
+        account_id: localStorage.id
       };
       const vm = this
       console.log(payload)
@@ -128,7 +113,11 @@ export default {
                 reader.onload = () => resolve(reader.result);
                 reader.onerror = error => reject(error);
             });
-        },
+    },
+    fn_showPdf(val) {
+      this.pdfProp = val;
+      this.showPdf = true;
+    },
     
     }
 }

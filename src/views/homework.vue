@@ -24,33 +24,18 @@
 
         <br />
         <v-data-table :headers="headers" :items="data" class="elevation-1" hide-default-footer>
-          <template v-slot:item.doc="{ item }">
-            <!-- <v-list >
-              <v-list-item-group>
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-file-pdf</v-icon>
-                  </v-list-item-icon>
-                    <v-list-item-title>
-                      {{item.doc}}
-                    </v-list-item-title>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list> -->
-            <!-- <div v-if="item.doc != ''">
-              <v-icon color="red">mdi-file-pdf</v-icon>{{ item.doc }}
-            </div> -->
-            <v-btn tile v-if="item.doc != ''" text @click="fn_showPdf">
-              <v-icon left color="red">mdi-file-pdf</v-icon>
-              {{ item.doc }}
+          <template v-slot:item.file="{ item }">
+            <v-btn @click="fn_showPdf(item.file)" color="red" small dark >
+              เอกสาร.pdf
             </v-btn>
           </template>
         </v-data-table>
         </v-flex>
     </v-layout>
 
-    <pdf 
+    <Pdf 
         :show="showPdf"
+        :pdf="pdfProp"
         @close="showPdf = false"
     />
   </div>
@@ -58,7 +43,7 @@
 
 <script>
 import Toolbar from "../layout/index.vue";
-import Pdf from "../components/dialog-leave-pdf.vue"
+import Pdf from "../components/dialog-homework-pdf.vue"
 export default {
   components: {
     Toolbar,
@@ -76,6 +61,7 @@ export default {
         { text: "เอกสาร", align: "center", sortable: false, value: "file" },
       ],
       showPdf : false,
+      pdfProp : "",
     };
   },
   mounted() {
@@ -119,9 +105,12 @@ export default {
     onPickFile() {
         this.$refs.fileInput.click();
     },
-    
+    fn_showPdf(val) {
+      this.pdfProp = val;
+      this.showPdf = true;
+    },
   },
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style></style>

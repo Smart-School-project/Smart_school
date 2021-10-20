@@ -227,6 +227,7 @@ export default {
             var filebase64 = await this.toBase64()
 
             var payload = {
+                account_id : localStorage.id,
                 date: this.date,
                 name: this.name,
                 students_id: this.id_card,
