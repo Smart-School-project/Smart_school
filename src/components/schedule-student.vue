@@ -1,9 +1,5 @@
 <template>
   <div>
-    <editSC
-    :edit="editSC"
-        @close="editSC = false"
-    />
     <v-layout row justify-right align-right>
       <v-flex xs12 md12 lg12 xl12>
       <v-btn tile color="warning" style="float: right" @click="fnEdit">
@@ -31,22 +27,34 @@
               label
               large
               v-if="item.eight.subject != ''"
+              @click="fnEdit(item.eight)"
             >
               <p>
                 {{ item.eight.id }}<br />
                 {{ item.eight.subject }}
               </p>
             </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.eight)"
+            >
+            </v-chip>
+            
           </template>
 
           <!-- 9 โมง -->
-          <template v-slot:item.nine="{ item }">
+          <template v-slot:item.nine="{ item }" @click="fnEdit()">
             <v-chip
               class="chip"
               :color="item.nine.color"
               label
               large
               v-if="item.nine.subject != ''"
+               @click="fnEdit(item.nine)"
             >
               <p>
                 {{ item.nine.id }} <br />
@@ -63,6 +71,7 @@
               label
               large
               v-if="item.ten.subject != ''"
+               @click="fnEdit(item.ten)"
             >
               <p>
                 {{ item.ten.id }} <br />
@@ -79,6 +88,7 @@
               label
               large
               v-if="item.eleven.subject != ''"
+               @click="fnEdit(item.eleven)"
             >
               <p>
                 {{ item.eleven.id }} <br />
@@ -95,6 +105,7 @@
               label
               large
               v-if="item.twelve.subject != ''"
+               @click="fnEdit(item.twelve)"
             >
               <p>
                 {{ item.twelve.id }} <br />
@@ -111,6 +122,7 @@
               label
               large
               v-if="item.thirteen.subject != ''"
+               @click="fnEdit(item.thirteen)"
             >
               <p>
                 {{ item.thirteen.id }} <br />
@@ -127,6 +139,7 @@
               label
               large
               v-if="item.fourteen.subject != ''"
+               @click="fnEdit(item.fourteen)"
             >
               <p>
                 {{ item.fourteen.id }} <br />
@@ -143,6 +156,7 @@
               label
               large
               v-if="item.fifteen.subject != ''"
+              @click="fnEdit(item.fifteen)"
             >
               <p>
                 {{ item.fifteen.id }} <br />
@@ -159,6 +173,7 @@
               label
               large
               v-if="item.sixteen.subject != ''"
+              @click="fnEdit(item.sixteen)"
             >
               <p>
                 {{ item.sixteen.id }} <br />
@@ -169,6 +184,14 @@
         </v-data-table>
       </v-flex>
     </v-layout>
+
+     <editSC
+      :show="editSC"
+      :item="editItem"
+      @close="editSC = false"
+      @save="fnSaveEdit"
+    />
+
   </div>
 </template>
 <script>
@@ -323,12 +346,20 @@ export default {
         },
       ],
       editSC : false,
+      editItem : {}
     };
   },
   methods: {
-    fnEdit() {
+    fnEdit(item) {
       this.editSC = true;
+      this.editItem = item;
+      console.log(item)
     },
+    fnSaveEdit(val) {
+      console.log(val);
+      this.editSC = false;
+      console.log("data",this.data);
+    }
   },
 };
 </script>

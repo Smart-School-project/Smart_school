@@ -72,7 +72,7 @@ export default {
     };
   },
   mounted(){
-    this.fnLeave()
+    this.fnHomework()
   },
   methods: {
       fn_showPdf(val){
@@ -80,7 +80,7 @@ export default {
           this.showPdf = true;
       },
 
-      fnLeave() {
+      fnHomework() {
         var payload = {
           account_id: localStorage.id,
         };

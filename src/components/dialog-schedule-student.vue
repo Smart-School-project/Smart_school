@@ -1,11 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog
-      v-model="edit"
-      persistent
-      max-width="600px"
-    >
-      
+    <v-dialog v-model="show" persistent max-width="400px">
       <v-card>
         <v-card-title>
           <span class="text-h5">แก้ไขตารางเรียน</span>
@@ -13,65 +8,40 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col
-                cols="12"
-                sm="8"
-                md="6"
-              >
-                <v-text-field
-                  label="รหัสวิชา"
-                  required
-                ></v-text-field>
+              <v-col cols="12" sm="8" md="12">
+                <v-text-field label="รหัสวิชา" required v-model="subjectID" ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="8"
-                md="6"
-              >
-                <v-text-field
-                  label="ชื่อวิชา"
-                  required
-                ></v-text-field>
+              <v-col cols="12" sm="8" md="12">
+                <v-text-field label="ชื่อวิชา" required v-model="subjectName" ></v-text-field>
               </v-col>
-              
-              
-              <v-col
-                cols="12"
-                sm="6"
-              >
+              <v-col cols="12" sm="12" >
                 <v-select
-                  :items="['จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี','ศุกร์']"
-                  label="วัน"
+                  :items="['blue', 'red', 'yellow', 'green', 'purple', 'pink', 'orange', 'brown', 'grey', 'cream', 'Bronze', 'Golden', 'Silver']"
+                  label="สี"
                   required
+                  v-model="subjectColor"
                 ></v-select>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-select
-                  :items="['08.00', '09.00', '10.00', '11.00', '12.00', '13.00', '14.00', '15.00', '16.00']"
-                  label="เวลา"
-                  required
-                ></v-select>
-              </v-col>
+
+              <v-col cols="12" sm="6"> </v-col>
+              <v-col cols="12" sm="6"> </v-col>
             </v-row>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="$emit('close')"
-          >
+          <v-btn color="blue darken-1" text @click="$emit('close')">
             Close
+          </v-btn>
+           <v-btn color="error" outlined @click="fnDelete">
+            delete
           </v-btn>
           <v-btn
             color="blue darken-1"
-            text
-            @click="resetValidation"
-            Reset Validation
+            dark
+            Reset
+            Validation
+            @click="fnSave"
           >
             Save
           </v-btn>
@@ -82,10 +52,40 @@
 </template>
 
 <script>
-  export default {
-    props:["edit"],
-    data: () => ({
-      dialog: false,
-    }),
+export default {
+  props: ["show", "item"],
+  data: () => ({
+    dialog: false,
+    subjectID: "",
+    subjectName: "",
+    newItem: {},
+    subjectColor: ""
+  }),
+  watch: {
+    show(val) {
+      if(val === true) {
+        this.newItem = this.item
+        this.subjectID =  this.newItem.id
+        this.subjectName =  this.newItem.subject
+        this.subjectColor =  this.newItem.color
+      }
+    }
+  },
+  methods: {
+
+    fnSave(){
+      this.newItem.id = this.subjectID 
+      this.newItem.subject =  this.subjectName 
+      this.newItem.color =  this.subjectColor 
+      this.$emit('save',this.newItem)
+    },
+
+    fnDelete(){
+      this.newItem.id = ""
+      this.newItem.subject = ""
+      this.newItem.color = ""
+      this.$emit('close')
+    }
   }
+};
 </script>
