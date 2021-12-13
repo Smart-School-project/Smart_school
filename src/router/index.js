@@ -8,6 +8,8 @@ import leave from '../views/leave.vue'
 import calendar from '../views/calendar.vue'
 import homework from '../views/homework.vue'
 import submitleave from '../views/submitleave.vue'
+import midterm from '../views/midterm.vue'
+
 
 Vue.use(VueRouter)
 
@@ -51,7 +53,13 @@ const routes = [
     path: '/submitleave',
     name: 'submitleave',
     component: submitleave
-  }
+  },
+  {
+    path: '/midterm',
+    name: 'midterm',
+    component: midterm
+  },
+  
 
 ]
 
