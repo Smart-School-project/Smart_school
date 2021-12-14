@@ -9,6 +9,7 @@ import calendar from '../views/calendar.vue'
 import homework from '../views/homework.vue'
 import submitleave from '../views/submitleave.vue'
 import midterm from '../views/midterm.vue'
+import final from '../views/final.vue'
 
 
 Vue.use(VueRouter)
@@ -59,6 +60,11 @@ const routes = [
     name: 'midterm',
     component: midterm
   },
+  {
+    path: '/final',
+    name: '/final',
+    component: final
+  }
   
 
 ]
