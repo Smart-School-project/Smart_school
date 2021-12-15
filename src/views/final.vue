@@ -18,7 +18,7 @@
         </v-flex>
         <!-- ในส่วนของ table grade  -->
         <div id="d2">
-            <div class="box-body table-responsive">
+            <div id="d3" align="center" class="box-body table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead class="bg-gray-light">
                         <tr>
@@ -90,22 +90,80 @@
                 </table>
             </div>
         </div>
+        <!-- เริ่มของ Chart -->
+        <div id="d4">
+            <apexchart id="d5" align="center"  type="line" :options="chartOptions" :series="series"></apexchart>
+            <apexchart id="d5" align="center"  type="bar" :options="chartOptions" :series="series"></apexchart>
+        </div>
     </div>
 </template>
 
 <script>
 
 import Toolbar from "../layout/index.vue";
+import Vue from 'vue';
+import VueApexCharts from 'vue-apexcharts';
+
+Vue.use(VueApexCharts);
+Vue.component('apexchart', VueApexCharts);
 
 export default {
     components: {
         Toolbar
     },
-    methods:{
-
-    }
-
-  }
+    data: function() {
+      return{
+        // สำหรับ char ที่เป็น line
+        // chartOptions: {
+        //   chart: {
+        //   height: 350,
+        //   type: 'line',
+        //   zoom: {
+        //     enabled: false
+        //   }
+        // },
+        // dataLabels: {
+        //   enabled: false
+        // },
+        // stroke: {
+        //   curve: 'straight'
+        // },
+        // title: {
+        //   text: 'Product Trends by Month',
+        //   align: 'left'
+        // },
+        // grid: {
+        //   row: {
+        //     colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        //     opacity: 0.5
+        //   },
+        // },
+        // xaxis: {
+        //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+        // }
+        // },
+        // series: [{
+        //     name: "Desktops",
+        //     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+        // }],
+        // <----------------------------------->
+        chartOptions: {
+          chart: {
+            id: 'vuechart-example',
+          },
+          xaxis: {
+            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          },
+        },
+        series: [{
+          name: 'series-1',
+          data: [30, 40, 45, 50, 49, 60, 70, 81]
+        }]
+      } 
+    },
+    mounted() {
+    },
+};
 </script>
 
 <style scoped>
@@ -127,4 +185,16 @@ export default {
       align-items: center;
       width: auto;
     }
+    #d3{}
+    #d4{
+        background-color: white;
+        width: auto;
+        height: auto;
+    }
+    #d5{
+        width: auto;
+    }
 </style>
+
+        
+      
