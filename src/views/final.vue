@@ -90,11 +90,6 @@
                 </table>
             </div>
         </div>
-        <!-- เริ่มของ Chart -->
-        <div id="d4">
-            <apexchart id="d5" align="center"  type="line" :options="chartOptions" :series="series"></apexchart>
-            <apexchart id="d5" align="center"  type="bar" :options="chartOptions" :series="series"></apexchart>
-        </div>
     </div>
 </template>
 
@@ -147,6 +142,7 @@ export default {
         //     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
         // }],
         // <----------------------------------->
+        // สำหรับChart ที่เป็น bar
         chartOptions: {
           chart: {
             id: 'vuechart-example',
@@ -185,15 +181,10 @@ export default {
       align-items: center;
       width: auto;
     }
-    #d3{}
     #d4{
         background-color: white;
-        width: auto;
-        height: auto;
     }
-    #d5{
-        width: auto;
-    }
+    
 </style>
 
         

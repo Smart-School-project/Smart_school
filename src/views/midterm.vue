@@ -54,13 +54,10 @@
                   <td colspan="11" class="small2">สาระการเรียนรู้พื้นฐาน</td>
                 </tr>
 
-                <tr>
-                  <td nowrap="" valign="top" align="center">1</td>
-                  <td nowrap="" valign="top" align="center">ท31102</td>
-                  <td nowrap="">ภาษาไทย 2 <br>
-                    <span class="small">
-                    ผู้สอน:&nbsp;ภูซีลา&nbsp;เจ๊ะแล<br>
-                    โทร:&nbsp;0828205539</span>
+                <tr v-for="(item,i) in items" :key="i">
+                  <td nowrap="" valign="center" align="center">{{i+1}}</td>
+                  <td nowrap="" valign="center" align="center">{{item.id}}</td>
+                  <td nowrap="">{{item.subject}}<br>
                   </td>
                     <td align="center">1.0</td>
                     <td align="center">0</td>
@@ -72,7 +69,7 @@
                       <table height="100%" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
                           <tr>
-                            <td style="border-right: 1px #000 solid; border-bottom: 1px #000 solid;" class="small">ตัวชี้วัด(เต็ม)</td>
+                            <td style="border-right: 1px #000 solid; border-bottom: 1px #000 solid;" class="small" >ตัวชี้วัด(เต็ม)</td>
                             <td nowrap="" align="left" style="border-right: 1px #000 solid; border-bottom: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
                             <td nowrap="" align="left" style="border-right: 1px #000 solid; border-bottom: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
                             <td nowrap="" align="left" style="border-right: 1px #000 solid; border-bottom: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
@@ -106,8 +103,6 @@
                             <td style="border-right: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
                             <td style="border-right: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
                             <td style="border-right: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
-                            
-                             
                           </tr>
                         </tbody>
                       </table>
@@ -116,8 +111,8 @@
                   <td align="center">0</td>
                 </tr>
                 <!-- ตัวที่เราสามารถสร้างเอาไว้ใส่คะเนน -->
-                  <tr>
-                    <td nowrap="" valign="top" align="center">2</td>
+                  <!-- <tr>
+                    <td nowrap="" valign="top" align="center">{{i+1}}</td>
                     <td nowrap="" valign="top" align="center">พ31102</td>
                     <td nowrap="">สุขศึกษา 2 <br>
                       <span class="small">
@@ -168,13 +163,13 @@
                         <td height="50%" align="center" style="border-right: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
                         <td height="50%" align="center" style="border-right: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
                         <td height="50%" align="center" style="border-right: 1px #000 solid;" class="small"><input type="text" size="10px"></td>
-                      </tr>
-                    </tbody>
+                      </tr> -->
+                    <!-- </tbody>
                   </table>
                     </td>
                   <td align="center">20</td>
                   <td align="center">0</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
                 </table>
               </div>
@@ -189,6 +184,17 @@ export default {
     components: {
         Toolbar
     },
+    data: () => ({
+      items : [
+        { id: 'ท1023' , subject: 'ภาษาไทย' },
+        { id: 'พ31102' , subject: 'สุขศึกษา 2' },
+        
+      ]
+
+      
+    }),
+
+    
     methods:{
       // Addchanel(){
       //   // var tr = document.createElement('tr');
