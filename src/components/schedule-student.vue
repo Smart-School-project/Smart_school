@@ -61,6 +61,15 @@
                 {{ item.nine.subject }}
               </p>
             </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.nine)"
+            >
+            </v-chip>
           </template>
 
           <!-- 10 โมง -->
@@ -77,6 +86,15 @@
                 {{ item.ten.id }} <br />
                 {{ item.ten.subject }}
               </p>
+            </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.ten)"
+            >
             </v-chip>
           </template>
 
@@ -95,6 +113,15 @@
                 {{ item.eleven.subject }}
               </p>
             </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.eleven)"
+            >
+            </v-chip>
           </template>
 
           <!-- 12 โมง -->
@@ -111,6 +138,15 @@
                 {{ item.twelve.id }} <br />
                 {{ item.twelve.subject }}
               </p>
+            </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.twelve)"
+            >
             </v-chip>
           </template>
 
@@ -129,6 +165,15 @@
                 {{ item.thirteen.subject }}
               </p>
             </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.thirteen)"
+            >
+            </v-chip>
           </template>
 
           <!-- 14 โมง -->
@@ -145,6 +190,15 @@
                 {{ item.fourteen.id }} <br />
                 {{ item.fourteen.subject }}
               </p>
+            </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.fourteen)"
+            >
             </v-chip>
           </template>
 
@@ -163,6 +217,15 @@
                 {{ item.fifteen.subject }}
               </p>
             </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.fifteen)"
+            >
+            </v-chip>
           </template>
 
           <!-- 16 โมง -->
@@ -179,6 +242,15 @@
                 {{ item.sixteen.id }} <br />
                 {{ item.sixteen.subject }}
               </p>
+            </v-chip>
+            <v-chip
+              class="chip"
+              color="white"
+              label
+              large
+              v-else
+              @click="fnEdit(item.sixteen)"
+            >
             </v-chip>
           </template>
         </v-data-table>

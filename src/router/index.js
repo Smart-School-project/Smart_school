@@ -8,6 +8,8 @@ import Leave  from '../views/leave.vue'
 import calendar  from '../views/calendar.vue'
 import homework  from '../views/homework.vue'
 import listHomework  from '../components/list-homework.vue'
+import Score  from '../views/score.vue'
+import Grade  from '../views/grade.vue'
 
 Vue.use(VueRouter)
 
@@ -52,6 +54,17 @@ const routes = [
     name: 'listHomework',
     component: listHomework
   },
+  {
+    path: '/score',
+    name: 'score',
+    component: Score
+  },
+  {
+    path: '/grade',
+    name: 'grade',
+    component: Grade
+  },
+  
 
 ]
 

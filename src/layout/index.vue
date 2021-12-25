@@ -8,7 +8,7 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text color="white">
+      <v-btn text color="white" @click="logout">
         <span>Sign out</span>
         <v-icon right>mdi-logout</v-icon>
       </v-btn>
@@ -49,8 +49,8 @@ export default {
       items: [
         { title: "หน้าหลัก", icon: "mdi-home", to: "/schedule" },
         { title: "ข้อมูลส่วนตัว", icon: "mdi-account", to: "/infomation" },
-        { title: "คะแนน", icon: "mdi-clipboard-list-outline", to: "" },
-        { title: "เกรด", icon: "mdi-clipboard-text-search-outline", to: "" },
+        { title: "คะแนน", icon: "mdi-clipboard-list-outline", to: "/score" },
+        { title: "เกรด", icon: "mdi-clipboard-text-search-outline", to: "/grade" },
         { title: "ใบลา", icon: "mdi-email-newsletter", to: "/leave" },
         { title: "ปฏิทินกิจกรรม", icon: "mdi-calendar-month", to: "/calendar" },
         { title: "การบ้าน", icon: "mdi-book-open-variant", to: "/homework" },
@@ -58,6 +58,12 @@ export default {
       right: null,
     };
   },
+
+  methods: {
+        logout() {
+            this.$router.push("/")
+        }
+  }
 };
 </script>
 
