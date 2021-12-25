@@ -138,38 +138,45 @@
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th rowspan="2" align="center" width="1%">ที่</th>
-            <th rowspan="2" align="center" width="3%">รหัสนักเรียน</th>
-            <th rowspan="2" align="center">ชื่อ-นามสกุล</th>
-            <th nowrap="" rowspan="2" align="center" width="2%">
+            <th rowspan="3" align="center" >ที่</th>
+            <th rowspan="3" align="center" >รหัสนักเรียน</th>
+            <th rowspan="3" align="center">ชื่อ-นามสกุล</th>
+            <th nowrap="" rowspan="3" align="center" >
               หน่วย<br />
               การเรียน
             </th>
-            <th nowrap="" colspan="5" align="center" class="text-center">
+
+            <th nowrap=""  colspan="5" align="center" class="text-center">
               เช็คชื่อเวลาเรียน
             </th>
-            <th rowspan="2" align="center" class="text-center">
-              คะแนนรายมาตรฐาน/ตัวชี้วัด
+
+            <th :colspan="itemScore.length" rowspan="2" align="center" class="text-center">
+              ตัวชี้วัด/คะแนนเต็ม
+              <v-icon right> mdi-folder-plus-outline </v-icon>
             </th>
-            <th nowrap="" colspan="2" align="center" class="text-center">
+            <th nowrap=""  colspan="2" align="center" class="text-center">
               รวมคะแนน
             </th>
           </tr>
           <tr>
-            <th nowrap="" align="center" width="2%">เต็ม</th>
-            <th nowrap="" align="center" width="2%">ที่ได้</th>
-            <th nowrap="" align="center" width="2%">ขาด</th>
-            <th nowrap="" align="center" width="2%">ป่วย</th>
-            <th nowrap="" align="center" width="2%">กิจ</th>
-            <th nowrap="" align="center" width="3%">เต็ม</th>
-            <th nowrap="" align="center" width="3%">ที่ได้</th>
+            <th  rowspan="2" nowrap="" align="center" width="2%">เต็ม</th>
+            <th  rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
+            <th rowspan="2"  nowrap="" align="center" width="2%">ขาด</th>
+            <th  rowspan="2" nowrap="" align="center" width="2%">ป่วย</th>
+            <th  rowspan="2" nowrap="" align="center" width="2%">กิจ</th>
+            <th rowspan="2" nowrap="" align="center" width="2%">เต็ม</th>
+            <th rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
+          </tr>
+          <tr>
+              <td v-for="(item,y) in itemScore" :key="y">
+                  <input type="text" size="10px" v-model="item.title"/>
+                   / (
+                  <input type="text" size="4px" v-model="item.score"/>
+                  )
+              </td>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td colspan="2">&nbsp;</td>
-            <td colspan="11" class="small2">สาระการเรียนรู้พื้นฐาน</td>
-          </tr>
           <tr v-for="(item, i) in items" :key="i">
             <td nowrap="" align="center">{{ i + 1 }}</td>
             <td nowrap="" align="center">{{ item.id }}</td>
@@ -180,129 +187,14 @@
             <td align="center">0</td>
             <td align="center">0</td>
             <td align="center">0</td>
-            <td align="left" style="padding: 0px">
-              <table height="100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody>
-                  <tr>
-                    <td
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      ตัวชี้วัด (เต็ม)
-                    </td>
-
-                    <td
-                      nowrap=""
-                      align="left"
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      ใบงานที่ 1(10)
-                    </td>
-
-                    <td
-                      nowrap=""
-                      align="left"
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      ใบงานที่ 2(10)
-                    </td>
-
-                    <td
-                      nowrap=""
-                      align="left"
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      ใบงานที่ 3(10)
-                    </td>
-
-                    <td
-                      nowrap=""
-                      align="left"
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      ใบงานที่ 4(10)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="border-right: 1px #000 solid" class="small">
-                      คะแนน
-                    </td>
-                    <!-- ช่องคะแนนที่ 1 -->
-                    <td
-                      nowrap=""
-                      align="left"
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      <input type="text" size="12px" v-model="item.hw1"/>
-                    </td>
-                    <!-- ช่องคะแนนที่ 2 -->
-                    <td
-                      nowrap=""
-                      align="left"
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      <input type="text" size="12px" v-model="item.hw2"/>
-                    </td>
-                    <!-- ช่องคะแนนที่ 3 -->
-                    <td
-                      nowrap=""
-                      align="left"
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      <input type="text" size="12px" v-model="item.hw3"/>
-                    </td>
-                    <!-- ช่องคะแนนที่ 4 -->
-                    <td
-                      nowrap=""
-                      align="left"
-                      style="
-                        border-right: 1px #000 solid;
-                        border-bottom: 1px #000 solid;
-                      "
-                      class="small"
-                    >
-                      <input type="text" size="12px" v-model="item.hw4"/>
-                    </td>
-
-                  </tr>
-                </tbody>
-              </table>
+            <td v-for="(Sc, i) in item.Score" :key="i" align="center" style="padding: 0px">
+                <input type="text" size="8px" v-model="Sc.get" style="width:100%"/>
             </td>
             <td align="center">100</td>
-            <td align="center">{{item.hw1+item.hw2+item.hw3+item.hw4}}</td>
+            <td align="center">0</td>
           </tr>
         </tbody>
+
       </table>
     </div>
   </div>
@@ -315,10 +207,11 @@ export default {
     selectedItem: 1,
     room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
     items: [
-      { id: "6110107", name: "ซูลตอน แวกะจิ", hw1: 1, hw2: 7, hw3: 9, hw4: 10},
-      { id: "6110362", name: "มุสปานี อาแด", hw1: 9, hw2: 10, hw3: 10, hw4: 7 },
-      { id: "6110363", name: "มูฮัมหมัด แวเด็ง", hw1: 8, hw2: 9, hw3: 9, hw4: 7},
+      { id: "6110107", name: "ซูลตอน แวกะจิ",  Score: [{get: 0},{get: 1},{get: 5}]},
+      { id: "6110362", name: "มุสปานี อาแด", Score: [{get: 1},{get: 1},{get: 7}]},
+      { id: "6110363", name: "มูฮัมหมัด แวเด็ง", Score: [{get: 3},{get: 1},{get: 7}]},
     ],
+    itemScore: [{title: "ใบงานที่ 1", score: 0},{title: "ใบงานที่ 2", score: 0},{title: "ใบงานที่ 3", score: 0}]
   }),
 
   components: {
@@ -329,177 +222,6 @@ export default {
     chanel.innerHTML =
       '<td height="50%" align="center" style="border-right: 1px #000 solid;" class="small"><input type="text" size="12px"></td>';
   },
-  // data: () => ({
-  //   dialog: false,
-  //   dialogDelete: false,
-  //   headers: [
-  //     { text: 'ลำดับ', value: 'calories' ,align: 'start'},
-  //     { text: 'รหัส', value: 'name',},
-  //     { text: 'วิชา', value: 'name',},
-  //     { text: 'หน่วยกิจ', value: 'name',},
-  //     { text: 'หน่วยกิจ', value: 'name',},
-  //     { text: 'Calories', value: 'calories' },
-  //     { text: 'Fat (g)', value: 'fat' },
-  //     { text: 'Carbs (g)', value: 'carbs' },
-  //     { text: 'Protein (g)', value: 'protein' },
-  //     { text: '', value: 'protein' },
-  //     { text: 'Actions', value: 'actions', sortable: false },
-  //   ],
-  //   desserts: [],
-  //   editedIndex: -1,
-  //   editedItem: {
-  //     name: '',
-  //     calories: 0,
-  //     fat: 0,
-  //     carbs: 0,
-  //     protein: 0,
-  //   },
-  //   defaultItem: {
-  //     name: '',
-  //     calories: 0,
-  //     fat: 0,
-  //     carbs: 0,
-  //     protein: 0,
-  //   },
-  // }),
-
-  // computed: {
-  //   formTitle () {
-  //     return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-  //   },
-  // },
-
-  // watch: {
-  //   dialog (val) {
-  //     val || this.close()
-  //   },
-  //   dialogDelete (val) {
-  //     val || this.closeDelete()
-  //   },
-  // },
-
-  // created () {
-  //   this.initialize()
-  // },
-
-  // methods: {
-  //   initialize () {
-  //     this.desserts = [
-  //       {
-  //         name: 'Frozen Yogurt',
-  //         calories: 159,
-  //         fat: 6.0,
-  //         carbs: 24,
-  //         protein: 4.0,
-  //       },
-  //       {
-  //         name: 'Ice cream sandwich',
-  //         calories: 237,
-  //         fat: 9.0,
-  //         carbs: 37,
-  //         protein: 4.3,
-  //       },
-  //       {
-  //         name: 'Eclair',
-  //         calories: 262,
-  //         fat: 16.0,
-  //         carbs: 23,
-  //         protein: 6.0,
-  //       },
-  //       {
-  //         name: 'Cupcake',
-  //         calories: 305,
-  //         fat: 3.7,
-  //         carbs: 67,
-  //         protein: 4.3,
-  //       },
-  //       {
-  //         name: 'Gingerbread',
-  //         calories: 356,
-  //         fat: 16.0,
-  //         carbs: 49,
-  //         protein: 3.9,
-  //       },
-  //       {
-  //         name: 'Jelly bean',
-  //         calories: 375,
-  //         fat: 0.0,
-  //         carbs: 94,
-  //         protein: 0.0,
-  //       },
-  //       {
-  //         name: 'Lollipop',
-  //         calories: 392,
-  //         fat: 0.2,
-  //         carbs: 98,
-  //         protein: 0,
-  //       },
-  //       {
-  //         name: 'Honeycomb',
-  //         calories: 408,
-  //         fat: 3.2,
-  //         carbs: 87,
-  //         protein: 6.5,
-  //       },
-  //       {
-  //         name: 'Donut',
-  //         calories: 452,
-  //         fat: 25.0,
-  //         carbs: 51,
-  //         protein: 4.9,
-  //       },
-  //       {
-  //         name: 'KitKat',
-  //         calories: 518,
-  //         fat: 26.0,
-  //         carbs: 65,
-  //         protein: 7,
-  //       },
-  //     ]
-  //   },
-
-  //   editItem (item) {
-  //     this.editedIndex = this.desserts.indexOf(item)
-  //     this.editedItem = Object.assign({}, item)
-  //     this.dialog = true
-  //   },
-
-  //   deleteItem (item) {
-  //     this.editedIndex = this.desserts.indexOf(item)
-  //     this.editedItem = Object.assign({}, item)
-  //     this.dialogDelete = true
-  //   },
-
-  //   deleteItemConfirm () {
-  //     this.desserts.splice(this.editedIndex, 1)
-  //     this.closeDelete()
-  //   },
-
-  //   close () {
-  //     this.dialog = false
-  //     this.$nextTick(() => {
-  //       this.editedItem = Object.assign({}, this.defaultItem)
-  //       this.editedIndex = -1
-  //     })
-  //   },
-
-  //   closeDelete () {
-  //     this.dialogDelete = false
-  //     this.$nextTick(() => {
-  //       this.editedItem = Object.assign({}, this.defaultItem)
-  //       this.editedIndex = -1
-  //     })
-  //   },
-
-  //   save () {
-  //     if (this.editedIndex > -1) {
-  //       Object.assign(this.desserts[this.editedIndex], this.editedItem)
-  //     } else {
-  //       this.desserts.push(this.editedItem)
-  //     }
-  //     this.close()
-  //   },
-  // },
 };
 </script>
 
