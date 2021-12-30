@@ -21,6 +21,25 @@
           </v-list-item-content>
         </v-list-item>
       </v-card>
+      <br>
+      <v-row>
+        <v-col>
+          <v-select
+            style="width: 10"
+            v-model="room_select"
+            :items="room"
+            color="primary"
+            label="ห้อง"
+            background-color="white"
+            outlined
+          ></v-select>
+        </v-col>
+        <v-col>
+          <v-btn color="success" dark Reset Validation @click="fnShow">
+            แสดงข้อมูล
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-flex>
     <!-- ในส่วนของ table grade  -->
     <div id="d2">
@@ -100,11 +119,15 @@ export default {
   },
   data: function () {
     return {
+        selectedItem: 1,
+        room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
      //สำหรับข้อมูลในตาราง
-      items: [
+        items: [
         { id: "6110107", name: "ซูลตอน แวกะจิ", cr: "3" },
         { id: "6110362", name: "มุสปานี อาแด", cr: "3" },
         { id: "6110363", name: "มูฮัมหมัด แวเด็ง", cr: "3" },
+        { id: "6110500", name: "ฮากีมีน พิศพรรณ", cr: "3"},
+        { id: "6110495", name: "อาฟิฟ แวอาแซ", cr: "3"},
       ],
 
       // สำหรับ char ที่เป็น line

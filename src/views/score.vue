@@ -44,13 +44,13 @@
     </v-flex>
     <v-layout row justify-center align-right>
       <v-flex xs12 md12 lg11 xl12>
-      <v-btn tile color="success" style="float: right" >
-        <v-icon left> mdi-pencil </v-icon>
-        บันทึก
-      </v-btn>
+        <v-btn tile color="success" style="float: right">
+          <v-icon left> mdi-pencil </v-icon>
+          บันทึก
+        </v-btn>
       </v-flex>
     </v-layout>
-    <br>
+    <br />
     <!-- ในส่วนของ table  -->
     <div></div>
     <div id="d10">
@@ -138,42 +138,49 @@
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th rowspan="3" align="center" >ที่</th>
-            <th rowspan="3" align="center" >รหัสนักเรียน</th>
+            <th rowspan="3" align="center">ที่</th>
+            <th rowspan="3" align="center">รหัสนักเรียน</th>
             <th rowspan="3" align="center">ชื่อ-นามสกุล</th>
-            <th nowrap="" rowspan="3" align="center" >
+            <th nowrap="" rowspan="3" align="center">
               หน่วย<br />
               การเรียน
             </th>
 
-            <th nowrap=""  colspan="5" align="center" class="text-center">
+            <th nowrap="" colspan="5" align="center" class="text-center">
               เช็คชื่อเวลาเรียน
             </th>
 
-            <th :colspan="itemScore.length" rowspan="2" align="center" class="text-center">
+            <th
+              :colspan="itemScore.length"
+              rowspan="2"
+              align="center"
+              class="text-center"
+            >
               ตัวชี้วัด/คะแนนเต็ม
-              <v-icon right> mdi-folder-plus-outline </v-icon>
+              <v-icon @click="Addchanel()" right>
+                mdi-folder-plus-outline
+              </v-icon>
             </th>
-            <th nowrap=""  colspan="2" align="center" class="text-center">
+            <th nowrap="" colspan="2" align="center" class="text-center">
               รวมคะแนน
             </th>
           </tr>
           <tr>
-            <th  rowspan="2" nowrap="" align="center" width="2%">เต็ม</th>
-            <th  rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
-            <th rowspan="2"  nowrap="" align="center" width="2%">ขาด</th>
-            <th  rowspan="2" nowrap="" align="center" width="2%">ป่วย</th>
-            <th  rowspan="2" nowrap="" align="center" width="2%">กิจ</th>
+            <th rowspan="2" nowrap="" align="center" width="2%">เต็ม</th>
+            <th rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
+            <th rowspan="2" nowrap="" align="center" width="2%">ขาด</th>
+            <th rowspan="2" nowrap="" align="center" width="2%">ป่วย</th>
+            <th rowspan="2" nowrap="" align="center" width="2%">กิจ</th>
             <th rowspan="2" nowrap="" align="center" width="2%">เต็ม</th>
             <th rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
           </tr>
-          <tr>
-              <td v-for="(item,y) in itemScore" :key="y">
-                  <input type="text" size="10px" v-model="item.title"/>
-                   / (
-                  <input type="text" size="4px" v-model="item.score"/>
-                  )
-              </td>
+          <tr >
+            <td v-for="(item, y) in itemScore" :key="y">
+              <input type="text" size="10px" v-model="item.title" />
+              / (
+              <input type="text" size="4px" v-model="item.score" />
+              )
+            </td>
           </tr>
         </thead>
         <tbody>
@@ -187,14 +194,23 @@
             <td align="center">0</td>
             <td align="center">0</td>
             <td align="center">0</td>
-            <td v-for="(Sc, i) in item.Score" :key="i" align="center" style="padding: 0px">
-                <input type="text" size="8px" v-model="Sc.get" style="width:100%"/>
+            <td
+              v-for="(Sc, i) in item.Score"
+              :key="i"
+              align="center"
+              style="padding: 0px"
+            >
+              <input
+                type="text"
+                size="8px"
+                v-model="Sc.get"
+                style="width: 100%"
+              />
             </td>
             <td align="center">100</td>
             <td align="center">0</td>
           </tr>
         </tbody>
-
       </table>
     </div>
   </div>
@@ -207,22 +223,29 @@ export default {
     selectedItem: 1,
     room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
     items: [
-      { id: "6110107", name: "ซูลตอน แวกะจิ",  Score: [{get: 0},{get: 1},{get: 5}]},
-      { id: "6110362", name: "มุสปานี อาแด", Score: [{get: 1},{get: 1},{get: 7}]},
-      { id: "6110363", name: "มูฮัมหมัด แวเด็ง", Score: [{get: 3},{get: 1},{get: 7}]},
+      { id: "6110107", name: "ซูลตอน แวกะจิ",  Score: [{get: 7},{get: 6},{get: 8}]},
+      { id: "6110362", name: "มุสปานี อาแด", Score: [{get: 8},{get: 8},{get: 6}]},
+      { id: "6110363", name: "มูฮัมหมัด แวเด็ง", Score: [{get: 8},{get: 9},{get: 6}]},
+      { id: "6110500", name: "ฮากีมีน พิศพรรณ", Score: [{get: 8},{get: 9},{get: 6}]},
+      { id: "6110495", name: "อาฟิฟ แวอาแซ", Score: [{get: 8},{get: 9},{get: 6}]},
     ],
-    itemScore: [{title: "ใบงานที่ 1", score: 0},{title: "ใบงานที่ 2", score: 0},{title: "ใบงานที่ 3", score: 0}]
+    itemScore: [{title: "ใบงานที่ 1", score: 10},{title: "ใบงานที่ 2", score: 10},{title: "ใบงานที่ 3", score: 10}]
   }),
 
   components: {
     Toolbar,
   },
-  Addchanel() {
-    var chanel = document.createElement("tr");
-    chanel.innerHTML =
-      '<td height="50%" align="center" style="border-right: 1px #000 solid;" class="small"><input type="text" size="12px"></td>';
-  },
-};
+//   Addchanel(){
+//         var tr = document.createElement('tr');
+//         // var td1 = document.createElement('td');
+//         var td1 = tr.appendChild(document.createElement('td'));
+        
+//         td1.innerHTML= '<td v-for="(item,y) in itemScore" :key="y"><input type="text" size="10px" v-model="item.title"/>/ (<input type="text" size="4px" v-model="item.score"/></td>'
+        
+//         document.getElementById("tbl").appendChild(td1);
+//       },               
+  }
+
 </script>
 
 <style scoped>
