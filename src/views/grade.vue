@@ -7,16 +7,16 @@
         <v-list-item>
           <v-list-item-icon>
             <v-icon color="#3F91A4" size="50"
-              >mdi-clipboard-list-outline</v-icon
+              >mdi-clipboard-text-search-outline</v-icon
             >
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title style="color: #3f91a4"
-              ><h3>คะเเนน</h3></v-list-item-title
+              ><h3>เกรด</h3></v-list-item-title
             >
             <hr style="border-top: 1px solid #3f91a4" />
             <v-list-item-title style="color: #3f91a4"
-              ><h4>คะเนนระหว่างเรียน</h4></v-list-item-title
+              ><h4>เทอม 1 ปีการศึกษา 2564</h4></v-list-item-title
             >
           </v-list-item-content>
         </v-list-item>

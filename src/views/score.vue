@@ -17,7 +17,7 @@
             >
             <hr style="border-top: 1px solid #3f91a4" />
             <v-list-item-title style="color: #3f91a4"
-              ><h4>คะเนนระหว่างเรียน</h4></v-list-item-title
+              ><h4>เทอม 1 ปีการศึกษา 2564</h4></v-list-item-title
             >
           </v-list-item-content>
         </v-list-item>
@@ -151,15 +151,16 @@
             </th>
 
             <th
-              :colspan="itemScore.length"
+              :colspan="colspan"
               rowspan="2"
               align="center"
               class="text-center"
             >
               ตัวชี้วัด/คะแนนเต็ม
-              <v-icon @click="Addchanel()" right>
-                mdi-folder-plus-outline
-              </v-icon>
+                <v-icon @click="fn_addCh()" color="success" right>
+                    mdi-plus
+                </v-icon>
+             
             </th>
             <th nowrap="" colspan="2" align="center" class="text-center">
               รวมคะแนน
@@ -174,12 +175,15 @@
             <th rowspan="2" nowrap="" align="center" width="2%">เต็ม</th>
             <th rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
           </tr>
-          <tr >
+          <tr>
             <td v-for="(item, y) in itemScore" :key="y">
               <input type="text" size="10px" v-model="item.title" />
               / (
               <input type="text" size="4px" v-model="item.score" />
               )
+              <v-icon @click="fn_removeCh(item)" color="error" right>
+                mdi-delete
+              </v-icon>
             </td>
           </tr>
         </thead>
@@ -222,30 +226,73 @@ export default {
   data: () => ({
     selectedItem: 1,
     room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
+    room_select: "",
     items: [
-      { id: "6110107", name: "ซูลตอน แวกะจิ",  Score: [{get: 7},{get: 6},{get: 8}]},
-      { id: "6110362", name: "มุสปานี อาแด", Score: [{get: 8},{get: 8},{get: 6}]},
-      { id: "6110363", name: "มูฮัมหมัด แวเด็ง", Score: [{get: 8},{get: 9},{get: 6}]},
-      { id: "6110500", name: "ฮากีมีน พิศพรรณ", Score: [{get: 8},{get: 9},{get: 6}]},
-      { id: "6110495", name: "อาฟิฟ แวอาแซ", Score: [{get: 8},{get: 9},{get: 6}]},
+      {
+        id: "6110107",
+        name: "ซูลตอน แวกะจิ",
+        Score: [{ get: 7 }, { get: 6 }, { get: 8 }],
+      },
+      {
+        id: "6110362",
+        name: "มุสปานี อาแด",
+        Score: [{ get: 8 }, { get: 8 }, { get: 6 }],
+      },
+      {
+        id: "6110363",
+        name: "มูฮัมหมัด แวเด็ง",
+        Score: [{ get: 8 }, { get: 9 }, { get: 6 }],
+      },
+      {
+        id: "6110500",
+        name: "ฮากีมีน พิศพรรณ",
+        Score: [{ get: 8 }, { get: 9 }, { get: 6 }],
+      },
+      {
+        id: "6110495",
+        name: "อาฟิฟ แวอาแซ",
+        Score: [{ get: 8 }, { get: 9 }, { get: 6 }],
+      },
     ],
-    itemScore: [{title: "ใบงานที่ 1", score: 10},{title: "ใบงานที่ 2", score: 10},{title: "ใบงานที่ 3", score: 10}]
+    itemScore: [
+      { title: "ใบงานที่ 1", score: 10 },
+      { title: "ใบงานที่ 2", score: 10 },
+      { title: "ใบงานที่ 3", score: 10 },
+    ],
   }),
 
   components: {
     Toolbar,
   },
-//   Addchanel(){
-//         var tr = document.createElement('tr');
-//         // var td1 = document.createElement('td');
-//         var td1 = tr.appendChild(document.createElement('td'));
-        
-//         td1.innerHTML= '<td v-for="(item,y) in itemScore" :key="y"><input type="text" size="10px" v-model="item.title"/>/ (<input type="text" size="4px" v-model="item.score"/></td>'
-        
-//         document.getElementById("tbl").appendChild(td1);
-//       },               
-  }
+  computed: {
+    colspan: {
+      get() {
+        return this.itemScore.length;
+      },
+    },
+  },
+  methods: {
+    fn_addCh() {
+      for (var i = 0; i < this.items.length; i++) {
+        var get = { get: 0 };
+        this.items[i].Score.push(get);
+      }
+      var item = { title: "ตัวชีวัด", score: 0 };
+      this.itemScore.push(item);
+    },
+    fn_removeCh(item) {
+      let index = this.itemScore.indexOf(item);
+      this.itemScore.splice(index, 1);
 
+      for (var i = 0; i < this.items.length; i++) {
+        if (index > -1) {
+          this.items[i].Score.splice(index, 1);
+        }
+      }
+    },
+    fnShow() {},
+  },
+};
 </script>
 
 <style scoped>
