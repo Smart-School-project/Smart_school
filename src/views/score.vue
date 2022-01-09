@@ -24,7 +24,7 @@
       </v-card>
       <br />
       <v-row>
-        <v-col>
+        <v-col id="d16">
           <v-select
             style="width: 10"
             v-model="room_select"
@@ -35,105 +35,40 @@
             outlined
           ></v-select>
         </v-col>
-        <v-col>
-          <v-btn color="success" dark Reset Validation @click="fnShow">
-            แสดงข้อมูล
+        <v-col id="d15">
+          <v-btn color="blue lighten-1" dark Reset Validation @click="fnScore()">
+            แสดงข้อมูล 
           </v-btn>
         </v-col>
       </v-row>
-    </v-flex>
+    </v-flex>    
     <v-layout row justify-center align-right>
-      <v-flex xs12 md12 lg11 xl12>
+        <!-- ในส่วนของปุ่มเเก้ไขและบันทึก -->
+        
+        <v-flex xs12 md12 lg11 xl12 >
+        
         <v-btn tile color="success" style="float: right">
-          <v-icon left> mdi-pencil </v-icon>
-          บันทึก
+          <v-icon left > mdi-clipboard-check </v-icon>
+          บันทึกข้อมูล
         </v-btn>
+        
+        <v-btn @click="editModeHw(itemScore)" tile color="yellow" style="float: right">
+          <v-icon left> mdi-pencil </v-icon>
+          เเก้ไขชี้วัดและคะแนนเต็ม
+        </v-btn>
+        
+        <v-btn @click="editModeP(items)" tile color="orange" style="float: right">
+          <v-icon left> mdi-pencil </v-icon>
+          เเก้ไขคะแนนนักเรียน
+        </v-btn>
+        
       </v-flex>
+      
+      <br>
+      <br>
+      <br>
     </v-layout>
-    <br />
     <!-- ในส่วนของ table  -->
-    <div></div>
-    <div id="d10">
-      <!-- <template>
-                  <v-data-table :headers="headers" :items="desserts" sort-by="calories" class="elevation-1">
-                      <template v-slot:top>
-                      <v-toolbar flat>
-                          <v-toolbar-title>My CRUD</v-toolbar-title>
-                           <v-divider class="mx-4" inset vertical></v-divider> -->
-      <!--<v-spacer></v-spacer>
-                          <v-dialog v-model="dialog" max-width="500px">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                                  New Item
-                                </v-btn>
-                            </template>
-                              <v-card>
-                                  <v-card-title>
-                                    <span class="text-h5">{{ formTitle }}</span>
-                                  </v-card-title>
-                                  <v-card-text>
-                                    <v-container> -->
-      <!-- หัวข้อ table -->
-      <!-- <v-row>
-                                          <v-col cols="12" sm="6" md="4">
-                                              <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-                                          </v-col>
-                                          <v-col cols="12" sm="6" md="4">
-                                              <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                                          </v-col>
-                                          <v-col cols="12" sm="6" md="4">
-                                              <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                                          </v-col>
-                                          <v-col cols="12" sm="6" md="4">
-                                              <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                                          </v-col>
-                                          <v-col cols="12" sm="6" md="4">
-                                              <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-                                          </v-col>
-                                        </v-row>
-                                    </v-container>
-                                  </v-card-text>
-
-                                  <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                      <v-btn color="blue darken-1" text @click="close">
-                                          Cancel
-                                      </v-btn>
-                                      <v-btn color="blue darken-1" text @click="save">
-                                          Save
-                                      </v-btn>
-                                  </v-card-actions>
-                              </v-card>
-                          </v-dialog>
-                          <v-dialog v-model="dialogDelete" max-width="500px"> -->
-      <!-- ต้วของถังขยะ -->
-      <!-- </v-dialog>
-                      </v-toolbar>
-                        </template>
-                          <template v-slot:item.actions="{ item }"> -->
-      <!-- ในส่วนของการเเก้ไขในเเต่ละอัน -->
-      <!-- <v-icon small class="mr-2" @click="editItem(item)">
-                                mdi-pencil
-                            </v-icon> -->
-      <!-- ในส่วนของการลบ -->
-      <!--<v-icon
-                                small
-                                @click="deleteItem(item)"
-                            >
-                                mdi-delete
-                            </v-icon>
-                        </template>
-                      <template v-slot:no-data>
-                      <v-btn
-                          color="primary"
-                          @click="initialize"
-                      >
-                          Reset
-                      </v-btn>
-                      </template>
-                  </v-data-table>
-                  </template> -->
-    </div>
     <div id="d6">
       <table class="table table-bordered table-striped table-hover">
         <thead>
@@ -176,11 +111,26 @@
             <th rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
           </tr>
           <tr>
-            <td v-for="(item, y) in itemScore" :key="y">
-              <input type="text" size="10px" v-model="item.title" />
-              / (
-              <input type="text" size="4px" v-model="item.score" />
-              )
+              <!-- --------ในส่วนของตัวขี้วัดและคะแนนตัวชี้วัด-------- -->
+              
+            <td v-for="(item, y) in itemScore" :key="y" >
+                <v-if v-if="editting === itemScore">
+                    (<input type="text" size="10px" v-model="item.title" />
+                    )/
+                </v-if>
+                <v-else v-else>
+                    ({{item.title}}) &nbsp;/
+                    
+                </v-else>
+                <v-if v-if="editting === itemScore">
+                    (<input type="text" size="4px" v-model="item.score" />
+                    )
+                </v-if>
+                <v-else v-else>
+                    (
+                    {{item.score}}
+                    )
+                </v-else>
               <v-icon @click="fn_removeCh(item)" color="error" right>
                 mdi-delete
               </v-icon>
@@ -188,28 +138,81 @@
           </tr>
         </thead>
         <tbody>
+            <!-- ในส่วนของข้อมูลนักเรียนทั้งหมด -->
           <tr v-for="(item, i) in items" :key="i">
+            <!-- ลำดับ -->
             <td nowrap="" align="center">{{ i + 1 }}</td>
+            <!-- รหัส -->
             <td nowrap="" align="center">{{ item.id }}</td>
+            <!-- ชื่อ -->
             <td nowrap="">{{ item.name }}<br /></td>
-            <td align="center">3</td>
-            <td align="center">0</td>
-            <td align="center">0</td>
-            <td align="center">0</td>
-            <td align="center">0</td>
-            <td align="center">0</td>
+            <!-- หน่วยการเรียน -->
+            <td align="center">
+                <v-if v-if="editting === items">
+                    <input type="text" size="4px" v-model="item.credit" />
+                </v-if>            
+                <v-else v-else>
+                    {{item.credit}}
+                </v-else>
+            </td>
+            <!-- เต็ม -->
+            <td align="center">
+                <v-if v-if="editting === items">
+                    <input type="text" size="4px" v-model="item.full" />
+                </v-if>
+                <v-else v-else>
+                    {{item.full}}
+                </v-else>
+            </td>
+            <!-- ที่ได้ -->
+            <td align="center">
+                <v-if v-if="editting === items">
+                    <input type="text" size="4px" v-model="item.have" />
+                </v-if>
+                <v-else v-else>
+                    {{item.have}}
+                </v-else>
+            </td>
+            <!-- ขาด -->
+            <td align="center">
+                <v-if v-if="editting === items">
+                    <input type="text" size="4px" v-model="item.miss" />
+                </v-if>
+                <v-else v-else>
+                    {{item.miss}}
+                </v-else>
+            </td>
+            <!-- ป่วย -->
+            <td align="center">
+                <v-if v-if="editting === items">
+                    <input type="text" size="4px" v-model="item.sick" />
+                </v-if>
+                <v-else v-else>
+                    {{item.sick}}
+                </v-else>
+            </td>
+            <!-- กิจ -->
+            <td align="center">
+                <v-if v-if="editting === items">
+                    <input type="text" size="4px" v-model="item.affiar" />
+                </v-if>
+                <v-else v-else>
+                    {{item.affiar}}
+                </v-else>
+            </td>
+            <!-- ในส่วนของการเพิ่มคะเเนน -->
             <td
-              v-for="(Sc, i) in item.Score"
+              v-for="(Sc, i) in item.indicators"
               :key="i"
               align="center"
               style="padding: 0px"
             >
-              <input
-                type="text"
-                size="8px"
-                v-model="Sc.get"
-                style="width: 100%"
-              />
+              <v-if v-if="editting === items">
+                  <input type="text" size="8px" v-model="Sc.get" style="width: 100%" />
+              </v-if>
+              <v-else v-else>
+                {{Sc.get}}
+              </v-else>
             </td>
             <td align="center">100</td>
             <td align="center">0</td>
@@ -223,43 +226,16 @@
 <script>
 import Toolbar from "../layout/index.vue";
 export default {
-  data: () => ({
-    selectedItem: 1,
-    room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
-    room_select: "",
-    items: [
-      {
-        id: "6110107",
-        name: "ซูลตอน แวกะจิ",
-        Score: [{ get: 7 }, { get: 6 }, { get: 8 }],
-      },
-      {
-        id: "6110362",
-        name: "มุสปานี อาแด",
-        Score: [{ get: 8 }, { get: 8 }, { get: 6 }],
-      },
-      {
-        id: "6110363",
-        name: "มูฮัมหมัด แวเด็ง",
-        Score: [{ get: 8 }, { get: 9 }, { get: 6 }],
-      },
-      {
-        id: "6110500",
-        name: "ฮากีมีน พิศพรรณ",
-        Score: [{ get: 8 }, { get: 9 }, { get: 6 }],
-      },
-      {
-        id: "6110495",
-        name: "อาฟิฟ แวอาแซ",
-        Score: [{ get: 8 }, { get: 9 }, { get: 6 }],
-      },
-    ],
-    itemScore: [
-      { title: "ใบงานที่ 1", score: 10 },
-      { title: "ใบงานที่ 2", score: 10 },
-      { title: "ใบงานที่ 3", score: 10 },
-    ],
-  }),
+  data() {
+    return {
+     editting: null,
+     selectedItem: 1,
+        room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
+        room_select: "",
+        items: [],
+        itemScore: [],
+    }
+  },
 
   components: {
     Toolbar,
@@ -272,6 +248,12 @@ export default {
     },
   },
   methods: {
+    editModeHw(itemScore) {
+        this.editting = itemScore;
+    },
+    editModeP(items){
+        this.editting = items;
+    },
     fn_addCh() {
       for (var i = 0; i < this.items.length; i++) {
         var get = { get: 0 };
@@ -290,12 +272,46 @@ export default {
         }
       }
     },
+    fnScore() {
+      var payload = {
+        course_id: "ท31101",
+        room: this.room_select,
+      };
+      const vm = this;
+      this.axios
+        .post("http://0.0.0.0:3000/score", payload)
+        .then(function (response) {
+            if(response.data.status == "OK") {
+                vm.itemScore = response.data.item_score[0]
+                vm.items = response.data.result
+                
+            }
+        });
+    },
+
+    fnSelectRoom(){
+        
+    },
+
     fnShow() {},
   },
 };
 </script>
 
 <style scoped>
+#d17{
+    padding-right: 20px;
+    padding-left: 20px;
+}
+#d16{
+    padding-bottom: 0%;
+}
+ #d15{
+    padding-bottom: 0%;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 20px;
+}
 #d5 {
   padding-left: 0%;
   padding-right: 0%;

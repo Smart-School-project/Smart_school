@@ -21,9 +21,9 @@
           </v-list-item-content>
         </v-list-item>
       </v-card>
-      <br>
+      <br />
       <v-row>
-        <v-col>
+        <v-col id="d16">
           <v-select
             style="width: 10"
             v-model="room_select"
@@ -34,21 +34,32 @@
             outlined
           ></v-select>
         </v-col>
-        <v-col>
-          <v-btn color="success" dark Reset Validation @click="fnShow">
+        <v-col id="d15">
+          <v-btn color="blue lighten-1" dark Reset Validation @click="fnShow">
             แสดงข้อมูล
           </v-btn>
         </v-col>
       </v-row>
     </v-flex>
-    <!-- ในส่วนของ table grade  -->
+    <v-layout row justify-center align-right>
+      <!-- ในส่วนของปุ่มเเก้ไขและบันทึก -->
+      <v-flex xs12 md12 lg11 xl12>
+        <v-btn tile color="success" style="float: right" @click="next()">
+          <v-icon left> mdi-clipboard-check </v-icon>
+          บันทึกข้อมูล
+        </v-btn>
+      </v-flex>
+      <br />
+      <br />
+      <br />
+    </v-layout>
     <div id="d2">
       <div id="d3" align="center" class="box-body table-responsive">
         <table class="table table-bordered table-hover">
           <thead class="bg-gray-light">
             <tr>
               <td rowspan="2" align="center">ที่</td>
-              <td rowspan="2" align="center">รหัสนักเรียน</td>
+              <td rowspan="2" align="center">รหัส</td>
               <td rowspan="2" align="center">ชื่อ-นามสกุล</td>
               <td rowspan="2" align="center">
                 หน่วย<br />
@@ -77,15 +88,21 @@
               <td align="center">{{ i + 1 }}</td>
               <td align="center">{{ item.id }}</td>
               <td>{{ item.name }}</td>
-              <td align="center">{{ item.cr }}</td>
-              <td align="center"></td>
-              <td align="center"></td>
-              <td align="center"></td>
-              <td align="center"></td>
-              <td align="center">&nbsp;</td>
+              <td align="center">{{ item.credit }}</td>
+              <td align="center">{{ item.have_score }}</td>
+              <td align="center">{{ item.grade }}</td>
+              <td align="center">
+                <input type="text" size="6px" v-model="item.edit_have_score" />
+              </td>
+              <td align="center">
+                <input type="text" size="6px" v-model="item.edit_grade" />
+              </td>
+              <td align="center">
+                <input type="text" size="6px" v-model="item.note" />
+              </td>
             </tr>
           </tbody>
-          </table>
+        </table>
       </div>
       <br />
       <br />
@@ -101,7 +118,6 @@
         </v-flex>
       </v-layout>
     </div>
-    <!-- เริ่มของ Chart -->
   </div>
 </template>
 
@@ -117,64 +133,99 @@ export default {
   components: {
     Toolbar,
   },
-  data: function () {
-    return {
-        selectedItem: 1,
-        room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
-     //สำหรับข้อมูลในตาราง
-        items: [
-        { id: "6110107", name: "ซูลตอน แวกะจิ", cr: "3" },
-        { id: "6110362", name: "มุสปานี อาแด", cr: "3" },
-        { id: "6110363", name: "มูฮัมหมัด แวเด็ง", cr: "3" },
-        { id: "6110500", name: "ฮากีมีน พิศพรรณ", cr: "3"},
-        { id: "6110495", name: "อาฟิฟ แวอาแซ", cr: "3"},
-      ],
-
-      // สำหรับ char ที่เป็น line
-      chartOptions: {
-        chart: {
-          height: 350,
-          type: "line",
-          zoom: {
-            enabled: false,
-          },
-        },
-        dataLabels: {
+  data: () => ({
+    dialog: false,
+    items: [
+      {
+        id: "6110107",
+        name: "ซูลตอน แวกะจิ",
+        credit: 3,
+        have_score: 0,
+        grade: 0,
+        edit_have_score: "",
+        edit_grade: "",
+        note: "",
+      },
+      {
+        id: "6110362",
+        name: "มุสปานี อาแด",
+        credit: 3,
+        have_score: 0,
+        grade: 0,
+      },
+      {
+        id: "6110363",
+        name: "มูฮัมหมัด แวเด็ง",
+        credit: 3,
+        have_score: 0,
+        grade: 0,
+      },
+      {
+        id: "6110500",
+        name: "ฮากีมีน พิศพรรณ",
+        credit: 3,
+        have_score: 0,
+        grade: 0,
+      },
+      {
+        id: "6110495",
+        name: "อาฟิฟ แวอาแซ",
+        credit: 3,
+        have_score: 0,
+        grade: 0,
+      },
+    ],
+    // สำหรับ char ที่เป็น line
+    chartOptions: {
+      chart: {
+        height: 350,
+        type: "line",
+        zoom: {
           enabled: false,
         },
-        stroke: {
-          curve: "straight",
-        },
-        title: {
-          text: "ช่วงเกรดเฉลี่ยของนักเรียน",
-          align: "left",
-          },
-        grid: {
-          row: {
-            colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-            opacity: 0.5,
-          },
-        },
-        xaxis: {
-          categories: [
-            "0",
-            "1",
-            "1.5",
-            "2",
-            "2.5",
-            "3",
-            "3.5",
-            "4",
-          ],
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: "straight",
+      },
+      title: {
+        text: "ช่วงเกรดเฉลี่ยของนักเรียน",
+        align: "left",
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          opacity: 0.5,
         },
       },
-      series: [
-        {
-          name: "จำนวน(คน)",
-          data: [0, 1, 1, 5, 4, 4, 5, 3],
-        },
-      ],
-    };
+      xaxis: {
+        categories: ["0", "1", "1.5", "2", "2.5", "3", "3.5", "4"],
+      },
+    },
+    series: [
+      {
+        name: "จำนวน(คน)",
+        data: [0, 1, 1, 5, 4, 4, 5, 3],
+      },
+    ],
+  }),
+  mounted() {},
+  methods: {
+    editModeP(items) {
+      this.editting = items;
+    },
+    next() {
+      alert("บันทึกข้อมูลสำเร็จ");
+    },
+    sum_credit() {
+      let total = 0;
+      for (let item in this.items) {
+        total = total + this.items[item].credit;
+      }
+      return total;
+    },
   },
 };
 </script>
@@ -200,14 +251,7 @@ td {
   align-items: center;
   width: auto;
 }
-#d3 {
-}
 #d4 {
   background-color: white;
-  width: auto;
-  height: auto;
-}
-#d5 {
-  width: auto;
 }
 </style>
