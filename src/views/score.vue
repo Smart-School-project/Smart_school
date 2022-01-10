@@ -36,7 +36,7 @@
           ></v-select>
         </v-col>
         <v-col id="d15">
-          <v-btn color="blue lighten-1" dark Reset Validation @click="fnScore()">
+          <v-btn color="blue lighten-1" dark Reset Validation @click="fnShowClass()">
             แสดงข้อมูล 
           </v-btn>
         </v-col>
@@ -47,7 +47,7 @@
         
         <v-flex xs12 md12 lg11 xl12 >
         
-        <v-btn tile color="success" style="float: right">
+        <v-btn @click="fnUpdateScore()" color="success" style="float: right">
           <v-icon left > mdi-clipboard-check </v-icon>
           บันทึกข้อมูล
         </v-btn>
@@ -143,7 +143,7 @@
             <!-- ลำดับ -->
             <td nowrap="" align="center">{{ i + 1 }}</td>
             <!-- รหัส -->
-            <td nowrap="" align="center">{{ item.id }}</td>
+            <td nowrap="" align="center">{{ item.id_std }}</td>
             <!-- ชื่อ -->
             <td nowrap="">{{ item.name }}<br /></td>
             <!-- หน่วยการเรียน -->
@@ -214,8 +214,8 @@
                 {{Sc.get}}
               </v-else>
             </td>
-            <td align="center">100</td>
-            <td align="center">0</td>
+            <td align="center">{{fullScore}}</td>
+            <td align="center">{{item.have_score}}</td>
           </tr>
         </tbody>
       </table>
@@ -234,6 +234,7 @@ export default {
         room_select: "",
         items: [],
         itemScore: [],
+        fullScore: 0,
     }
   },
 
@@ -247,6 +248,30 @@ export default {
       },
     },
   },
+  watch: {
+    items: {
+        handler: function(newValue) {
+            for(var i=0; i < newValue.length; i++) {
+                var newScore = 0
+                for(var y=0; y < (newValue[i].indicators).length; y++) {
+                    newScore = newScore + parseInt(newValue[i].indicators[y].get)
+                }
+                newValue[i].have_score = newScore
+            }
+            console.log(newValue);
+        },
+        deep: true
+    },
+    itemScore: {
+        handler: function(newValue) {
+            this.fullScore = 0
+            for(var i=0; i < newValue.length; i++) {
+                this.fullScore = this.fullScore + parseInt(newValue[i].score)
+            }
+        },
+        deep: true
+    },
+},
   methods: {
     editModeHw(itemScore) {
         this.editting = itemScore;
@@ -257,7 +282,7 @@ export default {
     fn_addCh() {
       for (var i = 0; i < this.items.length; i++) {
         var get = { get: 0 };
-        this.items[i].Score.push(get);
+        this.items[i].indicators.push(get);
       }
       var item = { title: "ตัวชีวัด", score: 0 };
       this.itemScore.push(item);
@@ -267,12 +292,10 @@ export default {
       this.itemScore.splice(index, 1);
 
       for (var i = 0; i < this.items.length; i++) {
-        if (index > -1) {
-          this.items[i].Score.splice(index, 1);
-        }
+        this.items[i].indicators.splice(index, 1);
       }
     },
-    fnScore() {
+    fnShowClass() {
       var payload = {
         course_id: "ท31101",
         room: this.room_select,
@@ -289,13 +312,21 @@ export default {
         });
     },
 
-    fnSelectRoom(){
-        
-    },
+    async fnUpdateScore() {
+            var payload = {
+                    item_score: this.itemScore,
+                    items: this.items,
+             };
+             this.axios
+                .post("http://0.0.0.0:3000/update_score", payload)
+                .then(function (response) { 
+                    if(response.data.status == "OK") {
+                        alert(response.data.result)    
+                    }
+                });
 
-    fnShow() {},
-  },
-};
+        },
+}}
 </script>
 
 <style scoped>
