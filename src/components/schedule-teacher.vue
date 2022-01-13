@@ -21,7 +21,7 @@
             >
               <p>
                 {{ item.eight.subject }}<br />
-                ม. {{ item.eight.class }}
+                ม.{{ item.eight.class }}
               </p>
             </v-chip>
           </template>
@@ -37,7 +37,7 @@
             >
               <p>
                 {{ item.nine.subject }}<br />
-                ม. {{ item.nine.class }}
+                ม.{{ item.nine.class }}
               </p>
             </v-chip>
           </template>
@@ -53,7 +53,7 @@
             >
               <p>
                 {{ item.ten.subject }}<br />
-                ม. {{ item.ten.class }}
+                ม.{{ item.ten.class }}
               </p>
             </v-chip>
           </template>
@@ -69,7 +69,7 @@
             >
               <p>
                 {{ item.eleven.subject }}<br />
-                ม. {{ item.eleven.class }}
+                ม.{{ item.eleven.class }}
               </p>
             </v-chip>
           </template>
@@ -85,7 +85,7 @@
             >
               <p>
                 {{ item.twelve.subject }}<br />
-                ม. {{ item.twelve.class }}
+                ม.{{ item.twelve.class }}
               </p>
             </v-chip>
           </template>
@@ -101,7 +101,7 @@
             >
               <p>
                 {{ item.thirteen.subject }}<br />
-                ม. {{ item.thirteen.class }}
+                ม.{{ item.thirteen.class }}
               </p>
             </v-chip>
           </template>
@@ -117,7 +117,7 @@
             >
               <p>
                 {{ item.fourteen.subject }}<br />
-                ม. {{ item.fourteen.class }}
+                ม.{{ item.fourteen.class }}
               </p>
             </v-chip>
           </template>
@@ -133,7 +133,7 @@
             >
               <p>
                 {{ item.fifteen.subject }}<br />
-                ม. {{ item.fifteen.class }}
+                ม.{{ item.fifteen.class }}
               </p>
             </v-chip>
           </template>
@@ -149,7 +149,7 @@
             >
               <p>
                 {{ item.sixteen.subject }}<br />
-                ม. {{ item.sixteen.class }}
+                ม.{{ item.sixteen.class }}
               </p>
             </v-chip>
           </template>

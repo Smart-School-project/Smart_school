@@ -35,7 +35,7 @@
           ></v-select>
         </v-col>
         <v-col id="d15">
-          <v-btn color="blue lighten-1" dark Reset Validation @click="fnShow">
+          <v-btn @click="fnShowClass" color="blue lighten-1" dark Reset Validation >
             แสดงข้อมูล
           </v-btn>
         </v-col>
@@ -44,7 +44,7 @@
     <v-layout row justify-center align-right>
       <!-- ในส่วนของปุ่มเเก้ไขและบันทึก -->
       <v-flex xs12 md12 lg11 xl12>
-        <v-btn tile color="success" style="float: right" @click="next()">
+        <v-btn tile color="success" style="float: right" @click="fnUpdateGrade()">
           <v-icon left> mdi-clipboard-check </v-icon>
           บันทึกข้อมูล
         </v-btn>
@@ -86,19 +86,45 @@
           <tbody>
             <tr v-for="(item, i) in items" :key="i">
               <td align="center">{{ i + 1 }}</td>
-              <td align="center">{{ item.id }}</td>
+              <td align="center">{{ item.id_std }}</td>
               <td>{{ item.name }}</td>
               <td align="center">{{ item.credit }}</td>
               <td align="center">{{ item.have_score }}</td>
-              <td align="center">{{ item.grade }}</td>
               <td align="center">
-                <input type="text" size="6px" v-model="item.edit_have_score" />
+                    <v-if v-if="item.have_score >= 50 && item.have_score <55">
+                        {{item.grade = 1.0}}
+                    </v-if>
+                    <v-else-if v-else-if="item.have_score >= 55 && item.have_score <60">
+                        {{item.grade = 1.5}}
+                    </v-else-if>
+                    <v-else-if v-else-if="item.have_score >= 60 && item.have_score <65">
+                        {{item.grade = 2.0}}
+                    </v-else-if>
+                    <v-else-if v-else-if="item.have_score >= 65 && item.have_score <70">
+                        {{item.grade = 2.5}}
+                    </v-else-if>
+                    <v-else-if v-else-if="item.have_score >= 70 && item.have_score <75">
+                        {{item.grade = 3.0}}
+                    </v-else-if>
+                    <v-else-if v-else-if="item.have_score >= 75 && item.have_score <80">
+                        {{item.grade = 3.5}}
+                    </v-else-if>
+                    <v-else-if v-else-if="item.have_score >= 80 && item.have_score <=100">
+                        {{item.grade = 4.0}}
+                    </v-else-if>
+                    <v-else-if v-else-if="item.have_score < 50"> 
+                        {{item.grade = 0}}
+                    </v-else-if>
+
               </td>
               <td align="center">
-                <input type="text" size="6px" v-model="item.edit_grade" />
+                <input align="center" type="text" size="6px" v-model="item.edit_have_score" />
               </td>
               <td align="center">
-                <input type="text" size="6px" v-model="item.note" />
+                <input align="center" type="text" size="6px" v-model="item.edit_grade" />
+              </td>
+              <td align="center">
+                <input align="center" type="text" size="20px" v-model="item.note" />
               </td>
             </tr>
           </tbody>
@@ -133,48 +159,12 @@ export default {
   components: {
     Toolbar,
   },
-  data: () => ({
+  data() {
+    return {
     dialog: false,
-    items: [
-      {
-        id: "6110107",
-        name: "ซูลตอน แวกะจิ",
-        credit: 3,
-        have_score: 0,
-        grade: 0,
-        edit_have_score: "",
-        edit_grade: "",
-        note: "",
-      },
-      {
-        id: "6110362",
-        name: "มุสปานี อาแด",
-        credit: 3,
-        have_score: 0,
-        grade: 0,
-      },
-      {
-        id: "6110363",
-        name: "มูฮัมหมัด แวเด็ง",
-        credit: 3,
-        have_score: 0,
-        grade: 0,
-      },
-      {
-        id: "6110500",
-        name: "ฮากีมีน พิศพรรณ",
-        credit: 3,
-        have_score: 0,
-        grade: 0,
-      },
-      {
-        id: "6110495",
-        name: "อาฟิฟ แวอาแซ",
-        credit: 3,
-        have_score: 0,
-        grade: 0,
-      },
-    ],
+    room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
+    room_select: "",
+    items: [],
     // สำหรับ char ที่เป็น line
     chartOptions: {
       chart: {
@@ -191,7 +181,7 @@ export default {
         curve: "straight",
       },
       title: {
-        text: "ช่วงเกรดเฉลี่ยของนักเรียน",
+        text: "ช่วงเกรดเฉลี่ยของนักเรียน(ทั้งหมด)",
         align: "left",
       },
       grid: {
@@ -207,10 +197,10 @@ export default {
     series: [
       {
         name: "จำนวน(คน)",
-        data: [0, 1, 1, 5, 4, 4, 5, 3],
+        data: [0, 2, 5, 8, 6, 3, 7, 9],
       },
     ],
-  }),
+  }},
   mounted() {},
   methods: {
     editModeP(items) {
@@ -219,6 +209,34 @@ export default {
     next() {
       alert("บันทึกข้อมูลสำเร็จ");
     },
+    fnShowClass() {
+      var payload = {
+        course_id: "ท31101",
+        room: this.room_select,
+      };
+      const vm = this;
+      this.axios
+        .post("http://0.0.0.0:3000/score", payload)
+        .then(function (response) {
+            if(response.data.status == "OK") {
+                vm.items = response.data.result
+                
+            }
+        });
+    },
+    async fnUpdateGrade() {
+            var payload = {
+                    items: this.items,
+             };
+             this.axios
+                .post("http://0.0.0.0:3000/update_grade", payload)
+                .then(function (response) { 
+                    if(response.data.status == "OK") {
+                        alert(response.data.result)    
+                    }
+                });
+
+        },
     sum_credit() {
       let total = 0;
       for (let item in this.items) {
