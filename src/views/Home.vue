@@ -78,6 +78,7 @@ export default {
           if(response.data.status == "OK") {
             localStorage.setItem("id",response.data.result[0].id)
             localStorage.setItem("role",response.data.result[0].role_id)
+            localStorage.setItem("std_id",response.data.result[0].std_id)
             vm.$router.push("/schedule");
           }
         });

@@ -16,15 +16,15 @@
                 </v-list-item>
             </v-card>
         </v-flex>
-        <!-- ในส่วนของ table grade  -->
+
         <div id="d2">
             <div id="d3" align="center" class="box-body table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead class="bg-gray-light">
                         <tr>
                             <td rowspan="2" align="center">ที่</td>
-                            <td rowspan="2" align="center">รหัส</td>
-                            <td rowspan="2" align="center">กลุ่มสาระ</td>
+                            <td rowspan="2" align="center">รหัสวิชา</td>
+                            <td rowspan="2" align="center">ชื่อวิชา</td>
                             <td rowspan="2" align="center">หน่วย<br>
                             การเรียน</td>
                             <td colspan="2" align="center">ผลการเรียนปกติ</td>
@@ -42,49 +42,37 @@
                             <td align="center">หมายเหตุ</td>
                         </tr>
                     </thead>
+                    <!-- ในส่วนของตารางคะแนนนักเรียน -->
                     <tbody>
                         <tr class="bg-gray">
                             <td colspan="2">&nbsp;</td>
                             <td>สาระการเรียนรู้พื้นฐาน</td>
                             <td colspan="6">&nbsp;</td>
                         </tr>
-                        <tr>
-                            <td align="center">1</td>
-                            <td align="center">ท31102</td>
-                            <td>ภาษาไทย 2</td>
-                            <td align="center">1.0</td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="center">2</td>
-                            <td align="center">ค31102</td>
-                            <td>คณิตศาสตร์ 2</td>
-                            <td align="center">1.0</td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="center">3</td>
-                            <td align="center">ว31111</td>
-                            <td>โลกดาราศาสตร์และอวกาศ 2</td>
-                            <td align="center">0.5</td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center"></td>
-                            <td align="center">&nbsp;</td>
+                        <tr v-for="(item,i) in items" :key="i">
+                            <!-- ลำดับ -->
+                            <td align="center">{{i+1}}</td>
+                            <!-- รหัส -->
+                            <td align="center">{{item.course_id}}</td>
+                            <!-- ชื่อ -->
+                            <td>{{item.subject_name}}</td>
+                            <!-- หน่วยกิจ -->
+                            <td align="center">{{item.credit}}</td>
+                            <!-- คะแนนที่ได้ -->
+                            <td align="center"> {{item.have_score}} </td>
+                            <!-- ผลการเรียน -->
+                            <td align="center">{{item.grade}}</td>
+                            <!-- ผลการเรียนเเก้ที่ได้ -->
+                            <td align="center">{{ item.edit_have_score }}</td>
+                            <!-- ผลการเรียนเเก้ -->
+                            <td align="center">{{ item.edit_grade }}</td>
+                            <!-- หมายเหตุ -->
+                            <td align="center">{{ item.note }}</td>
                         </tr>
                     </tbody>
                     <tfoot class="bg-green">
                         <tr>
-                            <td colspan="9" align="center">รวม นก/นน 14.5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ผลการเรียนเฉลี่ย 0.00</td>
+                            <td colspan="9" align="center">รวม นก/นน {{ sum_credit() }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ผลการเรียนเฉลี่ย {{ Gpa() }}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -106,59 +94,46 @@ export default {
     components: {
         Toolbar
     },
-    data: function() {
-      return{
-        // สำหรับ char ที่เป็น line
-        // chartOptions: {
-        //   chart: {
-        //   height: 350,
-        //   type: 'line',
-        //   zoom: {
-        //     enabled: false
-        //   }
-        // },
-        // dataLabels: {
-        //   enabled: false
-        // },
-        // stroke: {
-        //   curve: 'straight'
-        // },
-        // title: {
-        //   text: 'Product Trends by Month',
-        //   align: 'left'
-        // },
-        // grid: {
-        //   row: {
-        //     colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-        //     opacity: 0.5
-        //   },
-        // },
-        // xaxis: {
-        //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-        // }
-        // },
-        // series: [{
-        //     name: "Desktops",
-        //     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        // }],
-        // <----------------------------------->
-        // สำหรับChart ที่เป็น bar
-        chartOptions: {
-          chart: {
-            id: 'vuechart-example',
-          },
-          xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-          },
-        },
-        series: [{
-          name: 'series-1',
-          data: [30, 40, 45, 50, 49, 60, 70, 81]
-        }]
-      } 
-    },
+    data: () => ({
+      dialog: false,
+      items: [],
+    }),
     mounted() {
+        this.fnShowClass();
     },
+    methods: {
+        Gpa(){
+            let grade = 0;
+            for(let item in this.items){
+                grade = grade + ( (this.items[item].grade) * (this.items[item].credit) ) 
+            }
+            return (grade/this.sum_credit()).toFixed(2)
+        },
+        editModeP(items){
+            this.editting = items;
+        },
+        sum_credit(){
+            let total = 0;
+            for(let item in this.items){
+                total = total + (this.items[item].credit)
+            }
+            return total
+        },
+        fnShowClass() {
+            var payload = {
+                id_std : localStorage.std_id
+            };
+            const vm = this;
+            this.axios
+                .post("http://localhost:3000/grade", payload)
+                .then(function (response) {
+                    if(response.data.status == "OK") {
+                    vm.items = response.data.result
+                
+                }
+            });
+        },
+    }
 };
 </script>
 
@@ -186,6 +161,3 @@ export default {
     }
     
 </style>
-
-        
-      

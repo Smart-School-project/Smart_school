@@ -83,7 +83,6 @@ export default {
         email: "",
         phone: "",
         image: ""
-      
     };
   },
    mounted() {

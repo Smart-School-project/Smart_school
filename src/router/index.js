@@ -8,8 +8,9 @@ import leave from '../views/leave.vue'
 import calendar from '../views/calendar.vue'
 import homework from '../views/homework.vue'
 import submitleave from '../views/submitleave.vue'
-import midterm from '../views/midterm.vue'
-import final from '../views/final.vue'
+import score_std from '../views/score_std.vue'
+import grade_std from '../views/grade_std.vue'
+
 
 
 Vue.use(VueRouter)
@@ -56,15 +57,15 @@ const routes = [
     component: submitleave
   },
   {
-    path: '/midterm',
-    name: 'midterm',
-    component: midterm
+    path: '/score_std',
+    name: 'score_std',
+    component: score_std
   },
   {
-    path: '/final',
-    name: '/final',
-    component: final
-  }
+    path: '/grade_std',
+    name: 'grade_std',
+    component: grade_std
+  },
   
 
 ]
