@@ -36,45 +36,62 @@
           ></v-select>
         </v-col>
         <v-col id="d15">
-          <v-btn color="blue lighten-1" dark Reset Validation @click="fnShowClass()">
-            แสดงข้อมูล 
+          <v-btn
+            color="blue lighten-1"
+            dark
+            Reset
+            Validation
+            @click="fnShowClass()"
+          >
+            แสดงข้อมูล
           </v-btn>
         </v-col>
       </v-row>
-    </v-flex>    
-    <v-layout row justify-center align-right>
-        <!-- ในส่วนของปุ่มเเก้ไขและบันทึก -->
-        
-        <v-flex xs12 md12 lg11 xl12 >
-        
-        <v-btn @click="fnUpdateScore()" color="success" style="float: right">
-          <v-icon left > mdi-clipboard-check </v-icon>
+    </v-flex>
+    <v-layout row justify-end align-right>
+      <v-flex xs6 md12 lg12 xl12>
+        <v-btn
+          @click="fnUpdateScore()"
+          color="success"
+          style="float: right; margin: 5px"
+        >
+          <v-icon left> mdi-clipboard-check </v-icon>
           บันทึกข้อมูล
         </v-btn>
-        
-        <v-btn @click="editModeHw(itemScore)" tile color="yellow" style="float: right">
+
+        <v-btn
+          @click="editModeHw(itemScore)"
+          tile
+          color="yellow"
+          style="float: right; margin: 5px"
+        >
           <v-icon left> mdi-pencil </v-icon>
-          เเก้ไขชี้วัดและคะแนนเต็ม
+          เเก้ไขตัวชี้วัดและคะแนนเต็ม
         </v-btn>
-        
-        <v-btn @click="editModeP(items)" tile color="orange" style="float: right">
+
+        <v-btn
+          @click="editModeP(items)"
+          tile
+          color="orange"
+          style="float: right; margin: 5px"
+        >
           <v-icon left> mdi-pencil </v-icon>
           เเก้ไขคะแนนนักเรียน
         </v-btn>
-        
       </v-flex>
-      
-      <br>
-      <br>
-      <br>
+
+      <br />
+      <br />
+      <br />
     </v-layout>
     <!-- ในส่วนของ table  -->
+    <br />
     <div id="d6">
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
             <th rowspan="3" align="center">ที่</th>
-            <th rowspan="3" align="center">รหัสนักเรียน</th>
+            <th rowspan="3" align="center">เลขประจำตัวนักเรียน</th>
             <th rowspan="3" align="center">ชื่อ-นามสกุล</th>
             <th nowrap="" rowspan="3" align="center">
               หน่วย<br />
@@ -92,10 +109,9 @@
               class="text-center"
             >
               ตัวชี้วัด/คะแนนเต็ม
-                <v-icon @click="fn_addCh()" color="success" right>
-                    mdi-plus
-                </v-icon>
-             
+              <v-icon @click="fn_addCh()" color="success" right>
+                mdi-plus
+              </v-icon>
             </th>
             <th nowrap="" colspan="2" align="center" class="text-center">
               รวมคะแนน
@@ -111,26 +127,23 @@
             <th rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
           </tr>
           <tr>
-              <!-- --------ในส่วนของตัวขี้วัดและคะแนนตัวชี้วัด-------- -->
-              
-            <td v-for="(item, y) in itemScore" :key="y" >
-                <v-if v-if="editting === itemScore">
-                    (<input type="text" size="10px" v-model="item.title" />
-                    )/
-                </v-if>
-                <v-else v-else>
-                    ({{item.title}}) &nbsp;/
-                    
-                </v-else>
-                <v-if v-if="editting === itemScore">
-                    (<input type="text" size="4px" v-model="item.score" />
-                    )
-                </v-if>
-                <v-else v-else>
-                    (
-                    {{item.score}}
-                    )
-                </v-else>
+            <!-- --------ในส่วนของตัวขี้วัดและคะแนนตัวชี้วัด-------- -->
+
+            <td v-for="(item, y) in itemScore" :key="y">
+              <v-if v-if="editting === itemScore">
+                (<input type="text" size="10px" v-model="item.title" />
+                )/
+              </v-if>
+              <v-else v-else> ({{ item.title }}) &nbsp;/ </v-else>
+              <v-if v-if="editting === itemScore">
+                (<input type="text" size="4px" v-model="item.score" />
+                )
+              </v-if>
+              <v-else v-else>
+                (
+                {{ item.score }}
+                )
+              </v-else>
               <v-icon @click="fn_removeCh(item)" color="error" right>
                 mdi-delete
               </v-icon>
@@ -138,7 +151,7 @@
           </tr>
         </thead>
         <tbody>
-            <!-- ในส่วนของข้อมูลนักเรียนทั้งหมด -->
+          <!-- ในส่วนของข้อมูลนักเรียนทั้งหมด -->
           <tr v-for="(item, i) in items" :key="i">
             <!-- ลำดับ -->
             <td nowrap="" align="center">{{ i + 1 }}</td>
@@ -148,57 +161,57 @@
             <td nowrap="">{{ item.name }}<br /></td>
             <!-- หน่วยการเรียน -->
             <td align="center">
-                <v-if v-if="editting === items">
-                    <input type="text" size="4px" v-model="item.credit" />
-                </v-if>            
-                <v-else v-else>
-                    {{item.credit}}
-                </v-else>
+              <v-if v-if="editting === items">
+                <input type="text" size="4px" v-model="item.credit" />
+              </v-if>
+              <v-else v-else>
+                {{ item.credit }}
+              </v-else>
             </td>
             <!-- เต็ม -->
             <td align="center">
-                <v-if v-if="editting === items">
-                    <input type="text" size="4px" v-model="item.full" />
-                </v-if>
-                <v-else v-else>
-                    {{item.full}}
-                </v-else>
+              <v-if v-if="editting === items">
+                <input type="text" size="4px" v-model="item.full" />
+              </v-if>
+              <v-else v-else>
+                {{ item.full }}
+              </v-else>
             </td>
             <!-- ที่ได้ -->
             <td align="center">
-                <v-if v-if="editting === items">
-                    <input type="text" size="4px" v-model="item.have" />
-                </v-if>
-                <v-else v-else>
-                    {{item.have}}
-                </v-else>
+              <v-if v-if="editting === items">
+                <input type="text" size="4px" v-model="item.have" />
+              </v-if>
+              <v-else v-else>
+                {{ item.have }}
+              </v-else>
             </td>
             <!-- ขาด -->
             <td align="center">
-                <v-if v-if="editting === items">
-                    <input type="text" size="4px" v-model="item.miss" />
-                </v-if>
-                <v-else v-else>
-                    {{item.miss}}
-                </v-else>
+              <v-if v-if="editting === items">
+                <input type="text" size="4px" v-model="item.miss" />
+              </v-if>
+              <v-else v-else>
+                {{ item.miss }}
+              </v-else>
             </td>
             <!-- ป่วย -->
             <td align="center">
-                <v-if v-if="editting === items">
-                    <input type="text" size="4px" v-model="item.sick" />
-                </v-if>
-                <v-else v-else>
-                    {{item.sick}}
-                </v-else>
+              <v-if v-if="editting === items">
+                <input type="text" size="4px" v-model="item.sick" />
+              </v-if>
+              <v-else v-else>
+                {{ item.sick }}
+              </v-else>
             </td>
             <!-- กิจ -->
             <td align="center">
-                <v-if v-if="editting === items">
-                    <input type="text" size="4px" v-model="item.affiar" />
-                </v-if>
-                <v-else v-else>
-                    {{item.affiar}}
-                </v-else>
+              <v-if v-if="editting === items">
+                <input type="text" size="4px" v-model="item.affiar" />
+              </v-if>
+              <v-else v-else>
+                {{ item.affiar }}
+              </v-else>
             </td>
             <!-- ในส่วนของการเพิ่มคะเเนน -->
             <td
@@ -208,14 +221,19 @@
               style="padding: 0px"
             >
               <v-if v-if="editting === items">
-                  <input type="text" size="8px" v-model="Sc.get" style="width: 100%" />
+                <input
+                  type="text"
+                  size="8px"
+                  v-model="Sc.get"
+                  style="width: 100%"
+                />
               </v-if>
               <v-else v-else>
-                {{Sc.get}}
+                {{ Sc.get }}
               </v-else>
             </td>
-            <td align="center">{{fullScore}}</td>
-            <td align="center">{{item.have_score}}</td>
+            <td align="center">{{ fullScore }}</td>
+            <td align="center">{{ item.have_score }}</td>
           </tr>
         </tbody>
       </table>
@@ -228,14 +246,14 @@ import Toolbar from "../layout/index.vue";
 export default {
   data() {
     return {
-     editting: null,
-     selectedItem: 1,
-        room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
-        room_select: "",
-        items: [],
-        itemScore: [],
-        fullScore: 0,
-    }
+      editting: null,
+      selectedItem: 1,
+      room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
+      room_select: "",
+      items: [],
+      itemScore: [],
+      fullScore: 0,
+    };
   },
 
   components: {
@@ -250,34 +268,34 @@ export default {
   },
   watch: {
     items: {
-        handler: function(newValue) {
-            for(var i=0; i < newValue.length; i++) {
-                var newScore = 0
-                for(var y=0; y < (newValue[i].indicators).length; y++) {
-                    newScore = newScore + parseInt(newValue[i].indicators[y].get)
-                }
-                newValue[i].have_score = newScore
-            }
-            console.log(newValue);
-        },
-        deep: true
+      handler: function (newValue) {
+        for (var i = 0; i < newValue.length; i++) {
+          var newScore = 0;
+          for (var y = 0; y < newValue[i].indicators.length; y++) {
+            newScore = newScore + parseInt(newValue[i].indicators[y].get);
+          }
+          newValue[i].have_score = newScore;
+        }
+        console.log(newValue);
+      },
+      deep: true,
     },
     itemScore: {
-        handler: function(newValue) {
-            this.fullScore = 0
-            for(var i=0; i < newValue.length; i++) {
-                this.fullScore = this.fullScore + parseInt(newValue[i].score)
-            }
-        },
-        deep: true
+      handler: function (newValue) {
+        this.fullScore = 0;
+        for (var i = 0; i < newValue.length; i++) {
+          this.fullScore = this.fullScore + parseInt(newValue[i].score);
+        }
+      },
+      deep: true,
     },
-},
+  },
   methods: {
     editModeHw(itemScore) {
-        this.editting = itemScore;
+      this.editting = itemScore;
     },
-    editModeP(items){
-        this.editting = items;
+    editModeP(items) {
+      this.editting = items;
     },
     fn_addCh() {
       for (var i = 0; i < this.items.length; i++) {
@@ -304,44 +322,43 @@ export default {
       this.axios
         .post("http://0.0.0.0:3000/score", payload)
         .then(function (response) {
-            if(response.data.status == "OK") {
-                vm.itemScore = response.data.item_score[0]
-                vm.items = response.data.result
-                
-            }
+          if (response.data.status == "OK") {
+            vm.itemScore = response.data.item_score[0];
+            vm.items = response.data.result;
+          }
         });
     },
 
     async fnUpdateScore() {
-            var payload = {
-                    item_score: this.itemScore,
-                    items: this.items,
-             };
-             this.axios
-                .post("http://0.0.0.0:3000/update_score", payload)
-                .then(function (response) { 
-                    if(response.data.status == "OK") {
-                        alert(response.data.result)    
-                    }
-                });
-
-        },
-}}
+      var payload = {
+        item_score: this.itemScore,
+        items: this.items,
+      };
+      this.axios
+        .post("http://0.0.0.0:3000/update_score", payload)
+        .then(function (response) {
+          if (response.data.status == "OK") {
+            alert(response.data.result);
+          }
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
-#d17{
-    padding-right: 20px;
-    padding-left: 20px;
+#d17 {
+  padding-right: 20px;
+  padding-left: 20px;
 }
-#d16{
-    padding-bottom: 0%;
+#d16 {
+  padding-bottom: 0%;
 }
- #d15{
-    padding-bottom: 0%;
-    padding-left: 0%;
-    padding-right: 0%;
-    padding-top: 20px;
+#d15 {
+  padding-bottom: 0%;
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-top: 20px;
 }
 #d5 {
   padding-left: 0%;

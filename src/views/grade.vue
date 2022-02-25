@@ -35,7 +35,13 @@
           ></v-select>
         </v-col>
         <v-col id="d15">
-          <v-btn @click="fnShowClass" color="blue lighten-1" dark Reset Validation >
+          <v-btn
+            @click="fnShowClass"
+            color="blue lighten-1"
+            dark
+            Reset
+            Validation
+          >
             แสดงข้อมูล
           </v-btn>
         </v-col>
@@ -44,7 +50,12 @@
     <v-layout row justify-center align-right>
       <!-- ในส่วนของปุ่มเเก้ไขและบันทึก -->
       <v-flex xs12 md12 lg11 xl12>
-        <v-btn tile color="success" style="float: right" @click="fnUpdateGrade()">
+        <v-btn
+          tile
+          color="success"
+          style="float: right"
+          @click="fnUpdateGrade()"
+        >
           <v-icon left> mdi-clipboard-check </v-icon>
           บันทึกข้อมูล
         </v-btn>
@@ -59,7 +70,7 @@
           <thead class="bg-gray-light">
             <tr>
               <td rowspan="2" align="center">ที่</td>
-              <td rowspan="2" align="center">รหัส</td>
+              <td rowspan="2" align="center">เลขประจำตัวนักเรียน</td>
               <td rowspan="2" align="center">ชื่อ-นามสกุล</td>
               <td rowspan="2" align="center">
                 หน่วย<br />
@@ -91,40 +102,66 @@
               <td align="center">{{ item.credit }}</td>
               <td align="center">{{ item.have_score }}</td>
               <td align="center">
-                    <v-if v-if="item.have_score >= 50 && item.have_score <55">
-                        {{item.grade = 1.0}}
-                    </v-if>
-                    <v-else-if v-else-if="item.have_score >= 55 && item.have_score <60">
-                        {{item.grade = 1.5}}
-                    </v-else-if>
-                    <v-else-if v-else-if="item.have_score >= 60 && item.have_score <65">
-                        {{item.grade = 2.0}}
-                    </v-else-if>
-                    <v-else-if v-else-if="item.have_score >= 65 && item.have_score <70">
-                        {{item.grade = 2.5}}
-                    </v-else-if>
-                    <v-else-if v-else-if="item.have_score >= 70 && item.have_score <75">
-                        {{item.grade = 3.0}}
-                    </v-else-if>
-                    <v-else-if v-else-if="item.have_score >= 75 && item.have_score <80">
-                        {{item.grade = 3.5}}
-                    </v-else-if>
-                    <v-else-if v-else-if="item.have_score >= 80 && item.have_score <=100">
-                        {{item.grade = 4.0}}
-                    </v-else-if>
-                    <v-else-if v-else-if="item.have_score < 50"> 
-                        {{item.grade = 0}}
-                    </v-else-if>
-
+                <v-if v-if="item.have_score >= 50 && item.have_score < 55">
+                  1.0
+                </v-if>
+                <v-else-if
+                  v-else-if="item.have_score >= 55 && item.have_score < 60"
+                >
+                  1.5
+                </v-else-if>
+                <v-else-if
+                  v-else-if="item.have_score >= 60 && item.have_score < 65"
+                >
+                  2.0
+                </v-else-if>
+                <v-else-if
+                  v-else-if="item.have_score >= 65 && item.have_score < 70"
+                >
+                  2.5
+                </v-else-if>
+                <v-else-if
+                  v-else-if="item.have_score >= 70 && item.have_score < 75"
+                >
+                  {{ (item.grade = 3.0) }}
+                </v-else-if>
+                <v-else-if
+                  v-else-if="item.have_score >= 75 && item.have_score < 80"
+                >
+                  {{ (item.grade = 3.5) }}
+                </v-else-if>
+                <v-else-if
+                  v-else-if="item.have_score >= 80 && item.have_score <= 100"
+                >
+                  {{ (item.grade = 4.0) }}
+                </v-else-if>
+                <v-else-if v-else-if="item.have_score < 50">
+                  {{ (item.grade = 0) }}
+                </v-else-if>
               </td>
               <td align="center">
-                <input align="center" type="text" size="6px" v-model="item.edit_have_score" />
+                <input
+                  align="center"
+                  type="text"
+                  size="6px"
+                  v-model="item.edit_have_score"
+                />
               </td>
               <td align="center">
-                <input align="center" type="text" size="6px" v-model="item.edit_grade" />
+                <input
+                  align="center"
+                  type="text"
+                  size="6px"
+                  v-model="item.edit_grade"
+                />
               </td>
               <td align="center">
-                <input align="center" type="text" size="20px" v-model="item.note" />
+                <input
+                  align="center"
+                  type="text"
+                  size="20px"
+                  v-model="item.note"
+                />
               </td>
             </tr>
           </tbody>
@@ -161,47 +198,48 @@ export default {
   },
   data() {
     return {
-    dialog: false,
-    room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
-    room_select: "",
-    items: [],
-    // สำหรับ char ที่เป็น line
-    chartOptions: {
-      chart: {
-        height: 350,
-        type: "line",
-        zoom: {
+      dialog: false,
+      room: ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4"],
+      room_select: "",
+      items: [],
+      // สำหรับ char ที่เป็น line
+      chartOptions: {
+        chart: {
+          height: 350,
+          type: "line",
+          zoom: {
+            enabled: false,
+          },
+        },
+        dataLabels: {
           enabled: false,
         },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: "straight",
-      },
-      title: {
-        text: "ช่วงเกรดเฉลี่ยของนักเรียน(ทั้งหมด)",
-        align: "left",
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5,
+        stroke: {
+          curve: "straight",
+        },
+        title: {
+          text: "ช่วงเกรดเฉลี่ยของนักเรียน",
+          align: "left",
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+            opacity: 0.5,
+          },
+        },
+        xaxis: {
+          categories: ["0", "1", "1.5", "2", "2.5", "3", "3.5", "4"],
         },
       },
-      xaxis: {
-        categories: ["0", "1", "1.5", "2", "2.5", "3", "3.5", "4"],
-      },
-    },
-    series: [
-      {
-        name: "จำนวน(คน)",
-        data: [0, 2, 5, 8, 6, 3, 7, 9],
-      },
-    ],
-  }},
-  mounted() {},
+      series: [
+        {
+          name: "จำนวน(คน)",
+          data: [0, 0, 0, 0, 0, 0, 0, 0],
+          // data: [0, 0, 0, 5, 1, 0, 2, 2],
+        },
+      ],
+    };
+  },
   methods: {
     editModeP(items) {
       this.editting = items;
@@ -218,31 +256,102 @@ export default {
       this.axios
         .post("http://0.0.0.0:3000/score", payload)
         .then(function (response) {
-            if(response.data.status == "OK") {
-                vm.items = response.data.result
-                
+          if (response.data.status == "OK") {
+            vm.items = response.data.result;
+            var series =  [
+              {
+                name: "จำนวน(คน)",
+                data: [0, 0, 0, 0, 0, 0, 0, 0],
+              },
+            ]
+            for (var i = 0; i < vm.items.length; i++) {
+              if (vm.items[i].edit_grade == "") {
+                if (vm.items[i].have_score < 50) {
+                  series[0].data[0] += 1;
+                } else if (
+                  vm.items[i].have_score >= 50 && vm.items[i].have_score < 55
+                ) {
+                  series[0].data[1] += 1;
+                } else if (
+                  vm.items[i].have_score >= 55 && vm.items[i].have_score < 60
+                ) {
+                  series[0].data[2] += 1;
+                } else if (
+                  vm.items[i].have_score >= 60 && vm.items[i].have_score < 65
+                ) {
+                  console.log("2222");
+                  series[0].data[3] += 1;
+                } else if (
+                  vm.items[i].have_score >= 65 && vm.items[i].have_score < 70
+                ) {
+                  console.log("2222.5");
+                  series[0].data[4] += 1;
+                } else if (
+                  vm.items[i].have_score >= 70 && vm.items[i].have_score < 75
+                ) {
+                  series[0].data[5] += 1;
+                } else if (
+                  vm.items[i].have_score >= 75 && vm.items[i].have_score < 80
+                ) {
+                  series[0].data[6] += 1;
+                } else if (
+                  vm.items[i].have_score >= 80
+                ) {
+                  series[0].data[7] += 1;
+                }
+              } else {
+                if (vm.items[i].edit_have_score < 50) {
+                  series[0].data[0] += 1;
+                } else if (
+                  vm.items[i].edit_have_score >= 50 && vm.items[i].edit_have_score < 55
+                ) {
+                  series[0].data[1] += 1;
+                } else if (
+                  vm.items[i].edit_have_score >= 55 && vm.items[i].edit_have_score < 60
+                ) {
+                  series[0].data[2] += 1;
+                } else if (
+                  vm.items[i].edit_have_score >= 60 && vm.items[i].edit_have_score < 65
+                ) {
+                  series[0].data[3] += 1;
+                } else if (
+                  vm.items[i].edit_have_score >= 65 && vm.items[i].edit_have_score < 70
+                ) {
+                  series[0].data[4] += 1;
+                } else if (
+                  vm.items[i].edit_have_score >= 70 && vm.items[i].edit_have_score < 75
+                ) {
+                  series[0].data[5] += 1;
+                } else if (
+                  vm.items[i].edit_have_score >= 75 && vm.items[i].edit_have_score < 80
+                ) {
+                  series[0].data[6] += 1;
+                } else if (
+                  vm.items[i].edit_have_score >= 80
+                ) {
+                  series[0].data[7] += 1;
+                }
+              }
             }
+            vm.series = []
+            vm.series = series
+            console.log(vm.series);
+          }
         });
     },
     async fnUpdateGrade() {
-            var payload = {
-                    items: this.items,
-             };
-             this.axios
-                .post("http://0.0.0.0:3000/update_grade", payload)
-                .then(function (response) { 
-                    if(response.data.status == "OK") {
-                        alert(response.data.result)    
-                    }
-                });
-
-        },
-    sum_credit() {
-      let total = 0;
-      for (let item in this.items) {
-        total = total + this.items[item].credit;
-      }
-      return total;
+      var payload = {
+        items: this.items,
+      };
+      this.axios
+        .post("http://0.0.0.0:3000/update_grade", payload)
+        .then(function (response) {
+          const vm = this
+          if (response.data.status == "OK") {
+            alert(response.data.result);
+            vm.fnShowClass()
+          }
+        });
     },
   },
 };
