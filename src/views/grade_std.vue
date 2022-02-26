@@ -9,9 +9,9 @@
                         <v-icon color="#3F91A4" size="50">mdi-clipboard-list-outline</v-icon>
                     </v-list-item-icon>
                         <v-list-item-content>
-                            <v-list-item-title style="color: #3F91A4"><h3>คะเเนน</h3></v-list-item-title>
+                            <v-list-item-title style="color: #3F91A4"><h3>เกรด</h3></v-list-item-title>
                                 <hr style="border-top: 1px solid #3F91A4">
-                            <v-list-item-title style="color: #3F91A4"><h4>คะเนนระหว่างเรียน</h4></v-list-item-title>
+                            <v-list-item-title style="color: #3F91A4"><h4>เกรดเฉลี่ย</h4></v-list-item-title>
                         </v-list-item-content>
                 </v-list-item>
             </v-card>
@@ -19,27 +19,27 @@
 
         <div id="d2">
             <div id="d3" align="center" class="box-body table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead class="bg-gray-light">
-                        <tr>
-                            <td rowspan="2" align="center">ที่</td>
-                            <td rowspan="2" align="center">รหัสวิชา</td>
-                            <td rowspan="2" align="center">ชื่อวิชา</td>
-                            <td rowspan="2" align="center">หน่วย<br>
+                <table id="customers" class="table table-bordered table-hover">
+                    <thead id="h1" class="bg-gray-light">
+                        <tr >
+                            <td id="h1" rowspan="2" align="center">ที่</td>
+                            <td id="h1" rowspan="2" align="center">รหัสวิชา</td>
+                            <td id="h1" rowspan="2" align="center">ชื่อวิชา</td>
+                            <td id="h1" rowspan="2" align="center">หน่วย<br>
                             การเรียน</td>
-                            <td colspan="2" align="center">ผลการเรียนปกติ</td>
-                            <td colspan="2" align="center">ผลการเรียนแก้</td>
-                            <td align="center">&nbsp;</td>
+                            <td id="h1" colspan="2" align="center">ผลการเรียนปกติ</td>
+                            <td id="h1" colspan="2" align="center">ผลการเรียนแก้</td>
+                            <td id="h1" align="center">&nbsp;</td>
                         </tr>
-                        <tr>
-                            <td align="center">คะแนน<br>
+                        <tr >
+                            <td id="h1" align="center">คะแนน<br>
                                 ที่ได้
                             </td>
-                            <td align="center">ผลการเรียน</td>
-                            <td align="center">คะแนน<br>
+                            <td id="h1" align="center">ผลการเรียน</td>
+                            <td id="h1" align="center">คะแนน<br>
                             ที่ได้</td>
-                            <td align="center">ผลการเรียน</td>
-                            <td align="center">หมายเหตุ</td>
+                            <td id="h1" align="center">ผลการเรียน</td>
+                            <td id="h1" align="center">หมายเหตุ</td>
                         </tr>
                     </thead>
                     <!-- ในส่วนของตารางคะแนนนักเรียน -->
@@ -49,7 +49,7 @@
                             <td>สาระการเรียนรู้พื้นฐาน</td>
                             <td colspan="6">&nbsp;</td>
                         </tr>
-                        <tr v-for="(item,i) in items" :key="i">
+                        <tr id="h3" v-for="(item,i) in items" :key="i">
                             <!-- ลำดับ -->
                             <td align="center">{{i+1}}</td>
                             <!-- รหัส -->
@@ -72,7 +72,7 @@
                     </tbody>
                     <tfoot class="bg-green">
                         <tr>
-                            <td colspan="9" align="center">รวม นก/นน {{ sum_credit() }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ผลการเรียนเฉลี่ย {{ Gpa() }}</td>
+                            <td id="h1" colspan="9" align="center">รวม นก/นน {{ sum_credit() }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ผลการเรียนเฉลี่ย {{ Gpa() }}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -138,6 +138,38 @@ export default {
 </script>
 
 <style scoped>
+    #h1 {
+        background-color: #04adc4;
+        color: white;   
+    }
+    #h2 {
+        background-color: #04adc4;
+        color: white;   
+    }
+    
+    
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td, #customers th {
+        border: 0.8px solid #ddd;
+        padding: 8px;
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+    #customers tr:hover {background-color: #ddd;}
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04adc4;
+        color: white;
+    }
     #d2{
         background-color: rgb(255, 255, 255);
         padding-left: 1.5%;

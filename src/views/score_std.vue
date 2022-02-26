@@ -44,7 +44,7 @@
       </v-row>
       
     <div id="d6">
-      <table class="table table-bordered table-striped table-hover">
+      <table id="customers" class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
             <th rowspan="3" align="center">ที่</th>
@@ -82,7 +82,7 @@
             <th rowspan="2" nowrap="" align="center" width="2%">ที่ได้</th>
           </tr>
           <tr >
-            <td v-for="(item, y) in itemScore" :key="y" >
+            <td id="h0" v-for="(item, y) in itemScore" :key="y" >
                 {{ item.title }}
               / (
               {{ item.score }}
@@ -194,6 +194,31 @@ export default {
 </script>
 
 <style scoped>
+#h0 {
+  background-color: #04adc4;
+  color: white;
+}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 0.8px solid #ddd;
+  padding: 8px;
+}
+
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04adc4;
+  color: white;
+}
 #d16{
     padding-bottom: 0%;
     padding-left: 30px;
