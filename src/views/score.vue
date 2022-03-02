@@ -87,7 +87,7 @@
     <!-- ในส่วนของ table  -->
     <br />
     <div id="d6">
-      <table class="table table-bordered table-striped table-hover">
+      <table id="customers" class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
             <th rowspan="3" align="center">ที่</th>
@@ -109,7 +109,7 @@
               class="text-center"
             >
               ตัวชี้วัด/คะแนนเต็ม
-              <v-icon @click="fn_addCh()" color="success" right>
+              <v-icon @click="fn_addCh()" color="white" right>
                 mdi-plus
               </v-icon>
             </th>
@@ -347,6 +347,42 @@ export default {
 </script>
 
 <style scoped>
+#h1 {
+  background-color: #04adc4;
+  color: white;
+}
+#h2 {
+  background-color: #04adc4;
+  color: white;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td,
+#customers th {
+  border: 0.8px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04adc4;
+  color: white;
+}
 #d17 {
   padding-right: 20px;
   padding-left: 20px;

@@ -291,135 +291,13 @@ export default {
         { text: "15:00", align: "center", sortable: false, value: "fifteen" },
         { text: "16:00", align: "center", sortable: false, value: "sixteen" },
       ],
-      data: [
-        {
-          day: "จันทร์",
-          eight: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-2" },
-          nine: { subject: "ฟิสิกส์", id: "ว31201", color: "lime lighten-2" },
-          ten: { subject: "", id: "", color: "" },
-          eleven: {
-            subject: "ภาษาอังกฤษ",
-            id: "อ31101",
-            color: "brown lighten-3",
-          },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: {
-            subject: "ชีววิทยา",
-            id: "ว31213",
-            color: "green lighten-3",
-          },
-          fourteen: { subject: "", id: "", color: "" },
-          fifteen: {
-            subject: "สังคมศึกษา",
-            id: "ส31101",
-            color: "blue-grey lighten-3",
-          },
-          sixteen: { subject: "", id: "", color: "" },
-        },
-        {
-          day: "อังคาร",
-          eight: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
-          },
-          nine: { subject: "", id: "", color: "" },
-          ten: { subject: "เคมี", id: "ว31207", color: "orange lighten-1" },
-          eleven: { subject: "", id: "", color: "" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: {
-            subject: "ประวัติศาสตร์",
-            id: "ส31103",
-            color: "blue lighten-5",
-          },
-          fourteen: {
-            subject: "ดาราศาสตร์",
-            id: "ว31110",
-            color: "red lighten-2",
-          },
-          fifteen: { subject: "", id: "", color: "" },
-          sixteen: {
-            subject: "สุขศึกษา",
-            id: "พ31101",
-            color: "lime accent-3",
-          },
-        },
-        {
-          day: "พุธ",
-          eight: { subject: "", id: "", color: "" },
-          nine: { subject: "ศิลปะ", id: "ศ31101", color: "cyan lighten-4" },
-          ten: { subject: "ฟิสิกส์", id: "ว31201", color: "lime lighten-2" },
-          eleven: { subject: "", id: "", color: "" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: {
-            subject: "ภาษาไทย",
-            id: "ท31101",
-            color: "blue lighten-2",
-          },
-          fourteen: { subject: "", id: "", color: "" },
-          fifteen: {
-            subject: "การงาน",
-            id: "ง31101",
-            color: "indigo lighten-3",
-          },
-          sixteen: { subject: "เคมี", id: "ว31207", color: "orange lighten-1" },
-        },
-        {
-          day: "พฤหัสบดี",
-          eight: {
-            subject: "พลศึกษา",
-            id: "พ31201",
-            color: "purple lighten-3",
-          },
-          nine: { subject: "", id: "", color: "" },
-          ten: { subject: "ชีววิทยา", id: "ว31213", color: "green lighten-3" },
-          eleven: { subject: "ภาษาไทย", id: "ท31101", color: "blue lighten-2" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: {
-            subject: "ฟิสิกส์",
-            id: "ว31201",
-            color: "lime lighten-2",
-          },
-          fourteen: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
-          },
-          fifteen: { subject: "", id: "", color: "" },
-          sixteen: { subject: "", id: "", color: "" },
-        },
-        {
-          day: "ศุกร์",
-          eight: { subject: "", id: "", color: "" },
-          nine: {
-            subject: "คณิตศาสตร์",
-            id: "ค31101",
-            color: "pink lighten-4",
-          },
-          ten: { subject: "", id: "", color: "" },
-          eleven: { subject: "เคมี", id: "ว31207", color: "orange lighten-1" },
-          twelve: { subject: "", id: "", color: "" },
-          thirteen: { subject: "", id: "", color: "" },
-          fourteen: {
-            subject: "ชีววิทยา",
-            id: "ว31213",
-            color: "green lighten-3",
-          },
-          fifteen: {
-            subject: "ภาษาอังกฤษ",
-            id: "อ31101",
-            color: "brown lighten-3",
-          },
-          sixteen: {
-            subject: "สังคมศึกษา",
-            id: "ส31101",
-            color: "blue-grey lighten-3",
-          },
-        },
-      ],
+      data: [],
       editSC : false,
       editItem : {}
     };
+  },
+  mounted() {
+    this.fnStudent();
   },
   methods: {
     fnEdit(item) {
@@ -431,7 +309,22 @@ export default {
       console.log(val);
       this.editSC = false;
       console.log("data",this.data);
-    }
+    },
+    fnStudent() {
+      var payload = {
+        room: "ม.3/1",
+      };
+      const vm = this;
+      console.log(payload);
+      this.axios
+        .post("http://0.0.0.0:3000/schedule_student", payload)
+        .then(function (response) {
+          if (response.data.status == "OK") {
+            var dataResult = response.data.result[0];
+            vm.data = dataResult.schedule;
+          }
+        });
+    },
   },
 };
 </script>

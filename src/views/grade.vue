@@ -66,32 +66,32 @@
     </v-layout>
     <div id="d2">
       <div id="d3" align="center" class="box-body table-responsive">
-        <table class="table table-bordered table-hover">
+        <table id="customers" class="table table-bordered table-hover">
           <thead class="bg-gray-light">
-            <tr>
-              <td rowspan="2" align="center">ที่</td>
-              <td rowspan="2" align="center">เลขประจำตัวนักเรียน</td>
-              <td rowspan="2" align="center">ชื่อ-นามสกุล</td>
-              <td rowspan="2" align="center">
+            <tr >
+              <td id="h1" rowspan="2" align="center">ที่</td>
+              <td id="h1" rowspan="2" align="center">เลขประจำตัวนักเรียน</td>
+              <td id="h1" rowspan="2" align="center">ชื่อ-นามสกุล</td>
+              <td id="h1" rowspan="2" align="center">
                 หน่วย<br />
                 การเรียน
               </td>
-              <td colspan="2" align="center">ผลการเรียนปกติ</td>
-              <td colspan="2" align="center">ผลการเรียนแก้</td>
-              <td align="center">&nbsp;</td>
+              <td id="h1" colspan="2" align="center">ผลการเรียนปกติ</td>
+              <td id="h1" colspan="2" align="center">ผลการเรียนแก้</td>
+              <td id="h1" align="center">&nbsp;</td>
             </tr>
-            <tr>
-              <td align="center">
+            <tr >
+              <td id="h1" align="center">
                 คะแนน<br />
                 ที่ได้
               </td>
-              <td align="center">ผลการเรียน</td>
-              <td align="center">
+              <td id="h1" align="center">ผลการเรียน</td>
+              <td id="h1" align="center">
                 คะแนน<br />
                 ที่ได้
               </td>
-              <td align="center">ผลการเรียน</td>
-              <td align="center">หมายเหตุ</td>
+              <td id="h1" align="center">ผลการเรียน</td>
+              <td id="h1" align="center">หมายเหตุ</td>
             </tr>
           </thead>
           <tbody>
@@ -258,83 +258,91 @@ export default {
         .then(function (response) {
           if (response.data.status == "OK") {
             vm.items = response.data.result;
-            var series =  [
+            var series = [
               {
                 name: "จำนวน(คน)",
                 data: [0, 0, 0, 0, 0, 0, 0, 0],
               },
-            ]
+            ];
             for (var i = 0; i < vm.items.length; i++) {
               if (vm.items[i].edit_grade == "") {
                 if (vm.items[i].have_score < 50) {
                   series[0].data[0] += 1;
                 } else if (
-                  vm.items[i].have_score >= 50 && vm.items[i].have_score < 55
+                  vm.items[i].have_score >= 50 &&
+                  vm.items[i].have_score < 55
                 ) {
                   series[0].data[1] += 1;
                 } else if (
-                  vm.items[i].have_score >= 55 && vm.items[i].have_score < 60
+                  vm.items[i].have_score >= 55 &&
+                  vm.items[i].have_score < 60
                 ) {
                   series[0].data[2] += 1;
                 } else if (
-                  vm.items[i].have_score >= 60 && vm.items[i].have_score < 65
+                  vm.items[i].have_score >= 60 &&
+                  vm.items[i].have_score < 65
                 ) {
                   console.log("2222");
                   series[0].data[3] += 1;
                 } else if (
-                  vm.items[i].have_score >= 65 && vm.items[i].have_score < 70
+                  vm.items[i].have_score >= 65 &&
+                  vm.items[i].have_score < 70
                 ) {
                   console.log("2222.5");
                   series[0].data[4] += 1;
                 } else if (
-                  vm.items[i].have_score >= 70 && vm.items[i].have_score < 75
+                  vm.items[i].have_score >= 70 &&
+                  vm.items[i].have_score < 75
                 ) {
                   series[0].data[5] += 1;
                 } else if (
-                  vm.items[i].have_score >= 75 && vm.items[i].have_score < 80
+                  vm.items[i].have_score >= 75 &&
+                  vm.items[i].have_score < 80
                 ) {
                   series[0].data[6] += 1;
-                } else if (
-                  vm.items[i].have_score >= 80
-                ) {
+                } else if (vm.items[i].have_score >= 80) {
                   series[0].data[7] += 1;
                 }
               } else {
                 if (vm.items[i].edit_have_score < 50) {
                   series[0].data[0] += 1;
                 } else if (
-                  vm.items[i].edit_have_score >= 50 && vm.items[i].edit_have_score < 55
+                  vm.items[i].edit_have_score >= 50 &&
+                  vm.items[i].edit_have_score < 55
                 ) {
                   series[0].data[1] += 1;
                 } else if (
-                  vm.items[i].edit_have_score >= 55 && vm.items[i].edit_have_score < 60
+                  vm.items[i].edit_have_score >= 55 &&
+                  vm.items[i].edit_have_score < 60
                 ) {
                   series[0].data[2] += 1;
                 } else if (
-                  vm.items[i].edit_have_score >= 60 && vm.items[i].edit_have_score < 65
+                  vm.items[i].edit_have_score >= 60 &&
+                  vm.items[i].edit_have_score < 65
                 ) {
                   series[0].data[3] += 1;
                 } else if (
-                  vm.items[i].edit_have_score >= 65 && vm.items[i].edit_have_score < 70
+                  vm.items[i].edit_have_score >= 65 &&
+                  vm.items[i].edit_have_score < 70
                 ) {
                   series[0].data[4] += 1;
                 } else if (
-                  vm.items[i].edit_have_score >= 70 && vm.items[i].edit_have_score < 75
+                  vm.items[i].edit_have_score >= 70 &&
+                  vm.items[i].edit_have_score < 75
                 ) {
                   series[0].data[5] += 1;
                 } else if (
-                  vm.items[i].edit_have_score >= 75 && vm.items[i].edit_have_score < 80
+                  vm.items[i].edit_have_score >= 75 &&
+                  vm.items[i].edit_have_score < 80
                 ) {
                   series[0].data[6] += 1;
-                } else if (
-                  vm.items[i].edit_have_score >= 80
-                ) {
+                } else if (vm.items[i].edit_have_score >= 80) {
                   series[0].data[7] += 1;
                 }
               }
             }
-            vm.series = []
-            vm.series = series
+            vm.series = [];
+            vm.series = series;
             console.log(vm.series);
           }
         });
@@ -346,10 +354,10 @@ export default {
       this.axios
         .post("http://0.0.0.0:3000/update_grade", payload)
         .then(function (response) {
-          const vm = this
+          const vm = this;
           if (response.data.status == "OK") {
             alert(response.data.result);
-            vm.fnShowClass()
+            vm.fnShowClass();
           }
         });
     },
@@ -358,6 +366,42 @@ export default {
 </script>
 
 <style scoped>
+#h1 {
+  background-color: #04adc4;
+  color: white;
+}
+#h2 {
+  background-color: #04adc4;
+  color: white;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td,
+#customers th {
+  border: 0.8px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04adc4;
+  color: white;
+}
 #d2 {
   background-color: rgb(255, 255, 255);
   padding-left: 1.5%;
