@@ -175,7 +175,7 @@ export default {
       fnShowClass() {
         var payload = {
             subject_name : this.subject_select,
-            id_std: "61107"
+            id_std: localStorage.std_id
         };
         const vm = this;
         this.axios

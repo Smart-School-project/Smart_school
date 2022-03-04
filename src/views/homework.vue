@@ -52,10 +52,10 @@ export default {
   data() {
     return {
       data: [],
-      room: '',
+      room: 'ม.3/1',
       headers: [
         { text: "วัน/เดือน/ปี ที่ส่ง", align: "start" , sortable: false , value: "date"},
-        { text: "ชื่อวิชา", align: "center", sortable: false, value: "cause_name" },
+        { text: "ชื่อวิชา", align: "center", sortable: false, value: "course_name" },
         { text: "ห้อง", align: "center", sortable: false, value: "room" },
         { text: "รายละเอียด", align: "center", sortable: false, value: "detail" },
         { text: "เอกสาร", align: "center", sortable: false, value: "file" },
@@ -71,7 +71,7 @@ export default {
   methods: {
     fnHomework() {
       var payload = {
-        room : this.room
+        room : "ม.3/1"
       };
       console.log(payload)
       const vm = this
